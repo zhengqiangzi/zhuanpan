@@ -42,7 +42,19 @@ webEvents.on('PopupEvent.realAward',function(){
 	layout.createRealAward();
 })
 
+webEvents.on('virAwardEvent',function(){
+
+	layout.createVirAward();
+})
+webEvents.on('myAwardEvent',function(){
+
+	layout.createMyAward();
+})
+
 //webEvents.emit('PopupEvent.WriteMessage')
+//webEvents.emit('homeEvent')
 //webEvents.emit('PopupEvent.createFocus')
 //webEvents.emit('PopupEvent.realAward')
 //webEvents.emit('luckEvent')
+//webEvents.emit('virAwardEvent')
+webEvents.emit('myAwardEvent')

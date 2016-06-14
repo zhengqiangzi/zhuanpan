@@ -60,13 +60,17 @@ function createFocus(){
 	})
 }
 
-
-
-function createRealAward(){
+function createVirAward(){
 
 	var html=`
-			<div class="realAward popup-content">
-				
+		
+		<div class="virAward popup-content">
+	
+			<div class="vir-bg"><img src="image/vir_bg.png"/></div>
+
+			<div class="vir-award-content">
+				<img src="image/quan.png"/>
+			</div>
 				<div class="star-manager">
 					<div><img src="image/star-left.png"/></div>
 					<div><img src="image/star-middle.png"/></div>
@@ -74,6 +78,25 @@ function createRealAward(){
 
 				</div>
 
+		</div>
+
+
+	`
+
+	$(document.body).append(html);
+
+
+	createLayOut();
+}
+
+function createRealAward(){
+	var html=`
+			<div class="realAward popup-content">
+				<div class="star-manager">
+					<div><img src="image/star-left.png"/></div>
+					<div><img src="image/star-middle.png"/></div>
+					<div><img src="image/star-right.png"/></div>
+				</div>
 				<div class="realAward-image"><img src="image/award_bg.png"/></div>
 				<div class="realAwardBtn"><img src="image/btn.png"/></div>
 			<div>
@@ -85,9 +108,63 @@ function createRealAward(){
 		closePopup();
 		webEvents.emit('PopupEvent.WriteMessage')
 	})
-
 }
+//创建我的中奖纪录
+ function createMyAward(){
+	var html=`
+			<div class="myAward popup-content">
+				<div class="myaward-top"><img src="image/my-top.png"/></div>
+				<div class="myaward-middle">
+						
+						<div class="my-award-item">
+							<div class="my-award-left"><img src="image/award-item-left.png"/><span>3.25</span></div>
+							<div class="my-award-middle">雨伞</div>
+							<div class="my-award-right">3</div>
+						</div>
+					
+						<div class="my-award-item">
+							<div class="my-award-left"><img src="image/award-item-left.png"/><span>3.25</span></div>
+							<div class="my-award-middle">雨伞</div>
+							<div class="my-award-right">3</div>
+						</div>
 
+						<div class="my-award-item">
+							<div class="my-award-left"><img src="image/award-item-left.png"/><span>3.25</span></div>
+							<div class="my-award-middle">雨伞</div>
+							<div class="my-award-right">3</div>
+						</div>
+
+						<div class="my-award-item">
+							<div class="my-award-left"><img src="image/award-item-left.png"/><span>3.25</span></div>
+							<div class="my-award-middle">雨伞</div>
+							<div class="my-award-right">3</div>
+						</div>
+
+						<div class="my-award-item">
+							<div class="my-award-left"><img src="image/award-item-left.png"/><span>3.25</span></div>
+							<div class="my-award-middle">微店优惠券</div>
+							<div class="my-award-right">3</div>
+						</div>
+
+
+
+				</div>
+				<div class="myaward-bottom"><img src="image/my-bottom.png"/>
+						
+						<div class="next-btn"><img src="image/next.png"/></div>
+
+				</div>
+		
+
+			<div>
+	`
+
+	createLayOut();
+	$(document.body).append(html);
+
+
+
+ }
 
 
 function closePopup(){
@@ -105,6 +182,8 @@ module.exports={
 
 	createWriteMessage,
 	createFocus,
-	createRealAward
+	createRealAward,
+	createVirAward,
+	createMyAward
 
 }

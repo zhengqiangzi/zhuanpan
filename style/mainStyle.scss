@@ -3,6 +3,7 @@
 body{
 	margin:0px;
 	padding:0px;
+	font-size:12px;
 
 }
 img{
@@ -270,5 +271,153 @@ input[placeholder], [placeholder], *[placeholder] {
 		position:absolute;
 		bottom:10px;
  		@include horizontal-center((-50%,0px,0px));
+	}
+}
+
+.virAward{
+	position:absolute;
+	z-index:101;
+	width:percentage(601px/640px);
+	left:50%;
+	top:50%;
+	transform:translate3d(-50%,-50%,0px);
+
+	& .vir-award-content{
+		width:percentage(429px/640px);
+		position:absolute;
+ 		@include horizontal-center((-50%,100px,0px));
+ 		top:0px;
+
+	}
+ 	
+ 	& .star-manager{
+ 		position:absolute;
+ 		width:90%;
+ 		@include horizontal-center((-50%,-50px,0px));
+ 		top:0px;
+ 		&>div:nth-child(1){
+ 			position:absolute;
+ 			width:40%;
+ 			left:5%;
+ 		}
+ 		&>div:nth-child(2){
+ 			position:absolute;
+ 			width:40%;
+ 			 left:30%;
+ 			 top:-10px;
+ 		}
+ 		&>div:nth-child(3){
+ 			position:absolute;
+ 			width:40%;
+ 			left:55%;
+ 		}
+ 	}
+}
+
+.myAward{
+	position:absolute;
+	z-index:101;
+	left:0px;
+	top:0px;
+
+	& .myaward-top{
+		width:percentage(578px/640px);
+		margin-left:auto;
+		margin-right:auto;
+
+		& img{
+			display:block;
+		}
+
+
+	}
+
+	& .myaward-middle{
+		width:percentage(469px/640px);
+		margin-left:auto;
+		margin-right:auto;
+		background-image:url(../image/my-middle.png);
+		background-repeat:repeat-y;
+		overflow:hidden;
+
+	}
+
+	& .myaward-bottom{
+		width:percentage(469px/640px);
+		margin-left:auto;
+		margin-right:auto;
+		position:relative;
+
+		& .next-btn{
+			top:0px;
+			position:absolute;
+			width:70%;
+ 			@include horizontal-center((-50%,5px,0px));
+
+
+		}
+	}
+}
+
+.my-award-item{
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+	display:flex;
+	&>*{
+		float:left;
+		&>img{display:block;}
+	}
+	margin-bottom:10px;
+	&>*:nth-child(1){width:20%;}
+	&>*:nth-child(2){
+	width:60%;
+	background-color:#fff;
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+	margin-left:5%;
+	}
+	&>*:nth-child(3){
+		width:20%;
+		background-color:#ffed85;
+		border-top-right-radius:5px;
+		border-bottom-right-radius:5px;
+
+	}
+
+	& .my-award-left{
+		position:relative;
+		& span{
+			position:absolute;
+			top:0px;
+			left:0px;
+			display:flex;
+			width:100%;
+			height:100%;
+			align-items:center;
+			justify-content:center;
+			color:#ff7a00;
+			font-weight:bold;
+		}	
+	}
+
+	& .my-award-middle{
+			display:flex;
+			align-items:center;
+			justify-content:flex-start;
+			text-indent:20px;
+			color:#ff7a00;
+			font-size:14px;
+			font-weight:bold;
+	}
+
+	& .my-award-right{
+	display:flex;
+			align-items:center;
+			justify-content:center;
+			color:#ff7a00;
+			font-size:14px;
+			font-weight:bold;
+
 	}
 }
