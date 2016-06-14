@@ -235,3 +235,40 @@ input[placeholder], [placeholder], *[placeholder] {
 	}
 
 }
+
+.realAward{
+	position:absolute;
+	z-index:101;
+	width:percentage(601px/640px);
+	left:50%;
+	top:50%;
+	transform:translate3d(-50%,-50%,0px);
+ 	
+ 	& .star-manager{
+ 		position:absolute;
+ 		width:90%;
+ 		@include horizontal-center((-50%,-50px,0px));
+ 		&>div:nth-child(1){
+ 			position:absolute;
+ 			width:40%;
+ 			left:5%;
+ 		}
+ 		&>div:nth-child(2){
+ 			position:absolute;
+ 			width:40%;
+ 			 left:30%;
+ 			 top:-10px;
+ 		}
+ 		&>div:nth-child(3){
+ 			position:absolute;
+ 			width:40%;
+ 			left:55%;
+ 		}
+ 	}
+	& .realAwardBtn{
+		width:percentage(400px/640px);
+		position:absolute;
+		bottom:10px;
+ 		@include horizontal-center((-50%,0px,0px));
+	}
+}

@@ -38,5 +38,6 @@ function luck(){
 
 module.exports={
 
-	home
+	home,
+	luck
 }

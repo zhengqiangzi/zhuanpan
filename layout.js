@@ -1,3 +1,5 @@
+var webEvents=require('webEvents')
+
 var popup=null;
 function createLayOut(){
 	popup=$('<div class="popup"></div>');
@@ -58,6 +60,36 @@ function createFocus(){
 	})
 }
 
+
+
+function createRealAward(){
+
+	var html=`
+			<div class="realAward popup-content">
+				
+				<div class="star-manager">
+					<div><img src="image/star-left.png"/></div>
+					<div><img src="image/star-middle.png"/></div>
+					<div><img src="image/star-right.png"/></div>
+
+				</div>
+
+				<div class="realAward-image"><img src="image/award_bg.png"/></div>
+				<div class="realAwardBtn"><img src="image/btn.png"/></div>
+			<div>
+	`
+	createLayOut();
+	$(document.body).append(html);
+	//关闭自己，并且跳到填写弹出窗口页面
+	$('.realAwardBtn').click(function(){
+		closePopup();
+		webEvents.emit('PopupEvent.WriteMessage')
+	})
+
+}
+
+
+
 function closePopup(){
 	if(popup){
 		popup.remove();
@@ -72,6 +104,7 @@ function closePopup(){
 module.exports={
 
 	createWriteMessage,
-	createFocus
+	createFocus,
+	createRealAward
 
 }
