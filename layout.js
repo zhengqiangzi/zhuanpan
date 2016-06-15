@@ -44,7 +44,7 @@ function createWriteMessage(data){
 
 					<div class="write-item">
 						<div class="write-item-icon"><img src="image/icon-3.png"/></div>
-						<div class='write-item-input'><input type='text'  placeHolder="请输入地址" name='useraddress'/></div>
+						<div class='write-item-input'><input type='text' placeHolder="请输入地址" name='useraddress'/></div>
 					</div>
 
 				</div>
@@ -58,21 +58,38 @@ function createWriteMessage(data){
 
 	$('.write-message-submit-btn>a').click(function(){
 
-		var object={
-			gid:$("input[name='gid']").val(),
-			username:$("input[name='username']").val(),
-			userphone:$("input[name='userphone']").val(),
-			useraddress:$("input[name='useraddress']").val()
+		var gid=$("input[name='gid']").val()
+		var username=$("input[name='username']").val()
+		var userphone=$("input[name='userphone']").val()
+		var useraddress=$("input[name='useraddress']").val()
+
+		if(gid.length<=0){
+			alert('发生错误！请联系管理员!')
+			return;
 		}
-
+		if(username.length<=1){
+			alert('请正确填写姓名')
+			return;
+		}
+		if(!/^1[0-9]{10}$/.test(userphone)){
+			alert("请正确填写手机号码")
+			return 
+		}
+		if(useraddress.length<=5){
+			alert('请正确填写地址')
+			return;
+		}
+		var object={
+			gid:gid,
+			username:username,
+			userphone:userphone,
+			useraddress:useraddress
+		}
 		nets.submitMessage(object).then(function(data){
-
 			closePopup();
-
 			if(data.status==1){
 				//提交成功
 				alert('提交信息成功！');
-
 			}else{
 				alert(data.info)
 			}

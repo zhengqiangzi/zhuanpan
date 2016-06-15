@@ -3,7 +3,7 @@ var template=require('template');
 var webEvents=require('webEvents')
 var layout=require('layout');
 var awardData=require('awardData');
-
+var preRotate=-1;
 var timer=null;
 /*var a={
 	list:[
@@ -98,8 +98,12 @@ function addluck(){
 	$('.zhizheng').click(function(){
 
 		awardData.getAward().then(function(param){
+			preRotate=preRotate==param.rotate+(360*10)?preRotate+(360*10)+360:param.rotate+(360*10)
 
-			$('.round-pan').animate({ d: param.rotate+(360*10) },{
+			webEvents.emit('coverEvent');
+
+			$('.round-pan').animate({ d: preRotate},{
+
 			    step: function(now,fx) {
 			      $(this).css('-webkit-transform','rotate('+now+'deg)'); 
 			      $(this).css('-moz-transform','rotate('+now+'deg)');
@@ -112,19 +116,34 @@ function addluck(){
 
 			    		if(param.data.virtual==1){
 			    			//中了虚拟的奖品
-							webEvents.emit('PopupEvent.virAwardEvent',param)
+							setTimeout(function(){
+								webEvents.emit('PopupEvent.virAwardEvent',param);
+								webEvents.emit('closeCoverEvent')
+
+							},1000);
 
 			    		}else{
 			    			//中了实物奖品
-			    			webEvents.emit('PopupEvent.realAward',param)
+			    			setTimeout(function(){
+			    				webEvents.emit('PopupEvent.realAward',param);
+			    				webEvents.emit('closeCoverEvent')
+			    			},1000);
 			    		}
 
 			    	}else{
 
-			    		alert('运气不佳,未中奖,继续加油哦！')
+			    		setTimeout(function(){
+							webEvents.emit('closeCoverEvent')
+			    			alert('运气不佳,未中奖,继续加油哦！')
+			    		},1000);
 			    	}
+
+					
 			    }
 			},'linear');
+
+
+
 
 		},function(param){
 
@@ -181,9 +200,22 @@ webEvents.on('PopupEvent.myAwardEvent',function(){
 })
 //webEvents.emit('PopupEvent.WriteMessage')
 
+
+webEvents.on('coverEvent',function(){
+
+	var cover=$('<div class="cover"></div>');
+	$(document.body).append(cover)
+})
+webEvents.on('closeCoverEvent',function(){
+
+	$('.cover').remove();
+
+})
+
+
 window.start=function(){
 
-webEvents.emit('homeEvent')
+	webEvents.emit('homeEvent')
 }
 
 
