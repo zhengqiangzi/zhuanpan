@@ -1,4 +1,5 @@
 var webpack = require('webpack')
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports={
 	entry:{
@@ -8,14 +9,15 @@ module.exports={
 
 		filename:"bound.js",
 		path:"./dist/",
-		publicPath:"./dist/",
+		publicPath:"",
 	},
 	plugins:[
   		new webpack.ProvidePlugin({
         "$": "jquery",
         "jquery": "jquery",
         "window.jquery":"jquery"
-   	 })
+   	 }),
+  		new ExtractTextPlugin("style.css")
 	],
 	  devServer:{
       hot:true,
@@ -42,7 +44,7 @@ module.exports={
 	  module: {
 	    loaders: [
 	     {test: /\.js$/,loader: 'babel',include: __dirname},
-      		{test:/\.scss/,loader:'style!css!autoprefixer!sass'},
+      	  {test:/\.scss/,loader:ExtractTextPlugin.extract('style','css!autoprefixer!sass')},
       	  {test:/\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=50000&name=[path][name].[ext]'}
 
 	    ]
