@@ -536,19 +536,35 @@ input[placeholder], [placeholder], *[placeholder] {
 
 @-webkit-keyframes jb {
   from {
-    -webkit-transform: translate3d(0px, -80%, 0px) rotate(-7deg);
-            transform: translate3d(0px, -80%, 0px) rotate(-7deg); }
+    -webkit-transform: translate3d(0px, -80%, 0px) rotate(-17deg);
+            transform: translate3d(0px, -80%, 0px) rotate(-17deg); }
   to {
-    -webkit-transform: translate3d(0px, -80%, 0px) rotate(7deg);
-            transform: translate3d(0px, -80%, 0px) rotate(7deg); } }
+    -webkit-transform: translate3d(0px, -80%, 0px) rotate(17deg);
+            transform: translate3d(0px, -80%, 0px) rotate(17deg); } }
 
 @keyframes jb {
   from {
-    -webkit-transform: translate3d(0px, -80%, 0px) rotate(-7deg);
-            transform: translate3d(0px, -80%, 0px) rotate(-7deg); }
+    -webkit-transform: translate3d(0px, -80%, 0px) rotate(-17deg);
+            transform: translate3d(0px, -80%, 0px) rotate(-17deg); }
   to {
-    -webkit-transform: translate3d(0px, -80%, 0px) rotate(7deg);
-            transform: translate3d(0px, -80%, 0px) rotate(7deg); } }
+    -webkit-transform: translate3d(0px, -80%, 0px) rotate(17deg);
+            transform: translate3d(0px, -80%, 0px) rotate(17deg); } }
+
+@-webkit-keyframes bao {
+  from {
+    -webkit-transform: translate3d(10px, 0px, 0px) rotate(17deg);
+            transform: translate3d(10px, 0px, 0px) rotate(17deg); }
+  to {
+    -webkit-transform: translate3d(10px, 0px, 0px) rotate(-17deg);
+            transform: translate3d(10px, 0px, 0px) rotate(-17deg); } }
+
+@keyframes bao {
+  from {
+    -webkit-transform: translate3d(10px, 0px, 0px) rotate(17deg);
+            transform: translate3d(10px, 0px, 0px) rotate(17deg); }
+  to {
+    -webkit-transform: translate3d(10px, 0px, 0px) rotate(-17deg);
+            transform: translate3d(10px, 0px, 0px) rotate(-17deg); } }
 
 .luck {
   background-image: url(image/bg2.jpg);
@@ -570,15 +586,23 @@ input[placeholder], [placeholder], *[placeholder] {
       left: 0px;
       bottom: 0px;
       -webkit-transform: translate3d(0px, -80%, 0px);
-              transform: translate3d(0px, -80%, 0px); }
+              transform: translate3d(0px, -80%, 0px);
+      -webkit-animation: jb 1.8s infinite alternate ease-in-out;
+              animation: jb 1.8s infinite alternate ease-in-out;
+      -webkit-transform-origin: 50% 100%;
+              transform-origin: 50% 100%; }
     .luck .luck-title .bao {
       position: absolute;
       width: 22%;
       left: 0px;
       bottom: 0px;
       z-index: 2;
-      -webkit-transform: translate3d(10px, 0%, 0px);
-              transform: translate3d(10px, 0%, 0px); }
+      -webkit-transform: translate3d(10px, 0px, 0px);
+              transform: translate3d(10px, 0px, 0px);
+      -webkit-animation: bao 1.8s infinite alternate ease-in-out;
+              animation: bao 1.8s infinite alternate ease-in-out;
+      -webkit-transform-origin: 50% 100%;
+              transform-origin: 50% 100%; }
   .luck .pan {
     width: 90.625%;
     margin-left: auto;
@@ -591,8 +615,6 @@ input[placeholder], [placeholder], *[placeholder] {
       top: 50%;
       -webkit-transform: translate3d(-50%, -50%, 0px);
               transform: translate3d(-50%, -50%, 0px);
-      -webkit-animation: jb 1.8s infinite alternate ease-in-out;
-              animation: jb 1.8s infinite alternate ease-in-out;
       z-index: 10; }
     .luck .pan .light {
       position: absolute;
@@ -669,6 +691,26 @@ input[placeholder], [placeholder], *[placeholder] {
     top: 100px;
     width: 30px; }
 
+@-webkit-keyframes xinxin {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(1.6);
+            transform: scale(1.6); }
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+@keyframes xinxin {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(1.6);
+            transform: scale(1.6); }
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
 .realAward {
   position: absolute;
   z-index: 101;
@@ -686,16 +728,31 @@ input[placeholder], [placeholder], *[placeholder] {
     .realAward .star-manager > div:nth-child(1) {
       position: absolute;
       width: 40%;
-      left: 5%; }
+      left: 5%;
+      opacity: 0;
+      -webkit-transform: scale(1.6);
+              transform: scale(1.6);
+      -webkit-animation: xinxin 0.3s 0.1s forwards;
+              animation: xinxin 0.3s 0.1s forwards; }
     .realAward .star-manager > div:nth-child(2) {
       position: absolute;
       width: 40%;
       left: 30%;
-      top: -10px; }
+      top: -10px;
+      opacity: 0;
+      -webkit-transform: scale(1.6);
+              transform: scale(1.6);
+      -webkit-animation: xinxin 0.3s 0.2s forwards;
+              animation: xinxin 0.3s 0.2s forwards; }
     .realAward .star-manager > div:nth-child(3) {
       position: absolute;
       width: 40%;
-      left: 55%; }
+      left: 55%;
+      opacity: 0;
+      -webkit-transform: scale(1.6);
+              transform: scale(1.6);
+      -webkit-animation: xinxin 0.3s 0.4s forwards;
+              animation: xinxin 0.3s 0.4s forwards; }
   .realAward .realAwardBtn {
     width: 62.5%;
     position: absolute;
@@ -735,16 +792,31 @@ input[placeholder], [placeholder], *[placeholder] {
     .virAward .star-manager > div:nth-child(1) {
       position: absolute;
       width: 40%;
-      left: 5%; }
+      left: 5%;
+      opacity: 0;
+      -webkit-transform: scale(1.6);
+              transform: scale(1.6);
+      -webkit-animation: xinxin 0.3s 0.1s forwards;
+              animation: xinxin 0.3s 0.1s forwards; }
     .virAward .star-manager > div:nth-child(2) {
       position: absolute;
       width: 40%;
       left: 30%;
-      top: -10px; }
+      top: -10px;
+      opacity: 0;
+      -webkit-transform: scale(1.6);
+              transform: scale(1.6);
+      -webkit-animation: xinxin 0.3s 0.2s forwards;
+              animation: xinxin 0.3s 0.2s forwards; }
     .virAward .star-manager > div:nth-child(3) {
       position: absolute;
       width: 40%;
-      left: 55%; }
+      left: 55%;
+      opacity: 0;
+      -webkit-transform: scale(1.6);
+              transform: scale(1.6);
+      -webkit-animation: xinxin 0.3s 0.4s forwards;
+              animation: xinxin 0.3s 0.4s forwards; }
 
 .myAward {
   position: absolute;
@@ -783,6 +855,76 @@ input[placeholder], [placeholder], *[placeholder] {
       left: 50%;
       -webkit-transform: translate3d(-50%, 5px, 0px);
               transform: translate3d(-50%, 5px, 0px); }
+  .myAward .xin-group {
+    position: absolute;
+    right: 40px;
+    top: 60px;
+    z-index: 30; }
+    .myAward .xin-group > div {
+      float: left; }
+    .myAward .xin-group > :nth-child(1) {
+      -webkit-transform: rotate(-5deg) scale(0);
+              transform: rotate(-5deg) scale(0);
+      -webkit-animation: xin2 1s infinite alternate ease-in-out;
+              animation: xin2 1s infinite alternate ease-in-out; }
+    .myAward .xin-group > :nth-child(2) {
+      -webkit-transform: rotate(45deg) translate3d(0px, 5px, 0px) scale(0);
+              transform: rotate(45deg) translate3d(0px, 5px, 0px) scale(0);
+      -webkit-animation: xin2-2 1s 0.5s infinite alternate ease-in-out;
+              animation: xin2-2 1s 0.5s infinite alternate ease-in-out; }
+    .myAward .xin-group > :nth-child(3) {
+      -webkit-transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(0);
+              transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(0);
+      -webkit-animation: xin2-3 1s 0.8s infinite alternate ease-in-out;
+              animation: xin2-3 1s 0.8s infinite alternate ease-in-out; }
+
+@-webkit-keyframes xin2 {
+  from {
+    -webkit-transform: scale(0) rotate(0deg);
+            transform: scale(0) rotate(0deg); }
+  to {
+    -webkit-transform: scale(1) rotate(20deg);
+            transform: scale(1) rotate(20deg); } }
+
+@keyframes xin2 {
+  from {
+    -webkit-transform: scale(0) rotate(0deg);
+            transform: scale(0) rotate(0deg); }
+  to {
+    -webkit-transform: scale(1) rotate(20deg);
+            transform: scale(1) rotate(20deg); } }
+
+@-webkit-keyframes xin2-2 {
+  from {
+    -webkit-transform: rotate(0deg) translate3d(0px, 5px, 0px) scale(0);
+            transform: rotate(0deg) translate3d(0px, 5px, 0px) scale(0); }
+  to {
+    -webkit-transform: rotate(45deg) translate3d(0px, 5px, 0px) scale(1);
+            transform: rotate(45deg) translate3d(0px, 5px, 0px) scale(1); } }
+
+@keyframes xin2-2 {
+  from {
+    -webkit-transform: rotate(0deg) translate3d(0px, 5px, 0px) scale(0);
+            transform: rotate(0deg) translate3d(0px, 5px, 0px) scale(0); }
+  to {
+    -webkit-transform: rotate(45deg) translate3d(0px, 5px, 0px) scale(1);
+            transform: rotate(45deg) translate3d(0px, 5px, 0px) scale(1); } }
+
+@-webkit-keyframes xin2-3 {
+  from {
+    -webkit-transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(0);
+            transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(0); }
+  to {
+    -webkit-transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(1);
+            transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(1); } }
+
+@keyframes xin2-3 {
+  from {
+    -webkit-transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(0);
+            transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(0); }
+  to {
+    -webkit-transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(1);
+            transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(1); } }
 
 .my-award-item {
   width: 90%;
@@ -938,3 +1080,26 @@ input[placeholder], [placeholder], *[placeholder] {
 .cover {
   z-index: 200;
   background-color: transparent; }
+
+@media (max-height: 603px) and (min-height: 506px) {
+  .write-form {
+    top: 130px; }
+  .myAward .xin-group {
+    top: 80px; }
+  .index-bottom .index-logo {
+    -webkit-transform: translate3d(-50%, 160px, 0px);
+            transform: translate3d(-50%, 160px, 0px); }
+  .index-top .dai {
+    margin-top: 50px; } }
+
+@media (max-height: 673px) and (min-height: 604px) {
+  .write-form {
+    top: 150px; }
+  .myAward .xin-group {
+    top: 80px;
+    right: 50px; }
+  .index-top .dai {
+    margin-top: 70px; }
+  .index-bottom .index-logo {
+    -webkit-transform: translate3d(-50%, 160px, 0px);
+            transform: translate3d(-50%, 160px, 0px); } }

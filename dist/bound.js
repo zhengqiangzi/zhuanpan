@@ -138,7 +138,7 @@
 		$('.zhizheng').click(function () {
 
 			awardData.getAward().then(function (param) {
-				preRotate = preRotate == param.rotate + 360 * 10 ? preRotate + 360 * 10 + 360 : param.rotate + 360 * 10;
+				preRotate = preRotate == param.rotate + 360 * 5 ? preRotate + 360 * 5 + 360 : param.rotate + 360 * 5;
 
 				webEvents.emit('coverEvent');
 
@@ -149,7 +149,7 @@
 						$(this).css('-moz-transform', 'rotate(' + now + 'deg)');
 						$(this).css('transform', 'rotate(' + now + 'deg)');
 					},
-					duration: 5000,
+					duration: 3000,
 					complete: function complete() {
 
 						if (param.data.get == 1) {
@@ -696,7 +696,7 @@
 
 			var item = '<div class="my-award-item">\n\t\t\t\t\t\t<div class="my-award-left"><img src="image/award-item-left.png"/><span>3.25</span></div>\n\t\t\t\t\t\t<div class="my-award-middle">雨伞</div>\n\t\t\t\t\t\t<div class="my-award-right">3</div>\n\t\t\t\t\t</div>';
 
-			var html = '\n\t\t\t<div class="myAward popup-content">\n\t\t\t\t<div class="myaward-top"><img src="image/my-top.png"/><span class="close-btn-2"><img src="image/close-btn2.png"/></span></div>\n\t\t\t\t<div class="myaward-middle">\n\t\t\t\t\t\n\t\t\t\t</div>\n\t\t\t\t<div class="myaward-bottom"><img src="image/my-bottom.png"/>\n\t\t\t\t\t<div class="next-btn"><img src="image/next.png"/></div>\n\t\t\t\t</div>\n\t\t\t<div>\n\t\t\t';
+			var html = '\n\t\t\t<div class="myAward popup-content">\n\t\t\t\t<div class="xin-group">\n\t\t\t\t\t<div><img src="image/xin.png"/></div>\n\t\t\t\t\t<div><img src="image/xin.png"/></div>\n\t\t\t\t\t<div><img src="image/xin.png"/></div>\n\t\t\t\t</div>\n\n\t\t\t\t<div class="myaward-top"><img src="image/my-top.png"/><span class="close-btn-2"><img src="image/close-btn2.png"/></span></div>\n\t\t\t\t<div class="myaward-middle">\n\t\t\t\t\t\n\t\t\t\t</div>\n\t\t\t\t<div class="myaward-bottom"><img src="image/my-bottom.png"/>\n\t\t\t\t\t<div class="next-btn"><img src="image/next.png"/></div>\n\t\t\t\t</div>\n\t\t\t<div>\n\t\t\t';
 
 			createLayOut();
 			$(document.body).append(html);

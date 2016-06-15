@@ -98,7 +98,7 @@ function addluck(){
 	$('.zhizheng').click(function(){
 
 		awardData.getAward().then(function(param){
-			preRotate=preRotate==param.rotate+(360*10)?preRotate+(360*10)+360:param.rotate+(360*10)
+			preRotate=preRotate==param.rotate+(360*5)?preRotate+(360*5)+360:param.rotate+(360*5)
 
 			webEvents.emit('coverEvent');
 
@@ -109,7 +109,7 @@ function addluck(){
 			      $(this).css('-moz-transform','rotate('+now+'deg)');
 			      $(this).css('transform','rotate('+now+'deg)');
 			    },
-			    duration:5000,
+			    duration:3000,
 			    complete:function(){
 
 			    	if(param.data.get==1){

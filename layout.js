@@ -177,6 +177,12 @@ function createRealAward(data){
 
 			var html=`
 			<div class="myAward popup-content">
+				<div class="xin-group">
+					<div><img src="image/xin.png"/></div>
+					<div><img src="image/xin.png"/></div>
+					<div><img src="image/xin.png"/></div>
+				</div>
+
 				<div class="myaward-top"><img src="image/my-top.png"/><span class="close-btn-2"><img src="image/close-btn2.png"/></span></div>
 				<div class="myaward-middle">
 					

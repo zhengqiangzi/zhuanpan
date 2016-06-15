@@ -150,11 +150,22 @@ input[placeholder], [placeholder], *[placeholder] {
 @keyframes jb{
 	
 	from{
-			transform:translate3d(0px,-80%,0px) rotate(-7deg);
+			transform:translate3d(0px,-80%,0px)rotate(-17deg);
 
 	}
 	to{
-			transform:translate3d(0px,-80%,0px) rotate(7deg);
+			transform:translate3d(0px,-80%,0px)rotate(17deg);
+	}
+
+}
+@keyframes bao{
+	
+	from{
+			transform:translate3d(10px,0px,0px)rotate(17deg);
+
+	}
+	to{
+			transform:translate3d(10px,0px,0px)rotate(-17deg);
 	}
 
 }
@@ -181,6 +192,9 @@ input[placeholder], [placeholder], *[placeholder] {
 			width:12%;
 			left:0px;bottom:0px;
 			transform:translate3d(0px,-80%,0px);
+			animation:jb 1.8s infinite alternate ease-in-out;
+			transform-origin:50% 100%;
+
 		}
 
 		& .bao{
@@ -188,7 +202,9 @@ input[placeholder], [placeholder], *[placeholder] {
 			width:22%;
 			left:0px;bottom:0px;
 			z-index:2;
-			transform:translate3d(10px,0%,0px);
+			transform:translate3d(10px,0px,0px);
+			animation:bao 1.8s infinite alternate ease-in-out;
+			transform-origin:50% 100%;
 		}
 	}
 
@@ -204,8 +220,6 @@ input[placeholder], [placeholder], *[placeholder] {
 			left:50%;
 			top:50%;
 			transform:translate3d(-50%,-50%,0px);
-			animation:jb 1.8s infinite alternate ease-in-out;
-
 			z-index:10;
 		}
 
@@ -309,6 +323,19 @@ input[placeholder], [placeholder], *[placeholder] {
 
 }
 
+$xinxin_big_scale:1.6;
+@keyframes xinxin{
+	
+	from{
+		opacity:0;
+		transform:scale($xinxin_big_scale)
+	}
+	to{
+		opacity:1;
+		transform:scale(1)
+	}
+}
+
 .realAward{
 	position:absolute;
 	z-index:101;
@@ -325,17 +352,28 @@ input[placeholder], [placeholder], *[placeholder] {
  			position:absolute;
  			width:40%;
  			left:5%;
+ 			opacity:0;
+			transform:scale($xinxin_big_scale);
+ 			animation:xinxin 0.3s 0.1s forwards;
  		}
  		&>div:nth-child(2){
  			position:absolute;
  			width:40%;
  			 left:30%;
  			 top:-10px;
+ 			opacity:0;
+			transform:scale($xinxin_big_scale);
+ 			animation:xinxin 0.3s 0.2s forwards;
+
  		}
  		&>div:nth-child(3){
  			position:absolute;
  			width:40%;
  			left:55%;
+ 			 opacity:0;
+			transform:scale($xinxin_big_scale);
+ 			animation:xinxin 0.3s 0.4s forwards;
+
  		}
  	}
 	& .realAwardBtn{
@@ -376,17 +414,28 @@ input[placeholder], [placeholder], *[placeholder] {
  			position:absolute;
  			width:40%;
  			left:5%;
+ 			  opacity:0;
+			transform:scale($xinxin_big_scale);
+ 			animation:xinxin 0.3s 0.1s forwards;
  		}
  		&>div:nth-child(2){
  			position:absolute;
  			width:40%;
  			 left:30%;
  			 top:-10px;
+ 			  opacity:0;
+			transform:scale($xinxin_big_scale);
+ 			animation:xinxin 0.3s 0.2s forwards;
+
  		}
  		&>div:nth-child(3){
  			position:absolute;
  			width:40%;
  			left:55%;
+ 			  opacity:0;
+			transform:scale($xinxin_big_scale);
+ 			animation:xinxin 0.3s 0.4s forwards;
+
  		}
  	}
 }
@@ -440,11 +489,62 @@ input[placeholder], [placeholder], *[placeholder] {
 			position:absolute;
 			width:70%;
  			@include horizontal-center((-50%,5px,0px));
-
-
 		}
 	}
+
+	& .xin-group{
+			position:absolute;
+			right:40px;
+			top:60px;
+			z-index:30;
+			&>div{
+				float:left;
+			}
+
+			&>:nth-child(1){
+				 transform:rotate(-5deg)scale(0);
+				 animation:xin2 1s infinite alternate ease-in-out;
+
+			}
+			&>:nth-child(2){
+				 transform:rotate(45deg)translate3d(0px,5px,0px)scale(0);
+				 animation:xin2-2 1s 0.5s infinite alternate ease-in-out;
+			}
+			&>:nth-child(3){
+				 transform:rotate(85deg)translate3d(20px,20px,0px)scale(0);
+				 animation:xin2-3 1s 0.8s infinite alternate ease-in-out;
+			}
+	}
 }
+
+@keyframes xin2{
+		from{
+			transform:scale(0)rotate(0deg);
+		}
+		to{
+			transform:scale(1)rotate(20deg);
+		}
+		
+}
+@keyframes xin2-2{
+		from{
+				 transform:rotate(0deg)translate3d(0px,5px,0px)scale(0);
+		}
+		to{
+				 transform:rotate(45deg)translate3d(0px,5px,0px)scale(1);
+		}
+}
+
+@keyframes xin2-3{
+		from{
+				 transform:rotate(85deg)translate3d(20px,20px,0px)scale(0);
+		}
+		to{
+				 transform:rotate(85deg)translate3d(20px,20px,0px)scale(1);
+		}
+}
+
+
 
 .my-award-item{
 	width:90%;
@@ -597,4 +697,37 @@ input[placeholder], [placeholder], *[placeholder] {
 	@extend %full;
 	z-index:200;
 	background-color:rgba(0,0,0,0);
+}
+
+@media(max-height:603px) and (min-height:506px){
+	
+	.write-form{
+		top:130px;
+	}
+	.myAward .xin-group{
+		top:80px;
+	}
+		.index-bottom .index-logo{
+		transform:translate3d(-50%, 160px, 0px)
+	}
+		.index-top .dai{
+		margin-top:50px;
+	}
+}
+
+@media(max-height:673px) and (min-height:604px){
+	
+	.write-form{
+		top:150px;
+	}
+		.myAward .xin-group{
+		top:80px;
+		right:50px;
+	}
+	.index-top .dai{
+		margin-top:70px;
+	}
+	.index-bottom .index-logo{
+		transform:translate3d(-50%, 160px, 0px)
+	}
 }
