@@ -450,16 +450,51 @@ input[placeholder], [placeholder], *[placeholder] {
     -webkit-transform: translate3d(-50%, 140px, 0px);
             transform: translate3d(-50%, 140px, 0px); }
 
+@-webkit-keyframes title-play {
+  from {
+    -webkit-transform: rotate(-7deg);
+            transform: rotate(-7deg); }
+  to {
+    -webkit-transform: rotate(7deg);
+            transform: rotate(7deg); } }
+
+@keyframes title-play {
+  from {
+    -webkit-transform: rotate(-7deg);
+            transform: rotate(-7deg); }
+  to {
+    -webkit-transform: rotate(7deg);
+            transform: rotate(7deg); } }
+
+@-webkit-keyframes adai-play {
+  from {
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg); }
+  to {
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg); } }
+
+@keyframes adai-play {
+  from {
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg); }
+  to {
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg); } }
+
 .index-top {
   position: absolute;
   top: 0px;
   width: 100%;
-  overflow: hidden;
   margin-top: 60px; }
   .index-top .title {
     width: 90%;
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    -webkit-transform: rotate(-7deg);
+            transform: rotate(-7deg);
+    -webkit-animation: title-play 1s  infinite alternate ease-in-out;
+            animation: title-play 1s  infinite alternate ease-in-out; }
   .index-top .dai {
     margin-top: 40px;
     width: 100%;
@@ -468,7 +503,13 @@ input[placeholder], [placeholder], *[placeholder] {
     position: absolute;
     width: 41.71875%;
     left: 17%;
-    top: -35px; }
+    top: -35px;
+    -webkit-transform-origin: 50% 100%;
+            transform-origin: 50% 100%;
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+    -webkit-animation: adai-play 1.8s infinite alternate ease-in-out;
+            animation: adai-play 1.8s infinite alternate ease-in-out; }
 
 .caidai {
   width: 100%;
@@ -493,6 +534,22 @@ input[placeholder], [placeholder], *[placeholder] {
     -webkit-transform: rotate(3600deg);
             transform: rotate(3600deg); } }
 
+@-webkit-keyframes jb {
+  from {
+    -webkit-transform: translate3d(0px, -80%, 0px) rotate(-7deg);
+            transform: translate3d(0px, -80%, 0px) rotate(-7deg); }
+  to {
+    -webkit-transform: translate3d(0px, -80%, 0px) rotate(7deg);
+            transform: translate3d(0px, -80%, 0px) rotate(7deg); } }
+
+@keyframes jb {
+  from {
+    -webkit-transform: translate3d(0px, -80%, 0px) rotate(-7deg);
+            transform: translate3d(0px, -80%, 0px) rotate(-7deg); }
+  to {
+    -webkit-transform: translate3d(0px, -80%, 0px) rotate(7deg);
+            transform: translate3d(0px, -80%, 0px) rotate(7deg); } }
+
 .luck {
   background-image: url(image/bg2.jpg);
   background-size: cover; }
@@ -505,7 +562,23 @@ input[placeholder], [placeholder], *[placeholder] {
     width: 92.03125%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10px; }
+    margin-top: 10px;
+    position: relative; }
+    .luck .luck-title .jingbi {
+      position: absolute;
+      width: 12%;
+      left: 0px;
+      bottom: 0px;
+      -webkit-transform: translate3d(0px, -80%, 0px);
+              transform: translate3d(0px, -80%, 0px); }
+    .luck .luck-title .bao {
+      position: absolute;
+      width: 22%;
+      left: 0px;
+      bottom: 0px;
+      z-index: 2;
+      -webkit-transform: translate3d(10px, 0%, 0px);
+              transform: translate3d(10px, 0%, 0px); }
   .luck .pan {
     width: 90.625%;
     margin-left: auto;
@@ -518,6 +591,8 @@ input[placeholder], [placeholder], *[placeholder] {
       top: 50%;
       -webkit-transform: translate3d(-50%, -50%, 0px);
               transform: translate3d(-50%, -50%, 0px);
+      -webkit-animation: jb 1.8s infinite alternate ease-in-out;
+              animation: jb 1.8s infinite alternate ease-in-out;
       z-index: 10; }
     .luck .pan .light {
       position: absolute;

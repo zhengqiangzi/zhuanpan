@@ -73,16 +73,44 @@ input[placeholder], [placeholder], *[placeholder] {
  		@include horizontal-center((-50%,140px,0px));
 	}
 }
+@keyframes title-play{
+	
+	from{
+		transform:rotate(-7deg);
+	}
+	
+	to{
+		transform:rotate(7deg);
+	}
+}
+
+@keyframes adai-play{
+	
+	from{
+		transform:rotate(-10deg);
+	}	
+	to{
+
+		transform:rotate(10deg)
+	}
+
+
+}
+
+
+
+
 .index-top{
 	position:absolute;
 	top:0px;
 	width:100%;
-	overflow:hidden;
 	margin-top:60px;
 	& .title{
 		width:percentage(576px/640px);
 		margin-left:auto;
 		margin-right:auto;
+		transform:rotate(-7deg);
+		animation:title-play 1s  infinite alternate ease-in-out;
 	}
 
 	& .dai{
@@ -95,7 +123,11 @@ input[placeholder], [placeholder], *[placeholder] {
 		width:percentage(267px/640px);
 		left:17%;
 		top:-35px;
+		transform-origin:50% 100%;
+		transform:rotate(-10deg);
+		animation:adai-play 1.8s infinite alternate ease-in-out;
 	}
+	
 }
 .caidai{
 	width:100%;
@@ -115,7 +147,17 @@ input[placeholder], [placeholder], *[placeholder] {
 	}
 }
 
+@keyframes jb{
+	
+	from{
+			transform:translate3d(0px,-80%,0px) rotate(-7deg);
 
+	}
+	to{
+			transform:translate3d(0px,-80%,0px) rotate(7deg);
+	}
+
+}
 .luck{
 	
 	@extend %full;
@@ -132,7 +174,24 @@ input[placeholder], [placeholder], *[placeholder] {
 		margin-left:auto;
 		margin-right:auto;
 		margin-top:10px;
+		position:relative;
+
+		& .jingbi{
+			position:absolute;
+			width:12%;
+			left:0px;bottom:0px;
+			transform:translate3d(0px,-80%,0px);
+		}
+
+		& .bao{
+			position:absolute;
+			width:22%;
+			left:0px;bottom:0px;
+			z-index:2;
+			transform:translate3d(10px,0%,0px);
+		}
 	}
+
 	& .pan{
 		width:percentage(580px/640px);
 		margin-left:auto;
@@ -145,6 +204,8 @@ input[placeholder], [placeholder], *[placeholder] {
 			left:50%;
 			top:50%;
 			transform:translate3d(-50%,-50%,0px);
+			animation:jb 1.8s infinite alternate ease-in-out;
+
 			z-index:10;
 		}
 

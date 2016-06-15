@@ -24,8 +24,13 @@ function home(){
 function luck(){
 
 	
-	return `	 <div class="luck">
-			<div class="luck-title"><img src="image/title2.png"/></div>	
+	return `<div class="luck">
+			<div class="luck-title">
+				<img src="image/title2.png"/>
+				
+				<div class="jingbi"><img src="image/luck-ani-1.png"/></div>
+				<div class="bao"><img src="image/luck-ani-2.png"/></div>
+			</div>	
 		
 			<div class="pan">
 				<div class="round-pan"><img src="image/pan.png"/></div>

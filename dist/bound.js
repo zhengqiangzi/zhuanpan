@@ -281,7 +281,7 @@
 
 	function luck() {
 
-		return "\t <div class=\"luck\">\n\t\t\t<div class=\"luck-title\"><img src=\"image/title2.png\"/></div>\t\n\t\t\n\t\t\t<div class=\"pan\">\n\t\t\t\t<div class=\"round-pan\"><img src=\"image/pan.png\"/></div>\n\t\t\t\t<div class=\"zhizheng\"><img src=\"image/zhizheng.png\"/></div>\n\n\t\t\t\t<div class=\"light\">\n\t\t\t\t\t<img src=\"image/light1.png\"/>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"myAwardBtn\"><a href='javascript:void(0)'><img src=\"image/myAwardBtn.png\"/></a></div>\n\t\t</div>";
+		return "<div class=\"luck\">\n\t\t\t<div class=\"luck-title\">\n\t\t\t\t<img src=\"image/title2.png\"/>\n\t\t\t\t\n\t\t\t\t<div class=\"jingbi\"><img src=\"image/luck-ani-1.png\"/></div>\n\t\t\t\t<div class=\"bao\"><img src=\"image/luck-ani-2.png\"/></div>\n\t\t\t</div>\t\n\t\t\n\t\t\t<div class=\"pan\">\n\t\t\t\t<div class=\"round-pan\"><img src=\"image/pan.png\"/></div>\n\t\t\t\t<div class=\"zhizheng\"><img src=\"image/zhizheng.png\"/></div>\n\n\t\t\t\t<div class=\"light\">\n\t\t\t\t\t<img src=\"image/light1.png\"/>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"myAwardBtn\"><a href='javascript:void(0)'><img src=\"image/myAwardBtn.png\"/></a></div>\n\t\t</div>";
 	}
 
 	module.exports = {
