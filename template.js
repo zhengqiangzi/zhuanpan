@@ -30,6 +30,10 @@ function luck(){
 			<div class="pan">
 				<div class="round-pan"><img src="image/pan.png"/></div>
 				<div class="zhizheng"><img src="image/zhizheng.png"/></div>
+
+				<div class="light">
+					<img src="image/light1.png"/>
+				</div>
 			</div>
 			<div class="myAwardBtn"><a href='javascript:void(0)'><img src="image/myAwardBtn.png"/></a></div>
 		</div>`

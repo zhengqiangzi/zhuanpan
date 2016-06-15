@@ -1,5 +1,8 @@
 @import "normalize";
 @include normalize();
+
+$per:580/640;
+
 body{
 	margin:0px;
 	padding:0px;
@@ -104,21 +107,18 @@ input[placeholder], [placeholder], *[placeholder] {
 
 
 @keyframes round{
-	
 	from{
 		transform:rotate(0deg);
 	}
 	to{
 		transform:rotate(3600deg);
-
-
 	}
-
 }
+
+
 .luck{
 	
 	@extend %full;
-	border:1px solid #ff00ff;
 	background-image:url(../image/bg2.jpg);
 	background-size:cover;
 	& .myAwardBtn{
@@ -145,11 +145,22 @@ input[placeholder], [placeholder], *[placeholder] {
 			left:50%;
 			top:50%;
 			transform:translate3d(-50%,-50%,0px);
+			z-index:10;
+		}
+
+		& .light{
+			position:absolute;
+			left:0px;
+			top:0px;
 		}
 	}
 
 	& .round-pan{
-		animation:round 5s;
+		//transform:rotate(90deg);    
+		//transition:transform 5s;
+		
+		transform-origin:50% 50%;
+
 	}
 }
 
@@ -272,6 +283,11 @@ input[placeholder], [placeholder], *[placeholder] {
 		bottom:10px;
  		@include horizontal-center((-50%,0px,0px));
 	}
+	.realAwardImage{
+		position:absolute;
+ 		@include horizontal-center((-50%,120px,0px));
+ 		top:0px;
+	}
 }
 
 .virAward{
@@ -324,9 +340,19 @@ input[placeholder], [placeholder], *[placeholder] {
 		width:percentage(578px/640px);
 		margin-left:auto;
 		margin-right:auto;
+		position:relative;
 
 		& img{
 			display:block;
+		}
+
+		& .close-btn-2{
+			position:absolute;
+			z-index:10;
+			right:25px;
+			top:45px;
+			width:30px;
+
 		}
 
 
@@ -369,13 +395,15 @@ input[placeholder], [placeholder], *[placeholder] {
 		&>img{display:block;}
 	}
 	margin-bottom:10px;
-	&>*:nth-child(1){width:20%;}
+	&>*:nth-child(1){width:18%;}
+
 	&>*:nth-child(2){
-	width:60%;
-	background-color:#fff;
-	border-top-left-radius:5px;
-	border-bottom-left-radius:5px;
-	margin-left:5%;
+
+		width:60%;
+		background-color:#fff;
+		border-top-left-radius:5px;
+		border-bottom-left-radius:5px;
+		margin-left:5%;
 	}
 	&>*:nth-child(3){
 		width:20%;
@@ -398,6 +426,8 @@ input[placeholder], [placeholder], *[placeholder] {
 			justify-content:center;
 			color:#ff7a00;
 			font-weight:bold;
+			font-size:12px;
+			transform:scale(0.8);
 		}	
 	}
 
@@ -412,7 +442,7 @@ input[placeholder], [placeholder], *[placeholder] {
 	}
 
 	& .my-award-right{
-	display:flex;
+			display:flex;
 			align-items:center;
 			justify-content:center;
 			color:#ff7a00;
@@ -420,4 +450,84 @@ input[placeholder], [placeholder], *[placeholder] {
 			font-weight:bold;
 
 	}
+}
+
+@keyframes circle{
+	
+	from{
+		transform:rotate(0deg);
+	}
+	to{
+		
+		transform:rotate(360deg);
+	}
+
+}
+
+.loading{
+	@extend %full;
+	background-image:url(../image/bg-loading.jpg);
+	background-size:cover;
+
+	& .loading-logo{
+		position:absolute;
+		width:100%;
+		text-align:center;
+		bottom:30px;
+		& img{
+			width:percentage(302px/640px);
+		}
+	}
+
+	& .loading-text{
+		width:percentage(213px/640px);
+		position:relative;
+		overflow:hidden;
+ 		@include horizontal-center((-50%,50px,0px));
+ 		margin-bottom:60px;
+
+ 		& .loading-3{
+ 			width:100%;
+ 		}
+ 		& .loading-2{
+ 			width:90%;
+ 			position:absolute;
+ 			left:5%;
+ 			top:5%;
+ 			animation:circle 2s infinite;
+ 			transform-origin:50% 48%;
+ 		}
+ 		& .loading-1{
+ 			width:64%;
+ 			position:absolute;
+ 			left:18%;
+ 			top:11%;
+ 		}
+ 		& .loading-progress{
+ 			width:100%;
+ 			display:flex;
+ 			height:100%;
+ 			position:absolute;
+ 			left:0px;
+ 			top:0px;
+ 			align-items:center;
+ 			justify-content:center;
+ 			color:#fff;
+ 			font-size:26px;
+
+ 			&>span.tag{
+ 				font-size:18px;
+ 			}
+ 		}
+	}
+
+	& .loading-tops{
+		width:100%;
+		text-align:center;
+		color:#fff;
+		font-size:18px;
+		margin-top:10px;
+ 	}
+
+
 }

@@ -26,6 +26,10 @@ module.exports={
       port:8078,
       host:'127.0.0.1'
    },
+    externals: {
+    jquery: "jQuery",//用外部的jQuery代替里面的jquery
+   // bootJS:Path.resolve("./node_modules/bootstrap/dist/js/bootstrap.min.js")
+  },
 	resolve: {
     	extensions: ['', '.js', '.css', '.scss'],
 	    modulesDirectories: [
