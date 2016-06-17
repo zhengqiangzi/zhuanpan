@@ -767,7 +767,8 @@
 
 	function getMyAward() {
 
-		return ajax("/app/myaward.json");
+		return ajax("../Home/Index/zjqq", "");
+		// return ajax("/app/myaward.json")
 	}
 
 	function getAward() {
