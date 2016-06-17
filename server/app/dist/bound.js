@@ -100,12 +100,12 @@
 		//点击 开始 按钮
 		$('.start-btn').click(function () {
 
-			if (isfans == 1) {
+			/*if(isfans==1){*/
 
-				webEvents.emit('luckEvent');
-			} else {
-				webEvents.emit('PopupEvent.createFocus');
-			}
+			webEvents.emit('luckEvent');
+			/*}else{
+	  	webEvents.emit('PopupEvent.createFocus')
+	  }*/
 		});
 	}
 
@@ -238,6 +238,7 @@
 		$('.cover').remove();
 	});
 
+	webEvents.emit('PopupEvent.createFocus');
 	window.start = function () {
 
 		webEvents.emit('homeEvent');

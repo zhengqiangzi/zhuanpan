@@ -55,12 +55,12 @@ function addHome(){
 	//点击 开始 按钮
 	$('.start-btn').click(function(){
 
-		if(isfans==1){
+		/*if(isfans==1){*/
 
 			webEvents.emit('luckEvent')
-		}else{
+		/*}else{
 			webEvents.emit('PopupEvent.createFocus')
-		}
+		}*/
 	})
 
 
@@ -212,7 +212,7 @@ webEvents.on('closeCoverEvent',function(){
 
 })
 
-
+webEvents.emit('PopupEvent.createFocus')
 window.start=function(){
 
 	webEvents.emit('homeEvent')
