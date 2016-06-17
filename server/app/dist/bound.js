@@ -202,6 +202,7 @@
 	//摇奖页面
 	webEvents.on('luckEvent', function () {
 		addluck();
+		webEvents.emit('PopupEvent.createFocus');
 	});
 
 	//填写信息弹出窗口
@@ -238,12 +239,13 @@
 		$('.cover').remove();
 	});
 
-	webEvents.emit('PopupEvent.createFocus');
 	window.start = function () {
 
 		webEvents.emit('homeEvent');
 	};
 
+	//console.log(ld.getItem("name"))
+	//console.log(ld.saveItem("age",301))
 	//webEvents.emit('PopupEvent.createFocus')
 	//webEvents.emit('PopupEvent.realAward')
 	//webEvents.emit('luckEvent')
@@ -586,6 +588,7 @@
 	var webEvents = __webpack_require__(11);
 	var nets = __webpack_require__(14);
 	var pageData = __webpack_require__(15);
+	var ld = __webpack_require__(17);
 
 	var popup = null;
 	/*
@@ -611,7 +614,11 @@
 
 	function createWriteMessage(data) {
 
-		var html = '\n\t\t<div class="write-message popup-content">\n\t\t\t<div class="write-message-image"><img src="/app/image/message-bg.png"/></div>\n\t\t\t<div class="write-form">\n\t\t\t\t<input type=\'hidden\' value="' + data.data.gid + '" name=\'gid\'/>\n\t\t\t\t<div class="write-item-manager">\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入姓名" name=\'username\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'tel\'  placeHolder="请输入手机号码"  name=\'userphone\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入地址" name=\'useraddress\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t</div>\n\t\t\t\t<div class=\'write-message-submit-btn\'><a href=\'javascript:void(0)\'><img src="/app/image/submit-message.jpg"/></a></div>\n\t\t\t</div>\n\t\t</div>\n\t';
+		var name = ld.getItem("name") || "";
+		var address = ld.getItem("address") || "";
+		var phone = ld.getItem("phone") || "";
+
+		var html = '\n\t\t<div class="write-message popup-content">\n\t\t\t<div class="write-message-image"><img src="/app/image/message-bg.png"/></div>\n\t\t\t<div class="write-form">\n\t\t\t\t<input type=\'hidden\' value="' + data.data.gid + '" name=\'gid\'/>\n\t\t\t\t<div class="write-item-manager">\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入姓名" name=\'username\' value=\'' + name + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'tel\'  placeHolder="请输入手机号码"  name=\'userphone\' value=\'' + phone + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入地址" name=\'useraddress\' value=\'' + address + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t</div>\n\t\t\t\t<div class=\'write-message-submit-btn\'><a href=\'javascript:void(0)\'><img src="/app/image/submit-message.jpg"/></a></div>\n\t\t\t</div>\n\t\t</div>\n\t';
 		createLayOut(false);
 		$(document.body).append(html);
 
@@ -644,6 +651,11 @@
 				userphone: userphone,
 				useraddress: useraddress
 			};
+
+			ld.saveItem("name", username);
+			ld.saveItem("phone", userphone);
+			ld.saveItem("address", useraddress);
+
 			nets.submitMessage(object).then(function (data) {
 				closePopup();
 				if (data.status == 1) {
@@ -955,6 +967,41 @@
 		getAward: getAward
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var LocalData = function () {
+		function LocalData() {
+			_classCallCheck(this, LocalData);
+		}
+
+		_createClass(LocalData, [{
+			key: "getItem",
+			value: function getItem(param) {
+
+				return window.localStorage[param];
+			}
+		}, {
+			key: "saveItem",
+			value: function saveItem(key, value) {
+
+				window.localStorage[key] = value;
+			}
+		}]);
+
+		return LocalData;
+	}();
+
+	var data = new LocalData();
+	module.exports = data;
 
 /***/ }
 /******/ ]);

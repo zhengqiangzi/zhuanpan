@@ -1,6 +1,7 @@
 var webEvents=require('webEvents');
 var nets=require('net');
 var pageData=require('PageData');
+var ld=require('localdata')
 
 var popup=null;
 /*
@@ -26,6 +27,10 @@ function createLayOut(bgClickClose=true){
 
 function createWriteMessage(data){
 
+	var name=ld.getItem("name")||"";
+	var address=ld.getItem("address")||"";
+	var phone=ld.getItem("phone")||"";
+
 	var html=`
 		<div class="write-message popup-content">
 			<div class="write-message-image"><img src="/app/image/message-bg.png"/></div>
@@ -34,17 +39,17 @@ function createWriteMessage(data){
 				<div class="write-item-manager">
 					<div class="write-item">
 						<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>
-						<div class='write-item-input'><input type='text' placeHolder="请输入姓名" name='username'/></div>
+						<div class='write-item-input'><input type='text' placeHolder="请输入姓名" name='username' value='${name}'/></div>
 					</div>
 
 					<div class="write-item">
 						<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>
-						<div class='write-item-input'><input type='tel'  placeHolder="请输入手机号码"  name='userphone'/></div>
+						<div class='write-item-input'><input type='tel'  placeHolder="请输入手机号码"  name='userphone' value='${phone}'/></div>
 					</div>
 
 					<div class="write-item">
 						<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>
-						<div class='write-item-input'><input type='text' placeHolder="请输入地址" name='useraddress'/></div>
+						<div class='write-item-input'><input type='text' placeHolder="请输入地址" name='useraddress' value='${address}'/></div>
 					</div>
 
 				</div>
@@ -85,6 +90,11 @@ function createWriteMessage(data){
 			userphone:userphone,
 			useraddress:useraddress
 		}
+
+		ld.saveItem("name",username)
+		ld.saveItem("phone",userphone)
+		ld.saveItem("address",useraddress)
+
 		nets.submitMessage(object).then(function(data){
 			closePopup();
 			if(data.status==1){
