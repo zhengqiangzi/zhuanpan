@@ -1,0 +1,136 @@
+<extend name="./Application/Admin/View/Public/base.html" />
+<block name="eosi-css">
+    <link href="__PUBLIC__/assets/css/daterangepicker.css" rel="stylesheet">
+</block>
+<block name="eosi-js"> <script
+    src="__PUBLIC__/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+    <script src="__PUBLIC__/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="__PUBLIC__/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+    <script type="text/javascript">
+                var $path_base = "/"; //this will be used in gritter alerts containing images
+    </script>
+
+</block>
+<block name="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-xs" onclick="location.href = '{:U('addUser')}'">添加新用户</button>
+            </div>
+
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>用户名</th>
+                        <th>昵称</th>
+                        <th>状态</th>
+                        <th>登录次数</th>
+                        <th>上次登录IP</th>
+                        <th>上次登录时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name="_list" id="vo">
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.username}</td>
+                        <td>{$vo.nickname}</td>
+                        <td>{$vo.status_str}</td>
+                        <td>{$vo.login_count}</td>
+                        <td>{$vo.last_login_ip}</td>
+                        <td>{$vo.last_login_time_str}</td>
+                        <td>
+                            <span class="hand icon-pencil blue" title="编辑" onclick="editUser({$vo.id});"></span>
+                            &nbsp;&nbsp;
+                            <span class="hand icon-trash red" title="删除" onclick="delUser({$vo.id});"></span>
+                            &nbsp;&nbsp;
+                            <span class="hand icon-cog blue" title="修改密码" onclick="editPwd({$vo.id});"></span>
+
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            <div class="pager">{$_page}</div>
+        </div>
+    </div><!-- /.row -->
+
+    <script type="text/javascript">
+        //设置用户状态 open:开启  close:关闭
+        function setUserStatus(type, userid){
+            $.ajax({
+                type: "POST",
+                url:"__CONTROLLER__/setUserStatus",
+                dataType: 'json',
+                data: {id:userid, type:type},
+                success: function(data){
+                    if (data.status == 1) {
+                        location.href = "__CONTROLLER__/user";
+                    } else{
+                        art.dialog.alert(data.info);
+                    }
+                },
+                error:function(){
+                    art.dialog.alert("操作失败");
+                }
+            });
+        }
+
+        //编辑用户
+        function editUser(userid){
+        location.href = "__CONTROLLER__/editUser/id/" + userid;
+        }
+
+        //删除用户
+        function delUser(userid){
+            art.dialog.confirm('确定删除?', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "__CONTROLLER__/deleteUser",
+                    dataType: 'json',
+                    data: {id:userid},
+                    async: false,
+                    error:function(){
+                        art.dialog.alert("操作失败");
+                    },
+                    success: function(data){
+                        if (data.status == 1) {
+                            location.href = "__CONTROLLER__/user"; //刷新
+                        } else {
+                            art.dialog.alert(data.info);
+                        }
+                    }
+                });
+            });
+        }
+        //更新用户密码
+        function editPwd(userid){
+            art.dialog.prompt('请输入新密码', function (val) {
+                if (val.length > 5) {
+                    $.ajax({
+                        type: "POST",
+                        url: "__CONTROLLER__/editPwd",
+                        dataType: 'json',
+                        data: {id:userid, password:val},
+                        async: false,
+                        error:function(){
+                            art.dialog.alert("操作失败");
+                        },
+                        success: function(data){
+                        if (data.status == 1) {
+                            art.dialog.alert(data.info);
+                            location.href = "__CONTROLLER__/user"; //刷新
+                        } else {
+                            art.dialog.alert(data.info);
+                        }
+                        }
+                    });
+                } else{
+                    art.dialog.alert("新密码长度不能少于6位");
+                }
+            }, '');
+        }
+    </script>
+</block>

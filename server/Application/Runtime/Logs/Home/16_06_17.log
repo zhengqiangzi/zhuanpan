@@ -1,0 +1,17 @@
+[ 2016-06-17T07:50:54+08:00 ] 192.168.1.8 /dazhuanpan/Home/Index/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000034s ]
+INFO: [ app_init ] --END-- [ RunTime:0.033358s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.023365s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.023514s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000082s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000218s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.177824s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.178005s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.016404s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.016550s ]
+

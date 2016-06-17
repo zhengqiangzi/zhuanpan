@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <block name="head">
+        <!-- head 文件 -->
+        <include file="./Application/Admin/View/Public/head.html" />
+    </block>
+    <block name="eosi-css"></block>
+    <block name="eosi-js"></block>
+</head>
+<body>
+    <!-- Google Analytics 代码检查提示 -->
+    <!-- <php> if (!$gaIsExist) {</php>
+    <div class="alert alert-danger">
+            <button data-dismiss="alert" class="close" type="button">
+                    <i class="icon-remove"></i>
+            </button>
+            <i class="icon-remove"></i>
+                    你没有添加
+            <strong>
+                    Google Analytics
+            </strong>
+    
+            , 请检查代码.
+            <br>
+    </div>
+    <php> }</php> -->
+    <!-- /Google Analytics 代码检查提示 -->
+<block name="navbar">
+    <!-- 顶部导航文件 -->
+    <include file="./Application/Admin/View/Public/navbar.html" />
+</block>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#"> <span
+                class="menu-text"></span>
+        </a>
+        <!-- 左边导航栏 -->
+        <block name="sidebar">
+            <include file="./Application/Admin/View/Public/sidebar.html" />
+        </block>
+        <div class="main-content">
+            <!-- 面包屑 -->
+            <block name="breadcrumbs">
+                <include file="./Application/Admin/View/Public/breadcrumbs.html" />
+            </block>
+            <!-- 页面内容 -->
+            <div class="page-content">
+                <block name="page-content">
+                    <include file="./Application/Admin/View/Public/page-content.html" />
+                </block>
+            </div>
+            <!-- /.page-content -->
+        </div>
+        <!-- /.main-content -->
+        <!-- 设置容器 -->
+        <block name="settings-container">
+            <!-- <include file="./Application/Admin/View/Public/settings-container.html" /> -->
+        </block>
+    </div>
+    <!-- /.main-container-inner -->
+
+    <!-- 到顶部按钮 -->
+    <block name="btn-scroll-up">
+        <include file="./Application/Admin/View/Public/btn-scroll-up.html" />
+    </block>
+</div>
+<!-- /.main-container -->
+<block name="foot"></block>
+</body>
+</html>

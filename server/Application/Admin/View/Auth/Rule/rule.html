@@ -1,0 +1,103 @@
+<extend name="./Application/Admin/View/Public/base.html" />
+<block name="eosi-css">
+    <link href="__PUBLIC__/assets/css/daterangepicker.css" rel="stylesheet">
+</block>
+<block name="eosi-js"> <script
+    src="__PUBLIC__/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+    <script src="__PUBLIC__/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="__PUBLIC__/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+    <script type="text/javascript">
+                var $path_base = "/"; //this will be used in gritter alerts containing images
+    </script>
+</block>
+<block name="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-xs" onclick="location.href = '{:U('addRule')}'">添加新规则</button>
+            </div>
+
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>规则英文标识</th>
+                        <th>规则中文描述</th>
+                        <th>是否有效</th>
+                        <th>规则附加条件</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name="_list" id="vo">
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.name}</td>
+                        <td>{$vo.title}</td>
+                        <td>{$vo.status_str}</td>
+                        <td>
+                            {$vo.condition}
+                        </td>
+                        <td>
+                            <span class="hand icon-pencil blue" title="编辑" onclick="editRule({$vo.id});"></span>
+                            &nbsp;&nbsp;
+                            <span class="hand icon-trash red" title="删除" onclick="delRule({$vo.id});"></span>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            <div class="pager">{$_page}</div>
+        </div>
+    </div><!-- /.row -->
+    
+    <script type="text/javascript">
+    //设置任务状态 open:开启  close:关闭
+    function setStatus(type, ruleid){
+        $.ajax({
+            type: "POST",
+            url:"__CONTROLLER__/setRuleStatus",
+            dataType: 'json',
+            data: {id:ruleid, type:type},
+            success: function(data){
+                if (data.status == 1) {
+                    location.href = "__CONTROLLER__/rule";
+                } else{
+                    art.dialog.alert(data.info);
+                }
+            },
+            error:function(){
+                art.dialog.alert("操作失败");
+            }
+        });
+    }
+
+    //编辑任务
+    function editRule(ruleid){
+        location.href = "__CONTROLLER__/editRule/id/" + ruleid;
+    }
+
+    //删除任务
+    function delRule(ruleid){
+        art.dialog.confirm('确定删除?', function () {
+            $.ajax({
+                type: "POST",
+                url: "__CONTROLLER__/deleteRule",
+                dataType: 'json',
+                data: {id:ruleid},
+                async: false,
+                error:function(){
+                    art.dialog.alert("操作失败");
+                },
+                success: function(data){
+                    if (data.status == 1) {
+                        location.href = "__CONTROLLER__/rule"; //刷新
+                    } else {
+                        art.dialog.alert(data.info);
+                    }
+                }
+            });
+        });
+    }
+    </script>
+</block>

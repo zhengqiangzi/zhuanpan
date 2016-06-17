@@ -1,0 +1,107 @@
+<extend name="./Application/Admin/View/Public/base.html" />
+<block name="eosi-css">
+    <link href="__PUBLIC__/assets/css/daterangepicker.css" rel="stylesheet">
+</block>
+<block name="eosi-js"> <script
+        src="__PUBLIC__/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+    <script src="__PUBLIC__/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="__PUBLIC__/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+    <script type="text/javascript">
+        var $path_base = "/"; //this will be used in gritter alerts containing images
+    </script>
+
+</block>
+<block name="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div style="padding-bottom:5px;">
+                <!--<button class="btn btn-primary btn-xs" onclick="location.href = '{:U('addUser')}'">添加新用户</button>-->
+            </div>
+            <input value="{$realname}" placeholder="请输入姓名" id="realname" name="realname">
+            <input value="{$month}" placeholder="累计积分月份:201605" id="month" name="month">
+            该月累计积分范围:
+            <select id="name" name="name">
+                <option value="">请选择</option>
+                <option value="1"<if condition="is_numeric($name) && $name == 1">selected</if>>大于</option>
+                <option value="2" <if condition="is_numeric($name) && $name==2">selected</if> >小于</option>
+                <option value="3" <if condition="is_numeric($name) && $name==3">selected</if>>等于</option>
+            </select>
+
+            <input value="{$points}" placeholder="输入一个累计积分值" id="points" name="points" style="width: 200px">
+            <input type="button" id="search" value="查询">
+            <input type="button" id="searc" value="导出">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th>累计积分月份</th>
+                    <th>该月累计积分</th>
+                    <th>最后答题时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="_list" id="vo">
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.realname}</td>
+                        <td>{$vo.month}</td>
+                        <td>{$vo.points}</td>
+                        <td>{$vo.updated_at}</td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            <div class="pager">{$_page}</div>
+        </div>
+    </div><!-- /.row -->
+    <script>
+        $(function(){
+            $("#search").click(function(){
+                var realname = $("#realname").val();
+                if(realname != ''){
+                    realname = "/realname/"+realname;
+                }
+                var month = $("#month").val();
+                if(month != ''){
+                    month = "/month/"+month;
+                }
+                var name = $("#name").val();
+                if(name != ''){
+                    name = "/name/"+name;
+                }
+                var points = $("#points").val();
+                if(points != ''){
+                    points = "/points/"+points;
+                }
+                location.href = "__CONTROLLER__/index"+realname+month+name+points;
+            });
+
+        });
+        $(function(){
+            $("#searc").click(function(){
+                var realname = $("#realname").val();
+                if(realname != ''){
+                    realname = "/realname/"+realname;
+                }
+                var month = $("#month").val();
+                if(month != ''){
+                    month = "/month/"+month;
+                }
+                var name = $("#name").val();
+                if(name != ''){
+                    name = "/name/"+name;
+                }
+                var points = $("#points").val();
+                if(points != ''){
+                    points = "/points/"+points;
+                }
+                location.href = "__CONTROLLER__/export_user"+realname+month+name+points;
+            });
+
+
+        });
+
+    </script>
+
+</block>
