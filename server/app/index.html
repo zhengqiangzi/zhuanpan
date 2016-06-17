@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset='utf-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="/app/weblib/createjs-2015.11.26.min.js"></script>
+	<script type="text/javascript" src="/app/weblib/jquery.min.js"></script>
+	<link type="text/css" rel="styleSheet" href="/app/dist/style.css"/>
+   	<title>橙天玩</title>
+</head>
+<body>
+
+
+<div class="main">
+
+</div>
+
+<div class="loading">
+	
+	<div class="loading-text">
+		<div class="loading-3"><img src="/app/image/bg3-loading.png"/></div>
+		<div class="loading-2"><img src="/app/image/bg2-loading.png"/></div>
+		<div class="loading-1"><img src="/app/image/bg-loading.png"/></div>
+		<div class="loading-progress"><span class='number'></span><span class='tag'>%</span></div>
+	</div>
+		<div class="loading-tops">loading...</div>
+
+	<div class="loading-logo">
+			<img src="/app/image/logo-loading.png"/>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	var isfans=1;//是否公众号的粉丝 1是，2否
+
+var queue = new createjs.LoadQueue();
+ queue.on("complete", handleComplete, this);
+ queue.on("progress",progressHandler,this)
+ queue.loadManifest([
+     {id: "myImage", src:"/app/image/bg.jpg"},
+     {id: "myImage2", src:"/app/image/award_bg.png"},
+     {id: "myImage3", src:"/app/image/award-item-left.png"},
+     {id: "myImage4", src:"/app/image/a-dai.png"},
+     {id: "myImage5", src:"/app/image/pan.png"},
+     {id: "myImage6", src:"/app/image/my-top.png"},
+     {id: "myImage7", src:"/app/image/light1.png"},
+     {id: "myImage8", src:"/app/image/light2.png"},
+     {id: "myImage9", src:"/app/image/light3.png"},
+ ]);
+ function progressHandler(e){
+ 	var pro=Math.floor(e.progress*100)
+ 	$('.number').html(pro);
+ }
+ function handleComplete() {
+    $('.loading').remove();
+    queue=null;
+ 	window.start();
+ }
+</script>
+
+
+<script type="text/javascript" src="/app/dist/bound.js"></script>
+</body>
+</html>

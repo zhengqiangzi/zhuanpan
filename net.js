@@ -13,20 +13,20 @@ function ajax(url,data=null){
 function getMyAward(){
 
 
-	return ajax("myaward.json")
+	return ajax("/app/myaward.json")
 
 }
 
 function getAward(){
 
 
-	return ajax("one.json")
+	return ajax("/app/one.json")
 
 }
 
 function submitMessage(data){
 
-	return ajax("setAward.json",data)
+	return ajax("/app/setAward.json",data)
 }	
 
 module.exports={

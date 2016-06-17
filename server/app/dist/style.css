@@ -429,7 +429,7 @@ input[placeholder], [placeholder], *[placeholder] {
   overflow: hidden; }
 
 .home {
-  background-image: url(image/bg.jpg);
+  background-image: url(/app/dist/image/bg.jpg);
   background-size: cover; }
 
 .index-bottom {
@@ -567,7 +567,7 @@ input[placeholder], [placeholder], *[placeholder] {
             transform: translate3d(10px, 0px, 0px) rotate(-17deg); } }
 
 .luck {
-  background-image: url(image/bg2.jpg);
+  background-image: url(/app/dist/image/bg2.jpg);
   background-size: cover; }
   .luck .myAwardBtn {
     width: 24.21875%;
@@ -859,7 +859,8 @@ input[placeholder], [placeholder], *[placeholder] {
     position: absolute;
     right: 40px;
     top: 60px;
-    z-index: 30; }
+    z-index: 30;
+    pointer-events: none; }
     .myAward .xin-group > div {
       float: left; }
     .myAward .xin-group > :nth-child(1) {
@@ -1018,7 +1019,7 @@ input[placeholder], [placeholder], *[placeholder] {
             transform: rotate(360deg); } }
 
 .loading {
-  background-image: url(image/bg-loading.jpg);
+  background-image: url(/app/dist/image/bg-loading.jpg);
   background-size: cover; }
   .loading .loading-logo {
     position: absolute;

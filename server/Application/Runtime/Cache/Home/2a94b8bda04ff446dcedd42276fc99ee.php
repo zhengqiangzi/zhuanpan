@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-        <script type="text/javascript" src="/dazhuanpan/Public/jquery.min.js"></script>
+        <script type="text/javascript" src="/Public/jquery.min.js"></script>
         <script type="text/javascript">
     
     </script>

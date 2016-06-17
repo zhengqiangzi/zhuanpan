@@ -8,8 +8,8 @@ module.exports={
 	output:{
 
 		filename:"bound.js",
-		path:"./dist/",
-		publicPath:"",
+		path:"./server/app/dist/",
+		publicPath:"/app/dist/",
 	},
 	plugins:[
   		new webpack.ProvidePlugin({

@@ -28,27 +28,27 @@ function createWriteMessage(data){
 
 	var html=`
 		<div class="write-message popup-content">
-			<div class="write-message-image"><img src="image/message-bg.png"/></div>
+			<div class="write-message-image"><img src="/app/image/message-bg.png"/></div>
 			<div class="write-form">
 				<input type='hidden' value="${data.data.gid}" name='gid'/>
 				<div class="write-item-manager">
 					<div class="write-item">
-						<div class="write-item-icon"><img src="image/icon-1.png"/></div>
+						<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>
 						<div class='write-item-input'><input type='text' placeHolder="请输入姓名" name='username'/></div>
 					</div>
 
 					<div class="write-item">
-						<div class="write-item-icon"><img src="image/icon-2.png"/></div>
+						<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>
 						<div class='write-item-input'><input type='tel'  placeHolder="请输入手机号码"  name='userphone'/></div>
 					</div>
 
 					<div class="write-item">
-						<div class="write-item-icon"><img src="image/icon-3.png"/></div>
+						<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>
 						<div class='write-item-input'><input type='text' placeHolder="请输入地址" name='useraddress'/></div>
 					</div>
 
 				</div>
-				<div class='write-message-submit-btn'><a href='javascript:void(0)'><img src="image/submit-message.jpg"/></a></div>
+				<div class='write-message-submit-btn'><a href='javascript:void(0)'><img src="/app/image/submit-message.jpg"/></a></div>
 			</div>
 		</div>
 	`
@@ -105,9 +105,9 @@ function createFocus(){
 
 	var html=`
 		<div class="focus popup-content">
-			<div class='focus-tips'><img src="image/focus.png"/></div>
+			<div class='focus-tips'><img src="/app/image/focus.png"/></div>
 
-			<div class="close-btn"><img src="image/close-btn.jpg"/></div>
+			<div class="close-btn"><img src="/app/image/close-btn.jpg"/></div>
 		</div>
 	`
 	createLayOut();
@@ -123,14 +123,14 @@ function createVirAward(data){
 
 	var html=`
 		<div class="virAward popup-content">
-			<div class="vir-bg"><img src="image/vir_bg.png"/></div>
+			<div class="vir-bg"><img src="/app/image/vir_bg.png"/></div>
 			<div class="vir-award-content">
 				<img src="${data.data.pic}"/>
 			</div>
 				<div class="star-manager">
-					<div><img src="image/star-left.png"/></div>
-					<div><img src="image/star-middle.png"/></div>
-					<div><img src="image/star-right.png"/></div>
+					<div><img src="/app/image/star-left.png"/></div>
+					<div><img src="/app/image/star-middle.png"/></div>
+					<div><img src="/app/image/star-right.png"/></div>
 				</div>
 		</div>
 
@@ -146,13 +146,13 @@ function createRealAward(data){
 	var html=`
 			<div class="realAward popup-content">
 				<div class="star-manager">
-					<div><img src="image/star-left.png"/></div>
-					<div><img src="image/star-middle.png"/></div>
-					<div><img src="image/star-right.png"/></div>
+					<div><img src="/app/image/star-left.png"/></div>
+					<div><img src="/app/image/star-middle.png"/></div>
+					<div><img src="/app/image/star-right.png"/></div>
 				</div>
-				<div class="realAward-image"><img src="image/award_bg.png"/></div>
-				<div class="realAwardImage"><img src="image/quan.png"/></div>
-				<div class="realAwardBtn"><img src="image/btn.png"/></div>
+				<div class="realAward-image"><img src="/app/image/award_bg.png"/></div>
+				<div class="realAwardImage"><img src="/app/image/quan.png"/></div>
+				<div class="realAwardBtn"><img src="/app/image/btn.png"/></div>
 			<div>
 	`
 	createLayOut(false);
@@ -170,7 +170,7 @@ function createRealAward(data){
 			var source=pageData(data.list);//中奖数据实翻页实例
 
 			var item=`<div class="my-award-item">
-						<div class="my-award-left"><img src="image/award-item-left.png"/><span>3.25</span></div>
+						<div class="my-award-left"><img src="/app/image/award-item-left.png"/><span>3.25</span></div>
 						<div class="my-award-middle">雨伞</div>
 						<div class="my-award-right">3</div>
 					</div>`
@@ -178,17 +178,17 @@ function createRealAward(data){
 			var html=`
 			<div class="myAward popup-content">
 				<div class="xin-group">
-					<div><img src="image/xin.png"/></div>
-					<div><img src="image/xin.png"/></div>
-					<div><img src="image/xin.png"/></div>
+					<div><img src="/app/image/xin.png"/></div>
+					<div><img src="/app/image/xin.png"/></div>
+					<div><img src="/app/image/xin.png"/></div>
 				</div>
 
-				<div class="myaward-top"><img src="image/my-top.png"/><span class="close-btn-2"><img src="image/close-btn2.png"/></span></div>
+				<div class="myaward-top"><img src="/app/image/my-top.png"/><span class="close-btn-2"><img src="/app/image/close-btn2.png"/></span></div>
 				<div class="myaward-middle">
 					
 				</div>
-				<div class="myaward-bottom"><img src="image/my-bottom.png"/>
-					<div class="next-btn"><img src="image/next.png"/></div>
+				<div class="myaward-bottom"><img src="/app/image/my-bottom.png"/>
+					<div class="next-btn"><img src="/app/image/next.png"/></div>
 				</div>
 			<div>
 			`

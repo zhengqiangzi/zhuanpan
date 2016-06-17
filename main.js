@@ -159,7 +159,7 @@ function addluck(){
 		if(n>3){
 			n=1;
 		}
-		obj.attr("src","image/light"+n+".png")
+		obj.attr("src","/app/image/light"+n+".png")
 		n++;
 	},100)
 
