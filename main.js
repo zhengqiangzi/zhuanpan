@@ -174,6 +174,8 @@ webEvents.on('homeEvent',function(){
 //摇奖页面
 webEvents.on('luckEvent',function(){
 	addluck();
+	webEvents.emit('PopupEvent.createFocus')
+
 })
 
 //填写信息弹出窗口
@@ -212,14 +214,15 @@ webEvents.on('closeCoverEvent',function(){
 
 })
 
-webEvents.emit('PopupEvent.createFocus')
 window.start=function(){
 
 	webEvents.emit('homeEvent')
 }
 
 
-
+	
+	//console.log(ld.getItem("name"))
+	//console.log(ld.saveItem("age",301))
 //webEvents.emit('PopupEvent.createFocus')
 //webEvents.emit('PopupEvent.realAward')
 //webEvents.emit('luckEvent')
