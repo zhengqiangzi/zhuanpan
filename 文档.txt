@@ -1,4 +1,4 @@
-
+﻿
 1:请求中奖接口返回的数据：
 var one={
 	"id":1,//奖品ID需要和本地奖品ID相同
@@ -10,7 +10,7 @@ var one={
 }
 
 
-2:请求我的中奖记录数据 返回值
+2:请求我的中奖记录数据 返回值:
 {
 	"list":[
 		{"date":"03.25","award_name":"球衣","award_number":1},//date:中奖时间 award_name:中奖名称,award_number:奖品个数
@@ -23,7 +23,7 @@ var one={
 
 
 	
-3:提交中奖信息接口
+3:提交中奖信息接口:
 		var object={
 			gid:123//服务端生成的中奖记录id
 			username:"johnny",//中奖姓名
