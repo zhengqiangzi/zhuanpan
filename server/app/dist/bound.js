@@ -50,7 +50,7 @@
 	var template = __webpack_require__(10);
 	var webEvents = __webpack_require__(11);
 	var layout = __webpack_require__(13);
-	var awardData = __webpack_require__(16);
+	var awardData = __webpack_require__(17);
 	var preRotate = -1;
 	var timer = null;
 	/*var a={
@@ -588,7 +588,7 @@
 	var webEvents = __webpack_require__(11);
 	var nets = __webpack_require__(14);
 	var pageData = __webpack_require__(15);
-	var ld = __webpack_require__(17);
+	var ld = __webpack_require__(16);
 
 	var popup = null;
 	/*
@@ -726,6 +726,14 @@
 						d.find('.my-award-right').text(data[i].award_number);
 						$('.myaward-middle').append(d);
 					}
+					if (!source.hasNext()) {
+
+						$('.next-btn').addClass('disabled');
+					}
+				} else {
+
+					$('.next-btn').remove();
+					$('.myaward-middle').html("<div class='nodata'>暂时没有中奖数据！</div>");
 				}
 			});
 
@@ -769,13 +777,24 @@
 		var data = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
 
-		return $.ajax({
+		var best = $("<div class='best'><div>正在加载信息...</div></div>");
+		$(document.body).append(best);
+		var ajax = $.ajax({
 			type: 'GET',
 			url: url,
 			data: data,
 			dataType: 'json'
 
 		});
+
+		ajax.then(function () {
+
+			$('.best').remove();
+		}, function () {
+
+			$('.best').remove();
+		});
+		return ajax;
 	}
 
 	function getMyAward() {
@@ -889,6 +908,41 @@
 
 /***/ },
 /* 16 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var LocalData = function () {
+		function LocalData() {
+			_classCallCheck(this, LocalData);
+		}
+
+		_createClass(LocalData, [{
+			key: "getItem",
+			value: function getItem(param) {
+
+				return window.localStorage[param];
+			}
+		}, {
+			key: "saveItem",
+			value: function saveItem(key, value) {
+
+				window.localStorage[key] = value;
+			}
+		}]);
+
+		return LocalData;
+	}();
+
+	var data = new LocalData();
+	module.exports = data;
+
+/***/ },
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -967,41 +1021,6 @@
 		getAward: getAward
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var LocalData = function () {
-		function LocalData() {
-			_classCallCheck(this, LocalData);
-		}
-
-		_createClass(LocalData, [{
-			key: "getItem",
-			value: function getItem(param) {
-
-				return window.localStorage[param];
-			}
-		}, {
-			key: "saveItem",
-			value: function saveItem(key, value) {
-
-				window.localStorage[key] = value;
-			}
-		}]);
-
-		return LocalData;
-	}();
-
-	var data = new LocalData();
-	module.exports = data;
 
 /***/ }
 /******/ ]);
