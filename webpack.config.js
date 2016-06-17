@@ -19,7 +19,7 @@ module.exports={
    	 }),
   		new ExtractTextPlugin("style.css")
 	],
-	  devServer:{
+	devServer:{
       hot:true,
       inline:true,
       proxy:{
