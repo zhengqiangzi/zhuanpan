@@ -768,18 +768,18 @@
 
 	function getMyAward() {
 
-		return ajax("../Home/Index/zjqq", "");
+		return ajax("/Home/Award/myaward", "");
 		// return ajax("/app/myaward.json")
 	}
 
 	function getAward() {
 
-		return ajax("/app/one.json");
+		return ajax("/Home/Award/one");
 	}
 
 	function submitMessage(data) {
 
-		return ajax("/app/setAward.json", data);
+		return ajax("/Home/Award/setAward", data);
 	}
 
 	module.exports = {
