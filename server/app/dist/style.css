@@ -418,7 +418,7 @@ input[placeholder], [placeholder], *[placeholder] {
   color: #ff7a00;
   font-size: 12px; }
 
-.main, .home, .luck, .popup, .loading, .cover {
+.main, .home, .luck, .popup, .loading, .cover, .best {
   position: absolute;
   left: 0;
   top: 0;
@@ -843,6 +843,11 @@ input[placeholder], [placeholder], *[placeholder] {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdUAAAAeCAYAAAB64YQ0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozYTdhZWUwOC1hMzA1LTQzOTItOTY4NC1hZjAzMzUzZGZjNGMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6M0UwQTBDNzkzMjM2MTFFNkFDNDZEMEFCREUwMjEzOTIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6M0UwQTBDNzgzMjM2MTFFNkFDNDZEMEFCREUwMjEzOTIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MTUxNzFkNGQtM2NiZS00MDc0LTljMjktMjFlNjc2YTE2YTc3IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6ZDgwOWQxMWItNzBmYy0xMTc5LWEyZDYtZWZlMmE1M2RlZDU1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+7Q/yzAAAAIZJREFUeNrs1TERACAQxMADpejADFpQ9oiAhpldCWnSamYkWQEAbuyuAQC8YaoAYKoAYKoAYKoAgKkCgKkCgKkCgKkCAKYKAKYKAKYKAJgqAJgqAJgqAJgqAGCqAGCqAGCqAGCqAICpAoCpAoCpAgCmCgCmCgCmCgCmCgCYKgCYKgD86QgwABqXA3UDirTmAAAAAElFTkSuQmCC);
     background-repeat: repeat-y;
     overflow: hidden; }
+    .myAward .myaward-middle .nodata {
+      width: 100%;
+      margin: 20px 0px 0px 0px;
+      text-align: center;
+      color: #fff; }
   .myAward .myaward-bottom {
     width: 73.28125%;
     margin-left: auto;
@@ -855,6 +860,10 @@ input[placeholder], [placeholder], *[placeholder] {
       left: 50%;
       -webkit-transform: translate3d(-50%, 5px, 0px);
               transform: translate3d(-50%, 5px, 0px); }
+      .myAward .myaward-bottom .next-btn.disabled {
+        pointer-events: none;
+        -webkit-filter: grayscale(1);
+                filter: grayscale(1); }
   .myAward .xin-group {
     position: absolute;
     right: 40px;
@@ -1091,7 +1100,9 @@ input[placeholder], [placeholder], *[placeholder] {
     -webkit-transform: translate3d(-50%, 160px, 0px);
             transform: translate3d(-50%, 160px, 0px); }
   .index-top .dai {
-    margin-top: 50px; } }
+    margin-top: 50px; }
+  .focus .close-btn {
+    top: 116px; } }
 
 @media (max-height: 673px) and (min-height: 604px) {
   .write-form {
@@ -1103,4 +1114,36 @@ input[placeholder], [placeholder], *[placeholder] {
     margin-top: 70px; }
   .index-bottom .index-logo {
     -webkit-transform: translate3d(-50%, 160px, 0px);
-            transform: translate3d(-50%, 160px, 0px); } }
+            transform: translate3d(-50%, 160px, 0px); }
+  .focus .close-btn {
+    top: 128px; } }
+
+.best {
+  z-index: 10000;
+  background-color: rgba(255, 255, 255, 0);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #ff7a00; }
+  .best > div {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    min-width: 120px;
+    min-height: 60px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    font-size: 16px; }

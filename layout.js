@@ -218,6 +218,15 @@ function createRealAward(data){
 						d.find('.my-award-right').text(data[i].award_number);
 						$('.myaward-middle').append(d)
 					}
+					if(!source.hasNext()){
+
+						$('.next-btn').addClass('disabled');
+
+					}
+				}else{
+
+					$('.next-btn').remove();
+					$('.myaward-middle').html("<div class='nodata'>暂时没有中奖数据！</div>")
 				}
 			})
 

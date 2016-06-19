@@ -30,11 +30,12 @@ class AwardController extends Controller {
 
 		$list=[];
 		$list["sucess"]=1;
-		$list["list"][0]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
+		$list['list']=[];
+	/*	$list["list"][0]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
 		$list["list"][1]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
 		$list["list"][2]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
 		$list["list"][3]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
-		$list["list"][4]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
+		$list["list"][4]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);*/
 		
 		$this->ajaxReturn($list);
 	}

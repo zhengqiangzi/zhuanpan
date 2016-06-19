@@ -1,12 +1,25 @@
 function ajax(url,data=null){
 
-	return $.ajax({
+	var best=$("<div class='best'><div>正在加载信息...</div></div>");
+	$(document.body).append(best)
+	var ajax= $.ajax({
 	     type: 'GET',
 	     url: url ,
 	     data: data ,
 	     dataType: 'json'
 
-	});
+	})
+
+	ajax.then(function(){
+
+		$('.best').remove();
+
+	},function(){
+
+		$('.best').remove();
+
+	})
+	return ajax;
 
 }
 
