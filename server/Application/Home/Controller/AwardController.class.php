@@ -28,7 +28,12 @@ class AwardController extends Controller {
 	*/
 	function loginid(){
 		$loginid="999";
-		$this->ajaxReturn($loginid);
+
+		$arr=array();
+		$arr["loginid"]=$loginid;
+		$arr["status"]=1;//1成功2失败
+
+		$this->ajaxReturn($arr);
 	}
 	function myaward(){
 

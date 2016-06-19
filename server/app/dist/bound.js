@@ -51,8 +51,24 @@
 	var webEvents = __webpack_require__(11);
 	var layout = __webpack_require__(13);
 	var awardData = __webpack_require__(17);
+	var net = __webpack_require__(14);
 	var preRotate = -1;
 	var timer = null;
+	var localdatas = __webpack_require__(16);
+
+	//如果本地没有用户唯一数据就请求，并存入本地数据 库
+	if (!localdatas.getItem("loginid")) {
+		net.getUserId().then(function (data) {
+
+			if (data.status == 1) {
+
+				localdatas.saveItem('loginid', data.loginid);
+			}
+		}, function () {
+
+			console.log('get user id error');
+		});
+	}
 	/*var a={
 		list:[
 			{
@@ -771,8 +787,10 @@
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
+	var localdatas = __webpack_require__(16);
+	var uid = localdatas.getItem("loginid") || -1;
 	function ajax(url) {
 		var data = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
@@ -799,24 +817,31 @@
 
 	function getMyAward() {
 
-		return ajax("/Home/Award/myaward", "");
+		return ajax("/Home/Award/myaward", { loginid: uid });
 		// return ajax("/app/myaward.json")
 	}
 
 	function getAward() {
 
-		return ajax("/Home/Award/one");
+		return ajax("/Home/Award/one", { loginid: uid });
+	}
+
+	function getUserId() {
+
+		return ajax("/Home/Award/loginid");
 	}
 
 	function submitMessage(data) {
 
+		data.loginid = uid;
 		return ajax("/Home/Award/setAward", data);
 	}
 
 	module.exports = {
 		getMyAward: getMyAward,
 		getAward: getAward,
-		submitMessage: submitMessage
+		submitMessage: submitMessage,
+		getUserId: getUserId
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
