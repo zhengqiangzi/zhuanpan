@@ -26,32 +26,65 @@ class AwardController extends Controller {
 			]
 		}
 	*/
+	function loginid(){
+		$loginid="999";
+		$this->ajaxReturn($loginid);
+	}
 	function myaward(){
 
-		$list=[];
+		$list=array();
 		$list["sucess"]=1;
-		$list['list']=[];
-	/*	$list["list"][0]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
-		$list["list"][1]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
-		$list["list"][2]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
-		$list["list"][3]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
-		$list["list"][4]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);*/
+		$list['list']=array();
+		$openid="222";
+		$map['openid']=$openid;
+		$mygift=M('giftinfo')->where($map)->select();
+		if ($mygift) {
+			for($i=0;$i<count($mygift);$i++)
+				$list["list"][$i]=array("date"=>$mygift[$i]['date'],"award_name"=>$mygift[$i]['giftname'],"award_number"=>$mygift[$i]['nums']);
+		}
+		// $list["list"][0]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
+		// $list["list"][1]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
+		// $list["list"][2]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
+		// $list["list"][3]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
+		// $list["list"][4]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
 		
 		$this->ajaxReturn($list);
 	}
 	//{"id":2,"virtual":2,"get":1,"name":"手机壳","gid":123,"pic":"image/quan.png"}
 
 	function one(){
+		$time = time();
+		$month=date('m',$time);
+		$day=date('d',$time);
+		$nowday=$month.$day;
+		
+		$openid="openeverthing";
 
-		$data=[];
-		$data["id"]=2;
+		$data=array();
+		$data["gid"]=2;
 		$data["virtual"]=2;
-		$data["get"]=1;
-		$data["name"]="手机壳";
-		$data["gid"]="123";
+		$data["get"]=rand(1,5);
+		$data["giftname"]="手机壳";
+		$giftid=time().gid;
+		$data['openid']=$openid;
+		$data["giftid"]=$giftid;
+		$data['date']=$nowday;
 		$data["pic"]="image/quan.png";
 		$data["success"]=1;
-		$this->ajaxReturn($data);
+		// dump($data);
+		M('giftinfo')->data($data)->add();
+
+		$returnData=array();
+		$returnData["success"]=1;
+		$returnData["id"]=$data["gid"];
+		$returnData["get"]=$data["get"];
+
+
+
+
+
+
+		$this->ajaxReturn($returnData);
 
 	}
 
@@ -60,7 +93,7 @@ class AwardController extends Controller {
 	"info":"服务器异常"
 	}*/
 	function setAward(){
-		$data=[];
+		$data=array();
 		$data['status']=1;
 		$data['info']="服务器异常";
 		$data["success"]=1;
