@@ -9,19 +9,15 @@ var timer=null;
 var localdatas=require('localdata')
 	
 //如果本地没有用户唯一数据就请求，并存入本地数据 库
-if(!localdatas.getItem("loginid")){
-	net.getUserId().then(function(data){
 
+	net.getUserId({id:localdatas.getItem("loginid")||-1}).then(function(data){
 		if(data.status==1){
-
 			localdatas.saveItem('loginid',data.loginid)
 		}
-
 	},function(){
-
 		console.log('get user id error')
 	})
-}
+
 /*var a={
 	list:[
 		{
