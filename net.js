@@ -38,9 +38,9 @@ function getAward(){
 
 }
 
-function getUserId(data){
+function getUserId(){
 
-	return ajax("/Home/Award/loginid",data)
+	return ajax("/Home/Award/loginid")
 }
 
 function submitMessage(data){

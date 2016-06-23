@@ -7,20 +7,6 @@ use Think\Exception;
  * @author cloud
  * @version 1.0 2016-05-30
  */
-class RandChar{
-
-  function getRandChar($length){
-   $str = null;
-   $strPol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
-   $max = strlen($strPol)-1;
-
-   for($i=0;$i<$length;$i++){
-    $str.=$strPol[rand(0,$max)];//rand($min,$max)生成介于min和max两个数之间的一个随机整数
-   }
-
-   return $str;
-  }
- }
 class AwardController extends Controller {
 	
 	function _initialize(){
@@ -41,87 +27,25 @@ class AwardController extends Controller {
 		}
 	*/
 	function loginid(){
-		// 进入页面抓取session
-		$getloginid=I('id');
-		// $getloginid有值便设置session并开始进入数据库查找，若无值便从else开始请求新的session；
-		if($getloginid!='-1')
-		{
-			$lifetime =168 * 3600;    //7天；
-			session_set_cookie_params($lifetime);
-			session_start();
-			$_SESSION['loginid']=$getloginid;
-			// session_unset();
-			// session_destroy();
-			$arr=array();
-			$arr["loginid"]=$loginid;
-			$arr["status"]=1;//1成功2失败
-			// 查询是否为真
-			$data=array();
-			$data["loginid"]=$loginid;
-			$cfm_loginid=M('userinfo')->where($data)->find();
-			
-			if (!$cfm_loginid) {
-				// 查询到的loginid与实际不符
-				$arr["status"]=2;
-				$arr["errmsg"]="该登录信息有误，请重新登录";
-				$this->ajaxReturn($arr);
-				return;
-			}
-			$this->ajaxReturn($arr);
-		}else{
-			// 空loginid将会执行下方方法获取新的loginid
-			function findid(){
-				$randCharObj = new RandChar();
-				$loginid=$randCharObj->getRandChar(16);
-				$data=array();
-				$data['loginid']=$loginid;
-				$find_lid=M('userinfo')->where($data)->find();
-				if($find_lid)
-				{
+		$loginid="999";
 
-					findid();
-					return false;
-				}
-				else
-				{
-					M('userinfo')->data($data)->add();
-					$lifetime =168* 3600;    //7天；
-					session_set_cookie_params($lifetime);
-					session_Start();
-					$_SESSION["admin"] = true; 
-					$_SESSION["loginid"]=$loginid;
+		$arr=array();
+		$arr["loginid"]=$loginid;
+		$arr["status"]=1;//1成功2失败
 
-					return $loginid;
-				}
-				
-			}
-			$arr=array();
-			$arr["loginid"]=findid();
-			$arr["status"]=1;
-			session_start();
-			$this->ajaxReturn($arr);
-		}
-
+		$this->ajaxReturn($arr);
 	}
-
-	
-
-
-
 	function myaward(){
 
 		$list=array();
 		$list["sucess"]=1;
 		$list['list']=array();
-		session_start();
-		$loginid=$_SESSION["loginid"];
-		// $openid=$loginid;
-
-		$map['loginid']=$loginid;
+		$openid="222";
+		$map['openid']=$openid;
 		$mygift=M('giftinfo')->where($map)->select();
 		if ($mygift) {
 			for($i=0;$i<count($mygift);$i++)
-				$list["list"][$i]=array("date"=>$mygift[$i]['date'],"award_name"=>$mygift[$i]['giftname'],"award_number"=>$mygift[$i]['get']);
+				$list["list"][$i]=array("date"=>$mygift[$i]['date'],"award_name"=>$mygift[$i]['giftname'],"award_number"=>$mygift[$i]['nums']);
 		}
 		// $list["list"][0]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
 		// $list["list"][1]=array("date"=>"03.25","award_name"=>"球衣","award_number"=>1);
@@ -134,115 +58,39 @@ class AwardController extends Controller {
 	//{"id":2,"virtual":2,"get":1,"name":"手机壳","gid":123,"pic":"image/quan.png"}
 
 	function one(){
-		session_start();
-		$loginid=$_SESSION["loginid"];
+		$time = time();
+		$month=date('m',$time);
+		$day=date('d',$time);
+		$nowday=$month.$day;
 		
-	
-		function get_rand($proArr) { 
-		    $result = ''; 
+		$openid="openeverthing";
 
-		    //概率数组的总概率精度
-		    $proSum = array_sum($proArr); 
+		$data=array();
+		$data["gid"]=2;
+		$data["virtual"]=2;
+		$data["get"]=rand(1,5);
+		$data["giftname"]="手机壳";
+		$giftid=time().gid;
+		$data['openid']=$openid;
+		$data["giftid"]=$giftid;
+		$data['date']=$nowday;
+		$data["pic"]="image/quan.png";
+		$data["success"]=1;
+		// dump($data);
+		M('giftinfo')->data($data)->add();
 
-		    //概率数组循环
-		    foreach ($proArr as $key => $proCur) { 
-		        $randNum = mt_rand(1, $proSum); 
-		        if ($randNum <= $proCur) { 
-		            $result = $key; 
-		            break; 
-		        } else { 
-		            $proSum -= $proCur; 
-		        } 
-		    } 
-		    unset ($proArr); 
+		$returnData=array();
+		$returnData["success"]=1;
+		$returnData["id"]=$data["gid"];
+		$returnData["get"]=$data["get"];
 
-		    return $result; 
-		}
-// 		$prize_arr是一个二维数组，记录了所有本次抽奖的奖项信息，其中id表示中奖等级，prize表示奖品，v表示中奖概率。注意其中的v必须为整数，你可以将对应的奖项的v设置成0，即意味着该奖项抽中的几率是0，数组中v的总和（基数），基数越大越能体现概率的准确性。本例中v的总和为100，那么平板电脑对应的中奖概率就是1%，如果v的总和是10000，那中奖概率就是万分之一了。
-// 每次前端页面的请求，PHP循环奖项设置数组，通过概率计算函数get_rand获取抽中的奖项id。将中奖奖品保存在数组$res['yes']中，而剩下的未中奖的信息保存在$res['no']中，最后输出json个数数据给前端页面。
-		$map=array();
-		$map['stock']=array('neq','0');
 
-		$select_stocks=M('stocks')->where($map)->select();
-		 // dump($select_stocks);
-		$stocks=array();
-		$stocks=$select_stocks;
-		// $prize_arr = array( 
-		//     '0' => array('id'=>1,'prize'=>'平板电脑','v'=>1), 
-		//     '1' => array('id'=>2,'prize'=>'数码相机','v'=>5), 
-		//     '2' => array('id'=>3,'prize'=>'音箱设备','v'=>10), 
-		//     '3' => array('id'=>4,'prize'=>'4G优盘','v'=>12), 
-		//     '4' => array('id'=>5,'prize'=>'10Q币','v'=>22), 
-		//     '5' => array('id'=>6,'prize'=>'下次没准就能中哦','v'=>50), 
-		// ); 
-		
-		// dump($prize_arr);
-		//如果中奖数据是放在数据库里，这里就需要进行判断中奖数量
-		//在中1、2、3等奖的，如果达到最大数量的则unset相应的奖项，避免重复中大奖
-		//code here eg:unset($prize_arr['0'])
-		foreach ($stocks as $key => $val) { 
-		    $arr[$val['id']] = $val['probability']; 
 
-		} 
 
-		$rid = get_rand($arr); //根据概率获取奖项id
-		// echo $rid;
-		
-		$giftid=rand(1000,9999).time().$stocks[$rid-1]['id'];
-		// 前端返回
-		$returnData['id']=$stocks[$rid-1]['id'];
-		$returnData['virtual']=$stocks[$rid-1]['virtual'];
-		$returnData['get']=$stocks[$rid-1]['get'];
-		$returnData['name']=$stocks[$rid-1]['name'];
-		$returnData['pic']=$stocks[$rid-1]['imgurl'];
-		$returnData['gid']=$giftid;
-		
-		
-		if($stocks[$rid-1]['id']==6)
-		{
-			return;
-		}
-		else
-		{
-			$time = time();
-			$month=date('m',$time);
-			$day=date('d',$time);
-			$nowday=$month.$day;
-			$data=array();
-			$data['giftid']=$giftid;
-			$data['date']=$nowday;
-			$data['giftname']=$stocks[$rid-1]['name'];
-			$data['virtual']=$stocks[$rid-1]['virtual'];
-			$data['pic']=$stocks[$rid-1]['imgurl'];
-			$data['get']=$stocks[$rid-1]['get'];
-			$data['gid']=$stocks[$rid-1]['id'];
-			$data['openid']=$openid;
-			$data['loginid']=$loginid;
-			// dump($data['loginid']);
-			// 根据用户身份插入数据,若openid与loginid均无数据。则无法插入。
-			if(!$data['openid'] && !$data['loginid'])
-			{
-				$baduser=array();
-				$baduser['errmsg']="出现网络问题，请稍后尝试!";
-				$this->ajaxReturn($baduser);
-				return;
-			}
-			// 查看用户当日是否已经参与，若有，则无法再次参与
-			$map=array();
-			$map['date']=array('eq',$nowday);
-			$map['_query']='openid='.$openid.'&loginid='.$loginid.'&_logic=or';
-			$findtoday=M('giftinfo')->where($map)->select();
-			if($findtoday){
-				$baduser=array();
-				$baduser['errmsg']="一天只有一次机会哟，明日再来吧";
-				$this->ajaxReturn($baduser);
-				return;
-			}
-			//数据库写入：
-			$addgit=M('giftinfo')->data($data)->add();
 
-			}
-			$this->ajaxReturn($returnData);
+
+		$this->ajaxReturn($returnData);
+
 	}
 
 	/*{
@@ -250,64 +98,11 @@ class AwardController extends Controller {
 	"info":"服务器异常"
 	}*/
 	function setAward(){
-		$time = time();
-		$month=date('m',$time);
-		$day=date('d',$time);
-		$nowday=$month.$day;
-		$gid=I('gid');
-		$username=I('username');
-		$userphone=I('userphone');
-		$useraddress=I('useraddress');
-		$loginid=I('loginid');
-		
-		// 查找该ID当日是否已经中奖，若无则可以添加信息；
-		$map=array();
-		$map['date']=array('eq',$nowday);
-		$map['_query']='openid='.$openid.'&loginid='.$loginid.'&_logic=or';
-		$findtoday=M('userinfo')->where($map)->select();
-		// dump($map);
-		// dump($findtoday);
-		if(!$findtoday){
-			$adddata=array();
-			$adddata['loginid']=$loginid;
-			$adddata['name']=$username;
-			$adddata['phone']=$userphone;
-			$adddata['addr']=$useraddress;
-			$adddata['giftid']=$gid;
-			$adddata['creat_time']=$nowday;
-			$adddata['status']=0;
-			$addsql=M('userinfo')->data($adddata)->add();
-			if($addsql)
-			{
-				$data=array();
-				$data['status']=1;
-				$data['info']="添加成功";
-				$data["success"]=1;
-				$this->ajaxReturn($data);
-			}
-			else
-			{
-				$data=array();
-				$data['status']=1;
-				$data['info']="网络异常，请稍后再试！";
-				$data["success"]=1;
-				$this->ajaxReturn($data);
-			}
-
-		}else
-		{
-			$data=array();
-			$data['status']=1;
-			$data['info']="今日已经中奖，请明日再来参与！";
-			$data["success"]=1;
-			$this->ajaxReturn($data);
-		}
-
-
-
-		
-		
-		
+		$data=array();
+		$data['status']=1;
+		$data['info']="服务器异常";
+		$data["success"]=1;
+		$this->ajaxReturn($data);
 
 	}
 }

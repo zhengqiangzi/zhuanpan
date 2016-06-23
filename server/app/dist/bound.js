@@ -54,18 +54,21 @@
 	var net = __webpack_require__(14);
 	var preRotate = -1;
 	var timer = null;
-	var localdatas = __webpack_require__(15);
+	var localdatas = __webpack_require__(16);
 
 	//如果本地没有用户唯一数据就请求，并存入本地数据 库
+	if (!localdatas.getItem("loginid")) {
+		net.getUserId().then(function (data) {
 
-	net.getUserId({ id: localdatas.getItem("loginid") || -1 }).then(function (data) {
-		if (data.status == 1) {
-			localdatas.saveItem('loginid', data.loginid);
-		}
-	}, function () {
-		console.log('get user id error');
-	});
+			if (data.status == 1) {
 
+				localdatas.saveItem('loginid', data.loginid);
+			}
+		}, function () {
+
+			console.log('get user id error');
+		});
+	}
 	/*var a={
 		list:[
 			{
@@ -151,7 +154,7 @@
 		$('.zhizheng').click(function () {
 
 			awardData.getAward().then(function (param) {
-				preRotate = preRotate == param.rotate + 360 * 5 ? preRotate + 360 * 5 + 360 : param.rotate + 360 * 5;
+				preRotate = preRotate == param.rotate + 360 * 5 ? preRotate + 360 * 5 + 360 : preRotate + 360 * 5;
 
 				webEvents.emit('coverEvent');
 
@@ -600,8 +603,8 @@
 
 	var webEvents = __webpack_require__(11);
 	var nets = __webpack_require__(14);
-	var pageData = __webpack_require__(16);
-	var ld = __webpack_require__(15);
+	var pageData = __webpack_require__(15);
+	var ld = __webpack_require__(16);
 
 	var popup = null;
 	/*
@@ -786,7 +789,7 @@
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
-	var localdatas = __webpack_require__(15);
+	var localdatas = __webpack_require__(16);
 	var uid = localdatas.getItem("loginid") || -1;
 	function ajax(url) {
 		var data = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
@@ -823,9 +826,9 @@
 		return ajax("/Home/Award/one", { loginid: uid });
 	}
 
-	function getUserId(data) {
+	function getUserId() {
 
-		return ajax("/Home/Award/loginid", data);
+		return ajax("/Home/Award/loginid");
 	}
 
 	function submitMessage(data) {
@@ -844,41 +847,6 @@
 
 /***/ },
 /* 15 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var LocalData = function () {
-		function LocalData() {
-			_classCallCheck(this, LocalData);
-		}
-
-		_createClass(LocalData, [{
-			key: "getItem",
-			value: function getItem(param) {
-
-				return window.localStorage[param];
-			}
-		}, {
-			key: "saveItem",
-			value: function saveItem(key, value) {
-
-				window.localStorage[key] = value;
-			}
-		}]);
-
-		return LocalData;
-	}();
-
-	var data = new LocalData();
-	module.exports = data;
-
-/***/ },
-/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -962,6 +930,41 @@
 
 		return new PageData(data);
 	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var LocalData = function () {
+		function LocalData() {
+			_classCallCheck(this, LocalData);
+		}
+
+		_createClass(LocalData, [{
+			key: "getItem",
+			value: function getItem(param) {
+
+				return window.localStorage[param];
+			}
+		}, {
+			key: "saveItem",
+			value: function saveItem(key, value) {
+
+				window.localStorage[key] = value;
+			}
+		}]);
+
+		return LocalData;
+	}();
+
+	var data = new LocalData();
+	module.exports = data;
 
 /***/ },
 /* 17 */
