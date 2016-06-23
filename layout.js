@@ -273,6 +273,29 @@ var html=`
 
 }
 
+function createFail(){
+
+	var html=`
+			<div class="fail popup-content">
+				
+				<span>
+					<img src="/app/image/fail.png"/>
+					</span>
+
+
+			<div>
+	`
+	createLayOut(false);
+	$(document.body).append(html);
+
+
+	$('.fail').click(function(){
+
+				closePopup();
+	})
+
+		
+}
 function closePopup(){
 	if(popup){
 		popup.remove();
@@ -291,6 +314,7 @@ module.exports={
 	createRealAward,
 	createVirAward,
 	createMyAward,
-	createRule
+	createRule,
+	createFail
 
 }

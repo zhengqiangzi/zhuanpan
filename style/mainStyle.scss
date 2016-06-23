@@ -818,3 +818,17 @@ $xinxin_big_scale:1.6;
 		font-size:16px;
 	}
 }
+
+.fail{
+	@extend %full;
+	z-index:101;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+
+	&>span{
+
+		width:percentage(512px/640px);
+	
+	}
+}

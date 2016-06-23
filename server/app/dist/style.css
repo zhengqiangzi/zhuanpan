@@ -418,7 +418,7 @@ input[placeholder], [placeholder], *[placeholder] {
   color: #ff7a00;
   font-size: 12px; }
 
-.main, .home, .luck, .popup, .rule, .loading, .cover, .best {
+.main, .home, .luck, .popup, .rule, .loading, .cover, .best, .fail {
   position: absolute;
   left: 0;
   top: 0;
@@ -1184,3 +1184,17 @@ input[placeholder], [placeholder], *[placeholder] {
         -ms-flex-pack: center;
             justify-content: center;
     font-size: 16px; }
+
+.fail {
+  z-index: 101;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  .fail > span {
+    width: 80%; }

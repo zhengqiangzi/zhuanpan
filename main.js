@@ -151,7 +151,8 @@ function addluck(){
 
 			    		setTimeout(function(){
 							webEvents.emit('closeCoverEvent')
-			    			alert('运气不佳,未中奖,继续加油哦！')
+			    			webEvents.emit('PopupEvent.createFail')
+
 			    		},1000);
 			    	}
 
@@ -238,6 +239,11 @@ webEvents.on('closeCoverEvent',function(){
 webEvents.on('PopupEvent.rule',function(){
 	layout.createRule();
 })
+
+webEvents.on('PopupEvent.createFail',function(){
+	layout.createFail();
+})
+
 window.start=function(){
 
 	webEvents.emit('homeEvent')
@@ -246,7 +252,6 @@ window.start=function(){
 
 	//console.log(ld.getItem("name"))
 	//console.log(ld.saveItem("age",301))
-//webEvents.emit('PopupEvent.createFocus')
 //webEvents.emit('PopupEvent.realAward')
 //webEvents.emit('luckEvent')
 //webEvents.emit('PopupEvent.virAwardEvent')

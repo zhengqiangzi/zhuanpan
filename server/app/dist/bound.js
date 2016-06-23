@@ -187,7 +187,7 @@
 
 							setTimeout(function () {
 								webEvents.emit('closeCoverEvent');
-								alert('运气不佳,未中奖,继续加油哦！');
+								webEvents.emit('PopupEvent.createFail');
 							}, 1000);
 						}
 					}
@@ -262,6 +262,11 @@
 	webEvents.on('PopupEvent.rule', function () {
 		layout.createRule();
 	});
+
+	webEvents.on('PopupEvent.createFail', function () {
+		layout.createFail();
+	});
+
 	window.start = function () {
 
 		webEvents.emit('homeEvent');
@@ -269,7 +274,6 @@
 
 	//console.log(ld.getItem("name"))
 	//console.log(ld.saveItem("age",301))
-	//webEvents.emit('PopupEvent.createFocus')
 	//webEvents.emit('PopupEvent.realAward')
 	//webEvents.emit('luckEvent')
 	//webEvents.emit('PopupEvent.virAwardEvent')
@@ -783,6 +787,17 @@
 		});
 	}
 
+	function createFail() {
+
+		var html = '\n\t\t\t<div class="fail popup-content">\n\t\t\t\t\n\t\t\t\t<span>\n\t\t\t\t\t<img src="/app/image/fail.png"/>\n\t\t\t\t\t</span>\n\n\n\t\t\t<div>\n\t';
+		createLayOut(false);
+		$(document.body).append(html);
+
+		$('.fail').click(function () {
+
+			closePopup();
+		});
+	}
 	function closePopup() {
 		if (popup) {
 			popup.remove();
@@ -798,7 +813,8 @@
 		createRealAward: createRealAward,
 		createVirAward: createVirAward,
 		createMyAward: createMyAward,
-		createRule: createRule
+		createRule: createRule,
+		createFail: createFail
 
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
