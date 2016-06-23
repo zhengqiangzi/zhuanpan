@@ -175,10 +175,25 @@ input[placeholder], [placeholder], *[placeholder] {
 	background-image:url(../image/bg2.jpg);
 	background-size:cover;
 	& .myAwardBtn{
-		width:percentage(155px/640px);
+		width:100%;
 		position:absolute;
 		bottom:20px;
-		right:20px;
+			display:flex;
+
+		&>div{
+			float:left;
+			width:20%;
+			display:flex;
+			align-items:flex-end;
+		}
+		&>div:nth-child(2){
+			width:50%;
+			margin-left:5%;
+			margin-right:5%;
+		}
+		&>div:nth-child(3){
+			width:20%;
+		}
 	}
 	& .luck-title{
 		width:percentage(589px/640px);
@@ -529,6 +544,35 @@ $xinxin_big_scale:1.6;
 				 transform:rotate(85deg)translate3d(20px,20px,0px)scale(0);
 				 animation:xin2-3 1s 0.8s infinite alternate ease-in-out;
 			}
+	}
+}
+
+.rule{
+	@extend %full;
+	z-index:101;
+	overflow:scroll;
+	& .rule-header{
+		width:percentage(622px/640px);
+		margin-left:auto;
+		margin-right:auto;
+		position:relative;
+
+		& .rule-close-btn{
+			position:absolute;
+			right:40px;
+			top:32px;
+			width:40px;
+		}
+
+		&>img{
+			display:block;
+		}
+	}
+
+	& .rule-content{
+		width:percentage(514px/640px);
+				margin-left:auto;
+		margin-right:auto;
 	}
 }
 

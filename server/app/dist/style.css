@@ -418,7 +418,7 @@ input[placeholder], [placeholder], *[placeholder] {
   color: #ff7a00;
   font-size: 12px; }
 
-.main, .home, .luck, .popup, .loading, .cover, .best {
+.main, .home, .luck, .popup, .rule, .loading, .cover, .best {
   position: absolute;
   left: 0;
   top: 0;
@@ -570,10 +570,27 @@ input[placeholder], [placeholder], *[placeholder] {
   background-image: url(/app/dist/image/bg2.jpg);
   background-size: cover; }
   .luck .myAwardBtn {
-    width: 24.21875%;
+    width: 100%;
     position: absolute;
     bottom: 20px;
-    right: 20px; }
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+    .luck .myAwardBtn > div {
+      float: left;
+      width: 20%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: end;
+          -ms-flex-align: end;
+              align-items: flex-end; }
+    .luck .myAwardBtn > div:nth-child(2) {
+      width: 50%;
+      margin-left: 5%;
+      margin-right: 5%; }
+    .luck .myAwardBtn > div:nth-child(3) {
+      width: 20%; }
   .luck .luck-title {
     width: 92.03125%;
     margin-left: auto;
@@ -887,6 +904,26 @@ input[placeholder], [placeholder], *[placeholder] {
               transform: rotate(85deg) translate3d(20px, 20px, 0px) scale(0);
       -webkit-animation: xin2-3 1s 0.8s infinite alternate ease-in-out;
               animation: xin2-3 1s 0.8s infinite alternate ease-in-out; }
+
+.rule {
+  z-index: 101;
+  overflow: scroll; }
+  .rule .rule-header {
+    width: 97.1875%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; }
+    .rule .rule-header .rule-close-btn {
+      position: absolute;
+      right: 40px;
+      top: 32px;
+      width: 40px; }
+    .rule .rule-header > img {
+      display: block; }
+  .rule .rule-content {
+    width: 80.3125%;
+    margin-left: auto;
+    margin-right: auto; }
 
 @-webkit-keyframes xin2 {
   from {

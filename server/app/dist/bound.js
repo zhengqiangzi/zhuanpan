@@ -54,7 +54,7 @@
 	var net = __webpack_require__(14);
 	var preRotate = -1;
 	var timer = null;
-	var localdatas = __webpack_require__(16);
+	var localdatas = __webpack_require__(15);
 
 	//如果本地没有用户唯一数据就请求，并存入本地数据 库
 	if (!localdatas.getItem("loginid")) {
@@ -146,7 +146,7 @@
 		$('.round-pan').height($('.round-pan').width()); //shit for round fixer
 
 		//查看我的中奖礼品
-		$('.myAwardBtn').click(function () {
+		$('.myAwardBtn .myaward_btn').click(function () {
 			webEvents.emit('PopupEvent.myAwardEvent');
 		});
 
@@ -208,6 +208,10 @@
 			obj.attr("src", "/app/image/light" + n + ".png");
 			n++;
 		}, 100);
+
+		$('.rule-trigger').click(function () {
+			webEvents.emit('PopupEvent.rule');
+		});
 	}
 
 	//主页面
@@ -254,7 +258,10 @@
 
 		$('.cover').remove();
 	});
-
+	//中奖规则
+	webEvents.on('PopupEvent.rule', function () {
+		layout.createRule();
+	});
 	window.start = function () {
 
 		webEvents.emit('homeEvent');
@@ -300,7 +307,7 @@
 
 	function luck() {
 
-		return "<div class=\"luck\">\n\t\t\t<div class=\"luck-title\">\n\t\t\t\t<img src=\"/app/image/title2.png\"/>\n\t\t\t\t\n\t\t\t\t<div class=\"jingbi\"><img src=\"/app/image/luck-ani-1.png\"/></div>\n\t\t\t\t<div class=\"bao\"><img src=\"/app/image/luck-ani-2.png\"/></div>\n\t\t\t</div>\t\n\t\t\n\t\t\t<div class=\"pan\">\n\t\t\t\t<div class=\"round-pan\"><img src=\"/app/image/pan.png\"/></div>\n\t\t\t\t<div class=\"zhizheng\"><img src=\"/app/image/zhizheng.png\"/></div>\n\n\t\t\t\t<div class=\"light\">\n\t\t\t\t\t<img src=\"/app/image/light1.png\"/>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"myAwardBtn\"><a href='javascript:void(0)'><img src=\"/app/image/myAwardBtn.png\"/></a></div>\n\t\t</div>";
+		return "<div class=\"luck\">\n\t\t\t<div class=\"luck-title\">\n\t\t\t\t<img src=\"/app/image/title2.png\"/>\n\t\t\t\t\n\t\t\t\t<div class=\"jingbi\"><img src=\"/app/image/luck-ani-1.png\"/></div>\n\t\t\t\t<div class=\"bao\"><img src=\"/app/image/luck-ani-2.png\"/></div>\n\t\t\t</div>\t\n\t\t\n\t\t\t<div class=\"pan\">\n\t\t\t\t<div class=\"round-pan\"><img src=\"/app/image/pan.png\"/></div>\n\t\t\t\t<div class=\"zhizheng\"><img src=\"/app/image/zhizheng.png\"/></div>\n\n\t\t\t\t<div class=\"light\">\n\t\t\t\t\t<img src=\"/app/image/light1.png\"/>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"myAwardBtn\">\n\n\t\t\t\t<div><a href='javascript:void(0)' class='rule-trigger'><img src=\"/app/image/rule_btn.png\"/></a></div>\n\t\t\t\t<div><a href='javascript:void(0)'><img src=\"/app/image/times.png\"/></a></div>\n\t\t\t\t<div><a href='javascript:void(0)' class='myaward_btn'><img src=\"/app/image/myAwardBtn.png\"/></a></div>\n\n\n\t\t\t</div>\n\t\t</div>";
 	}
 
 	module.exports = {
@@ -603,8 +610,8 @@
 
 	var webEvents = __webpack_require__(11);
 	var nets = __webpack_require__(14);
-	var pageData = __webpack_require__(15);
-	var ld = __webpack_require__(16);
+	var pageData = __webpack_require__(16);
+	var ld = __webpack_require__(15);
 
 	var popup = null;
 	/*
@@ -764,6 +771,18 @@
 		});
 	}
 
+	function createRule() {
+
+		var html = '\n\t\t\t<div class="rule popup-content">\n\t\t\t\t\n\t\t\t\t<div class="rule-header"><img src="/app/image/rule-header.png"/>\n\t\t\t\t\t\n\t\t\t\t\t<div class="rule-close-btn"><img src="/app/image/close-btn2.png"/></div>\n\n\t\t\t\t</div>\n\t\t\t\t<div class="rule-content"><img src="/app/image/rule_content.png"/></div>\n\n\n\n\t\t\t<div>\n\t';
+		createLayOut(false);
+		$(document.body).append(html);
+
+		$('.rule-close-btn').click(function () {
+
+			closePopup();
+		});
+	}
+
 	function closePopup() {
 		if (popup) {
 			popup.remove();
@@ -778,7 +797,8 @@
 		createFocus: createFocus,
 		createRealAward: createRealAward,
 		createVirAward: createVirAward,
-		createMyAward: createMyAward
+		createMyAward: createMyAward,
+		createRule: createRule
 
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -789,7 +809,7 @@
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
-	var localdatas = __webpack_require__(16);
+	var localdatas = __webpack_require__(15);
 	var uid = localdatas.getItem("loginid") || -1;
 	function ajax(url) {
 		var data = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
@@ -847,6 +867,41 @@
 
 /***/ },
 /* 15 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var LocalData = function () {
+		function LocalData() {
+			_classCallCheck(this, LocalData);
+		}
+
+		_createClass(LocalData, [{
+			key: "getItem",
+			value: function getItem(param) {
+
+				return window.localStorage[param];
+			}
+		}, {
+			key: "saveItem",
+			value: function saveItem(key, value) {
+
+				window.localStorage[key] = value;
+			}
+		}]);
+
+		return LocalData;
+	}();
+
+	var data = new LocalData();
+	module.exports = data;
+
+/***/ },
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -930,41 +985,6 @@
 
 		return new PageData(data);
 	};
-
-/***/ },
-/* 16 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var LocalData = function () {
-		function LocalData() {
-			_classCallCheck(this, LocalData);
-		}
-
-		_createClass(LocalData, [{
-			key: "getItem",
-			value: function getItem(param) {
-
-				return window.localStorage[param];
-			}
-		}, {
-			key: "saveItem",
-			value: function saveItem(key, value) {
-
-				window.localStorage[key] = value;
-			}
-		}]);
-
-		return LocalData;
-	}();
-
-	var data = new LocalData();
-	module.exports = data;
 
 /***/ },
 /* 17 */

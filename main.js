@@ -107,7 +107,7 @@ function addluck(){
 	$('.round-pan').height($('.round-pan').width());//shit for round fixer
 
 	//查看我的中奖礼品
-	$('.myAwardBtn').click(function(){
+	$('.myAwardBtn .myaward_btn').click(function(){
 		webEvents.emit('PopupEvent.myAwardEvent')
 	})
 
@@ -181,6 +181,10 @@ function addluck(){
 	},100)
 
 
+	$('.rule-trigger').click(function(){
+			webEvents.emit('PopupEvent.rule')
+
+	})
 }	
 
 //主页面
@@ -230,14 +234,16 @@ webEvents.on('closeCoverEvent',function(){
 	$('.cover').remove();
 
 })
-
+//中奖规则 
+webEvents.on('PopupEvent.rule',function(){
+	layout.createRule();
+})
 window.start=function(){
 
 	webEvents.emit('homeEvent')
 }
 
 
-	
 	//console.log(ld.getItem("name"))
 	//console.log(ld.saveItem("age",301))
 //webEvents.emit('PopupEvent.createFocus')

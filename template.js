@@ -40,7 +40,14 @@ function luck(){
 					<img src="/app/image/light1.png"/>
 				</div>
 			</div>
-			<div class="myAwardBtn"><a href='javascript:void(0)'><img src="/app/image/myAwardBtn.png"/></a></div>
+			<div class="myAwardBtn">
+
+				<div><a href='javascript:void(0)' class='rule-trigger'><img src="/app/image/rule_btn.png"/></a></div>
+				<div><a href='javascript:void(0)'><img src="/app/image/times.png"/></a></div>
+				<div><a href='javascript:void(0)' class='myaward_btn'><img src="/app/image/myAwardBtn.png"/></a></div>
+
+
+			</div>
 		</div>`
 
 }

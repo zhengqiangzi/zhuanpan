@@ -246,6 +246,33 @@ function createRealAward(data){
  }
 
 
+function createRule(){
+
+var html=`
+			<div class="rule popup-content">
+				
+				<div class="rule-header"><img src="/app/image/rule-header.png"/>
+					
+					<div class="rule-close-btn"><img src="/app/image/close-btn2.png"/></div>
+
+				</div>
+				<div class="rule-content"><img src="/app/image/rule_content.png"/></div>
+
+
+
+			<div>
+	`
+	createLayOut(false);
+	$(document.body).append(html);
+
+	$('.rule-close-btn').click(function(){
+
+				closePopup();
+	})
+
+
+}
+
 function closePopup(){
 	if(popup){
 		popup.remove();
@@ -263,6 +290,7 @@ module.exports={
 	createFocus,
 	createRealAward,
 	createVirAward,
-	createMyAward
+	createMyAward,
+	createRule
 
 }
