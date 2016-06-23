@@ -42,9 +42,9 @@ class AwardController extends Controller {
 	*/
 	function loginid(){
 		// 进入页面抓取session
-		$getloginid=I('loginid');
+		$getloginid=I('id');
 		// $getloginid有值便设置session并开始进入数据库查找，若无值便从else开始请求新的session；
-		if($getloginid)
+		if($getloginid!='-1')
 		{
 			$lifetime =168 * 3600;    //7天；
 			session_set_cookie_params($lifetime);
