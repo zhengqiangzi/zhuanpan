@@ -418,7 +418,7 @@ input[placeholder], [placeholder], *[placeholder] {
   color: #ff7a00;
   font-size: 12px; }
 
-.main, .home, .luck, .popup, .rule, .loading, .cover, .best, .fail {
+.main, .home, .luck, .popup, .rule, .loading, .cover, .best, .fail, .messageSuccess {
   position: absolute;
   left: 0;
   top: 0;
@@ -1198,3 +1198,28 @@ input[placeholder], [placeholder], *[placeholder] {
           justify-content: center; }
   .fail > span {
     width: 80%; }
+
+.messageSuccess {
+  z-index: 101;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  .messageSuccess > .messageSuccess-content {
+    width: 76.5625%;
+    position: relative; }
+    .messageSuccess > .messageSuccess-content .myawardbtn2 {
+      position: absolute;
+      width: 50%;
+      top: 110px;
+      left: 25%; }
+    .messageSuccess > .messageSuccess-content .message-close-btn {
+      position: absolute;
+      right: 16px;
+      top: 0px;
+      width: 15%; }

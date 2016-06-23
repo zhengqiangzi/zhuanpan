@@ -243,6 +243,9 @@ webEvents.on('PopupEvent.rule',function(){
 webEvents.on('PopupEvent.createFail',function(){
 	layout.createFail();
 })
+webEvents.on('PopupEvent.createMessageSuccess',function(){
+	layout.createMessageSuccess();
+})
 
 window.start=function(){
 
@@ -256,5 +259,6 @@ window.start=function(){
 //webEvents.emit('luckEvent')
 //webEvents.emit('PopupEvent.virAwardEvent')
 //webEvents.emit('PopupEvent.myAwardEvent')
-
+/*webEvents.emit('PopupEvent.createMessageSuccess')
+*/
 

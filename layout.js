@@ -25,7 +25,7 @@ function createLayOut(bgClickClose=true){
 	}
 }
 
-function createWriteMessage(data){
+function createWriteMessage(data={data:{gid:1}}){
 
 	var name=ld.getItem("name")||"";
 	var address=ld.getItem("address")||"";
@@ -99,7 +99,7 @@ function createWriteMessage(data){
 			closePopup();
 			if(data.status==1){
 				//提交成功
-				alert('提交信息成功！');
+				webEvents.emit('PopupEvent.createMessageSuccess')
 			}else{
 				alert(data.info)
 			}
@@ -293,9 +293,43 @@ function createFail(){
 
 				closePopup();
 	})
-
-		
 }
+
+function createMessageSuccess(){
+
+	var html=`
+			<div class="messageSuccess popup-content">
+				
+				<div class='messageSuccess-content'>
+					<div><img src="/app/image/message-success.png"/></div>
+					
+					<div class='myawardbtn2'><img src="/app/image/myAwardBtn2.png"/></div>
+					<div class='message-close-btn'><img src="/app/image/close-btn2.png"/></div>
+				</div>
+
+
+			<div>
+	`
+	createLayOut(false);
+	$(document.body).append(html);
+
+
+	$('.message-close-btn').click(function(){
+
+				closePopup();
+	})
+
+
+	$('.myawardbtn2').click(function(){
+
+		closePopup();
+		webEvents.emit('PopupEvent.myAwardEvent')
+	})
+
+
+}
+
+
 function closePopup(){
 	if(popup){
 		popup.remove();
@@ -313,6 +347,7 @@ module.exports={
 	createFocus,
 	createRealAward,
 	createVirAward,
+	createMessageSuccess,
 	createMyAward,
 	createRule,
 	createFail

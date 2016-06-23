@@ -266,6 +266,9 @@
 	webEvents.on('PopupEvent.createFail', function () {
 		layout.createFail();
 	});
+	webEvents.on('PopupEvent.createMessageSuccess', function () {
+		layout.createMessageSuccess();
+	});
 
 	window.start = function () {
 
@@ -278,6 +281,8 @@
 	//webEvents.emit('luckEvent')
 	//webEvents.emit('PopupEvent.virAwardEvent')
 	//webEvents.emit('PopupEvent.myAwardEvent')
+	/*webEvents.emit('PopupEvent.createMessageSuccess')
+	*/
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
@@ -639,7 +644,9 @@
 		}
 	}
 
-	function createWriteMessage(data) {
+	function createWriteMessage() {
+		var data = arguments.length <= 0 || arguments[0] === undefined ? { data: { gid: 1 } } : arguments[0];
+
 
 		var name = ld.getItem("name") || "";
 		var address = ld.getItem("address") || "";
@@ -687,7 +694,7 @@
 				closePopup();
 				if (data.status == 1) {
 					//提交成功
-					alert('提交信息成功！');
+					webEvents.emit('PopupEvent.createMessageSuccess');
 				} else {
 					alert(data.info);
 				}
@@ -798,6 +805,25 @@
 			closePopup();
 		});
 	}
+
+	function createMessageSuccess() {
+
+		var html = '\n\t\t\t<div class="messageSuccess popup-content">\n\t\t\t\t\n\t\t\t\t<div class=\'messageSuccess-content\'>\n\t\t\t\t\t<div><img src="/app/image/message-success.png"/></div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\'myawardbtn2\'><img src="/app/image/myAwardBtn2.png"/></div>\n\t\t\t\t\t<div class=\'message-close-btn\'><img src="/app/image/close-btn2.png"/></div>\n\t\t\t\t</div>\n\n\n\t\t\t<div>\n\t';
+		createLayOut(false);
+		$(document.body).append(html);
+
+		$('.message-close-btn').click(function () {
+
+			closePopup();
+		});
+
+		$('.myawardbtn2').click(function () {
+
+			closePopup();
+			webEvents.emit('PopupEvent.myAwardEvent');
+		});
+	}
+
 	function closePopup() {
 		if (popup) {
 			popup.remove();
@@ -812,6 +838,7 @@
 		createFocus: createFocus,
 		createRealAward: createRealAward,
 		createVirAward: createVirAward,
+		createMessageSuccess: createMessageSuccess,
 		createMyAward: createMyAward,
 		createRule: createRule,
 		createFail: createFail

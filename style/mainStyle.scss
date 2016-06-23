@@ -832,3 +832,32 @@ $xinxin_big_scale:1.6;
 	
 	}
 }
+
+.messageSuccess{
+	
+		@extend %full;
+	z-index:101;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+
+	&>.messageSuccess-content{
+
+		width:percentage(490px/640px);
+		position:relative;
+
+		& .myawardbtn2{
+			position:absolute;
+			width:50%;
+			top:110px;
+			left:25%;
+		}
+
+		& .message-close-btn{
+			position:absolute;
+			right:16px;
+			top:0px;
+			width:15%;
+		}
+	}
+}
