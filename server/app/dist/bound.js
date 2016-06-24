@@ -50,25 +50,23 @@
 	var template = __webpack_require__(10);
 	var webEvents = __webpack_require__(11);
 	var layout = __webpack_require__(13);
-	var awardData = __webpack_require__(17);
+	var awardData = __webpack_require__(18);
 	var net = __webpack_require__(14);
 	var preRotate = -1;
 	var timer = null;
 	var localdatas = __webpack_require__(15);
+	var step = 3;
 
 	//如果本地没有用户唯一数据就请求，并存入本地数据 库
-	if (!localdatas.getItem("loginid")) {
-		net.getUserId().then(function (data) {
+	net.getUserId({ loginid: localdatas.getItem("loginid") || -1 }).then(function (data) {
 
-			if (data.status == 1) {
+		if (data.status == 1) {
+			localdatas.saveItem('loginid', data.loginid);
+		}
+	}, function () {
 
-				localdatas.saveItem('loginid', data.loginid);
-			}
-		}, function () {
-
-			console.log('get user id error');
-		});
-	}
+		console.log('get user id error');
+	});
 	/*var a={
 		list:[
 			{
@@ -154,8 +152,8 @@
 		$('.zhizheng').click(function () {
 
 			awardData.getAward().then(function (param) {
-				preRotate = preRotate == param.rotate + 360 * 5 ? preRotate + 360 * 5 + 360 : preRotate + 360 * 5;
-
+				preRotate = param.rotate + step * 360;
+				step = step + 3;
 				webEvents.emit('coverEvent');
 
 				$('.round-pan').animate({ d: preRotate }, {
@@ -167,7 +165,6 @@
 					},
 					duration: 3000,
 					complete: function complete() {
-
 						if (param.data.get == 1) {
 
 							if (param.data.virtual == 1) {
@@ -623,6 +620,12 @@
 	var ld = __webpack_require__(15);
 
 	var popup = null;
+	var conts = __webpack_require__(17);
+
+	var citySelect = __webpack_require__(20);
+
+	console.log(citySelect);
+
 	/*
 
 		param:
@@ -652,9 +655,23 @@
 		var address = ld.getItem("address") || "";
 		var phone = ld.getItem("phone") || "";
 
-		var html = '\n\t\t<div class="write-message popup-content">\n\t\t\t<div class="write-message-image"><img src="/app/image/message-bg.png"/></div>\n\t\t\t<div class="write-form">\n\t\t\t\t<input type=\'hidden\' value="' + data.data.gid + '" name=\'gid\'/>\n\t\t\t\t<div class="write-item-manager">\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入姓名" name=\'username\' value=\'' + name + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'tel\'  placeHolder="请输入手机号码"  name=\'userphone\' value=\'' + phone + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入地址" name=\'useraddress\' value=\'' + address + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t</div>\n\t\t\t\t<div class=\'write-message-submit-btn\'><a href=\'javascript:void(0)\'><img src="/app/image/submit-message.jpg"/></a></div>\n\t\t\t</div>\n\t\t</div>\n\t';
+		var html = '\n\t\t<div class="write-message popup-content">\n\t\t\t<div class="write-message-image"><img src="/app/image/message-bg.png"/></div>\n\t\t\t<div class="write-form">\n\t\t\t\t<input type=\'hidden\' value="' + data.data.gid + '" name=\'gid\'/>\n\t\t\t\t<div class="write-item-manager">\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入姓名" name=\'username\' value=\'' + name + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'tel\'  placeHolder="请输入手机号码"  name=\'userphone\' value=\'' + phone + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\n\n\n\t\t\t\t\t<div class="write-item spec" id="scx">\n\t\t\t\t\t\t<div class="shen"><select class=\'prov\'></select></div>\n\t\t\t\t\t\t<div class="shi"><select class=\'city\'></select></div>\n\t\t\t\t\t\t<div class="qu"><select class=\'dist\'></select></div>\n\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入地址" name=\'useraddress\' value=\'' + address + '\'/></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\'write-message-submit-btn\'><a href=\'javascript:void(0)\'><img src="/app/image/submit-message.jpg"/></a></div>\n\t\t\t</div>\n\t\t</div>\n\t';
 		createLayOut(false);
+
 		$(document.body).append(html);
+
+		$('#scx').citySelect({
+			prov: function () {
+				return ld.getItem("shen") || '北京';
+			}(),
+			city: function () {
+				return ld.getItem("shi") || '东城区';
+			}(),
+			dist: function () {
+				return ld.getItem("dist") || '';
+			}(),
+			nodata: "none"
+		});
 
 		$('.write-message-submit-btn>a').click(function () {
 
@@ -662,7 +679,9 @@
 			var username = $("input[name='username']").val();
 			var userphone = $("input[name='userphone']").val();
 			var useraddress = $("input[name='useraddress']").val();
-
+			var shen = $('.prov').val();
+			var shi = $('.city').val();
+			var dist = $('.dist').val() || '';
 			if (gid.length <= 0) {
 				alert('发生错误！请联系管理员!');
 				return;
@@ -683,12 +702,15 @@
 				gid: gid,
 				username: username,
 				userphone: userphone,
-				useraddress: useraddress
+				useraddress: shen + shi + dist + useraddress
 			};
 
 			ld.saveItem("name", username);
 			ld.saveItem("phone", userphone);
 			ld.saveItem("address", useraddress);
+			ld.saveItem("shen", shen);
+			ld.saveItem("shi", shi);
+			ld.saveItem("dist", dist);
 
 			nets.submitMessage(object).then(function (data) {
 				closePopup();
@@ -707,7 +729,7 @@
 
 	function createFocus() {
 
-		var html = '\n\t\t<div class="focus popup-content">\n\t\t\t<div class=\'focus-tips\'><img src="/app/image/focus.png"/></div>\n\n\t\t\t<div class="close-btn"><img src="/app/image/close-btn.jpg"/></div>\n\t\t</div>\n\t';
+		var html = '\n\t\t<div class="focus popup-content">\n\t\t\t<div class=\'focus-tips\'><img src="/app/image/focus' + conts.leave_times + '.png"/></div>\n\n\t\t\t<div class="close-btn"><img src="/app/image/close-btn.jpg"/></div>\n\t\t</div>\n\t';
 		createLayOut();
 		$(document.body).append(html);
 
@@ -717,7 +739,6 @@
 	}
 
 	function createVirAward(data) {
-
 		var html = '\n\t\t<div class="virAward popup-content">\n\t\t\t<div class="vir-bg"><img src="/app/image/vir_bg.png"/></div>\n\t\t\t<div class="vir-award-content">\n\t\t\t\t<img src="' + data.data.pic + '"/>\n\t\t\t</div>\n\t\t\t\t<div class="star-manager">\n\t\t\t\t\t<div><img src="/app/image/star-left.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-middle.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-right.png"/></div>\n\t\t\t\t</div>\n\t\t</div>\n\n\t';
 		$(document.body).append(html);
 
@@ -886,12 +907,14 @@
 
 	function getAward() {
 
-		return ajax("/Home/Award/one", { loginid: uid });
+		//return ajax("/Home/Award/one",{loginid:uid})
+
+		return ajax("/app/one.json");
 	}
 
-	function getUserId() {
+	function getUserId(data) {
 
-		return ajax("/Home/Award/loginid");
+		return ajax("/Home/Award/loginid", data);
 	}
 
 	function submitMessage(data) {
@@ -1031,6 +1054,19 @@
 
 /***/ },
 /* 17 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var leave_times = 2;
+
+	module.exports = {
+
+		leave_times: leave_times
+	};
+
+/***/ },
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -1040,23 +1076,23 @@
 		award_mapping: [{
 			id: 1,
 			name: "10元微店优惠券",
-			rotate: 315
+			rotate: 0
 		}, {
 			id: 2,
 			name: "手机壳",
-			rotate: 275
+			rotate: 135
 		}, {
 			id: 3,
 			name: "阳伞",
-			rotate: 180
+			rotate: -135
 		}, {
 			id: 4,
 			name: "5元微店优惠券",
-			rotate: 135
+			rotate: -180
 		}, {
 			id: 5,
 			name: "球衣",
-			rotate: 45
+			rotate: 90
 		}
 		/*{
 	 	id:-1,
@@ -1081,8 +1117,8 @@
 			}
 		} else {
 			//未中奖
-			var g = [90, 0, 230];
-			return g[Math.floor(Math.random() * 3)];
+			var g = [43, -90];
+			return g[Math.floor(Math.random() * g.length)];
 		}
 		return rotate;
 	}
@@ -1109,6 +1145,159 @@
 		getAward: getAward
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 19 */,
+/* 20 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	/*
+	Ajax 三级省市联动
+	日期：2012-7-18
+
+	settings 参数说明
+	-----
+	url:省市数据josn文件路径
+	prov:默认省份
+	city:默认城市
+	dist:默认地区（县）
+	nodata:无数据状态
+	required:必选项
+	------------------------------ */
+	(function ($) {
+		$.fn.citySelect = function (settings) {
+			if (this.length < 1) {
+				return;
+			};
+
+			// 默认值
+			settings = $.extend({
+				url: "js/city.min.js",
+				prov: null,
+				city: null,
+				dist: null,
+				nodata: null,
+				required: true
+			}, settings);
+
+			var box_obj = this;
+			var prov_obj = box_obj.find(".prov");
+			var city_obj = box_obj.find(".city");
+			var dist_obj = box_obj.find(".dist");
+			var prov_val = settings.prov;
+			var city_val = settings.city;
+			var dist_val = settings.dist;
+			var select_prehtml = settings.required ? "" : "<option value=''>请选择</option>";
+			var city_json;
+
+			// 赋值市级函数
+			var cityStart = function cityStart() {
+				var prov_id = prov_obj.get(0).selectedIndex;
+				if (!settings.required) {
+					prov_id--;
+				};
+				city_obj.empty().attr("disabled", true);
+				dist_obj.empty().attr("disabled", true);
+
+				if (prov_id < 0 || typeof city_json.citylist[prov_id].c == "undefined") {
+					if (settings.nodata == "none") {
+						city_obj.css("display", "none");
+						dist_obj.css("display", "none");
+					} else if (settings.nodata == "hidden") {
+						city_obj.css("visibility", "hidden");
+						dist_obj.css("visibility", "hidden");
+					};
+					return;
+				};
+
+				// 遍历赋值市级下拉列表
+				var temp_html = select_prehtml;
+				$.each(city_json.citylist[prov_id].c, function (i, city) {
+					temp_html += "<option value='" + city.n + "'>" + city.n + "</option>";
+				});
+				city_obj.html(temp_html).attr("disabled", false).css({ "display": "", "visibility": "" });
+				distStart();
+			};
+
+			// 赋值地区（县）函数
+			var distStart = function distStart() {
+				var prov_id = prov_obj.get(0).selectedIndex;
+				var city_id = city_obj.get(0).selectedIndex;
+				if (!settings.required) {
+					prov_id--;
+					city_id--;
+				};
+				dist_obj.empty().attr("disabled", true);
+
+				if (prov_id < 0 || city_id < 0 || typeof city_json.citylist[prov_id].c[city_id].a == "undefined") {
+					if (settings.nodata == "none") {
+						dist_obj.css("display", "none");
+					} else if (settings.nodata == "hidden") {
+						dist_obj.css("visibility", "hidden");
+					};
+					return;
+				};
+
+				// 遍历赋值市级下拉列表
+				var temp_html = select_prehtml;
+				$.each(city_json.citylist[prov_id].c[city_id].a, function (i, dist) {
+					temp_html += "<option value='" + dist.s + "'>" + dist.s + "</option>";
+				});
+				dist_obj.html(temp_html).attr("disabled", false).css({ "display": "", "visibility": "" });
+			};
+
+			var init = function init() {
+				// 遍历赋值省份下拉列表
+				var temp_html = select_prehtml;
+				$.each(city_json.citylist, function (i, prov) {
+					temp_html += "<option value='" + prov.p + "'>" + prov.p + "</option>";
+				});
+				prov_obj.html(temp_html);
+
+				// 若有传入省份与市级的值，则选中。（setTimeout为兼容IE6而设置）
+				setTimeout(function () {
+					if (settings.prov != null) {
+						prov_obj.val(settings.prov);
+						cityStart();
+						setTimeout(function () {
+							if (settings.city != null) {
+								city_obj.val(settings.city);
+								distStart();
+								setTimeout(function () {
+									if (settings.dist != null) {
+										dist_obj.val(settings.dist);
+									};
+								}, 1);
+							};
+						}, 1);
+					};
+				}, 1);
+
+				// 选择省份时发生事件
+				prov_obj.bind("change", function () {
+					cityStart();
+				});
+
+				// 选择市级时发生事件
+				city_obj.bind("change", function () {
+					distStart();
+				});
+			};
+
+			// 设置省市json数据
+			if (typeof settings.url == "string") {
+				$.getJSON(settings.url, function (json) {
+					city_json = json;
+					init();
+				});
+			} else {
+				city_json = settings.url;
+				init();
+			};
+		};
+	})(jQuery);
 
 /***/ }
 /******/ ]);

@@ -34,13 +34,14 @@ function getMyAward(){
 function getAward(){
 
 
-	return ajax("/Home/Award/one",{loginid:uid})
+	//return ajax("/Home/Award/one",{loginid:uid})
 
+	return ajax("/app/one.json")
 }
 
-function getUserId(){
+function getUserId(data){
 
-	return ajax("/Home/Award/loginid")
+	return ajax("/Home/Award/loginid",data)
 }
 
 function submitMessage(data){

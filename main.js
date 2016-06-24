@@ -7,13 +7,12 @@ var net=require('net')
 var preRotate=-1;
 var timer=null;
 var localdatas=require('localdata')
+var step=3;
 	
 //如果本地没有用户唯一数据就请求，并存入本地数据 库
-if(!localdatas.getItem("loginid")){
-	net.getUserId().then(function(data){
+	net.getUserId({loginid:localdatas.getItem("loginid")||-1}).then(function(data){
 
 		if(data.status==1){
-
 			localdatas.saveItem('loginid',data.loginid)
 		}
 
@@ -21,7 +20,6 @@ if(!localdatas.getItem("loginid")){
 
 		console.log('get user id error')
 	})
-}
 /*var a={
 	list:[
 		{
@@ -115,8 +113,8 @@ function addluck(){
 	$('.zhizheng').click(function(){
 
 		awardData.getAward().then(function(param){
-			preRotate=preRotate==param.rotate+(360*5)?preRotate+(360*5)+360:preRotate+(360*5)
-
+			preRotate=param.rotate+step*360;
+			step=step+3;
 			webEvents.emit('coverEvent');
 
 			$('.round-pan').animate({ d: preRotate},{
@@ -128,7 +126,6 @@ function addluck(){
 			    },
 			    duration:3000,
 			    complete:function(){
-
 			    	if(param.data.get==1){
 
 			    		if(param.data.virtual==1){

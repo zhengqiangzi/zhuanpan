@@ -4,27 +4,27 @@ var local_award_info={
 		{
 			id:1,
 			name:"10元微店优惠券",
-			rotate:315
+			rotate:0
 		},
 		{
 			id:2,
 			name:"手机壳",
-			rotate:275
+			rotate:135
 		},
 		{
 			id:3,
 			name:"阳伞",
-			rotate:180
+			rotate:-135
 		},
 		{
 			id:4,
 			name:"5元微店优惠券",
-			rotate:135
+			rotate:-180
 		},
 		{
 			id:5,
 			name:"球衣",
-			rotate:45
+			rotate:90
 		}
 		/*{
 			id:-1,
@@ -49,8 +49,8 @@ function getRotateById(param){
 		}
 	}else{
 		//未中奖
-		var g=[90,0,230];
-		return g[Math.floor(Math.random()*3)];
+		var g=[43,-90];
+		return g[Math.floor(Math.random()*g.length)];
 	}
 	return rotate;
 }

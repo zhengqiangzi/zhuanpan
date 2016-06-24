@@ -4,6 +4,12 @@ var pageData=require('PageData');
 var ld=require('localdata')
 
 var popup=null;
+var conts=require('consts')
+
+var citySelect=require('jquery.cityselect');
+
+console.log(citySelect)
+
 /*
 
 	param:
@@ -47,18 +53,35 @@ function createWriteMessage(data={data:{gid:1}}){
 						<div class='write-item-input'><input type='tel'  placeHolder="请输入手机号码"  name='userphone' value='${phone}'/></div>
 					</div>
 
+			
+
+
+					<div class="write-item spec" id="scx">
+						<div class="shen"><select class='prov'></select></div>
+						<div class="shi"><select class='city'></select></div>
+						<div class="qu"><select class='dist'></select></div>
+
+					</div>
+					
 					<div class="write-item">
 						<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>
 						<div class='write-item-input'><input type='text' placeHolder="请输入地址" name='useraddress' value='${address}'/></div>
 					</div>
-
 				</div>
 				<div class='write-message-submit-btn'><a href='javascript:void(0)'><img src="/app/image/submit-message.jpg"/></a></div>
 			</div>
 		</div>
 	`
 	createLayOut(false);
+
 	$(document.body).append(html)
+
+	$('#scx').citySelect({
+			prov:function(){return ld.getItem("shen")||'北京'}(),
+			city:function(){return ld.getItem("shi")||'东城区'}(),
+			dist:function(){return ld.getItem("dist")||''}(),
+			nodata:"none"
+	})
 
 
 	$('.write-message-submit-btn>a').click(function(){
@@ -67,7 +90,9 @@ function createWriteMessage(data={data:{gid:1}}){
 		var username=$("input[name='username']").val()
 		var userphone=$("input[name='userphone']").val()
 		var useraddress=$("input[name='useraddress']").val()
-
+		var shen=$('.prov').val();
+		var shi=$('.city').val();
+		var dist=$('.dist').val()||'';
 		if(gid.length<=0){
 			alert('发生错误！请联系管理员!')
 			return;
@@ -88,12 +113,15 @@ function createWriteMessage(data={data:{gid:1}}){
 			gid:gid,
 			username:username,
 			userphone:userphone,
-			useraddress:useraddress
+			useraddress:shen+shi+dist+useraddress
 		}
 
 		ld.saveItem("name",username)
 		ld.saveItem("phone",userphone)
 		ld.saveItem("address",useraddress)
+		ld.saveItem("shen",shen)
+		ld.saveItem("shi",shi)
+		ld.saveItem("dist",dist)
 
 		nets.submitMessage(object).then(function(data){
 			closePopup();
@@ -115,7 +143,7 @@ function createFocus(){
 
 	var html=`
 		<div class="focus popup-content">
-			<div class='focus-tips'><img src="/app/image/focus.png"/></div>
+			<div class='focus-tips'><img src="/app/image/focus${conts.leave_times}.png"/></div>
 
 			<div class="close-btn"><img src="/app/image/close-btn.jpg"/></div>
 		</div>
@@ -130,7 +158,6 @@ function createFocus(){
 }
 
 function createVirAward(data){
-
 	var html=`
 		<div class="virAward popup-content">
 			<div class="vir-bg"><img src="/app/image/vir_bg.png"/></div>
