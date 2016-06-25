@@ -55,6 +55,7 @@ class AwardController extends Controller {
 			$data=array();
 			$data["loginid"]=$getloginid;
 			$cfm_loginid=M('userinfo')->where($data)->find();
+
 			if (!$cfm_loginid) {
 				// 查询到的loginid与实际不符
 				$arr["status"]=2;
@@ -66,12 +67,11 @@ class AwardController extends Controller {
 			$month=date('m',$time);
 			$day=date('d',$time);
 			$nowday=$month.$day;
-
-
 			$timesdata=array();
 			$timesdata["loginid"]=$getloginid;
 			$timesdata["date"]=$nowday;
 			$gettimes=M('loginid')->where($timesdata)->find();
+			
 			if($gettimes==null){
 				$time = time();
 				$month=date('m',$time);
@@ -83,14 +83,14 @@ class AwardController extends Controller {
 				$check_in=M('loginid')->add($checkdate);
 				$uptimes=array();
 				$uptimes['times']=2;
-				$datetype=M('userinfo')->where('loginid='.$getloginid)->save($uptimes);
+				$datetype=M('userinfo')->where('loginid="'.$getloginid.'"')->save($uptimes);
 				$arr["times"]=2;
+
 				$this->ajaxReturn($arr);
 				
 			}else{
-				$times = M('userinfo')->where('loginid='.$getloginid)->getField('times');
+				$times = M('userinfo')->where('loginid="'.$getloginid.'"')->getField('times');
 				$arr['times']=$times;
-				
 				$this->ajaxReturn($arr);
 			}
 
@@ -160,16 +160,19 @@ class AwardController extends Controller {
 		session_start();
 		$loginid=$_SESSION["loginid"];
 
-		$times = M('userinfo')->where('loginid='.$loginid)->getField('times');
+		$times = M('userinfo')->where('loginid="'.$loginid.'"')->getField('times');
 
 		if($times==0){
-			echo "can not play";
+			$data=array();
+			$data['times']=0;
+			$data['msg']="今日可玩次数已用光，请明日继续！";
+			$this->ajaxReturn($data);
 			return;
 		}else
 		{
 				$uptimes=array();
 				$uptimes['times']=$times-1;
-				$datetype=M('userinfo')->where('loginid='.$loginid)->save($uptimes);
+				$datetype=M('userinfo')->where('loginid="'.$loginid.'"')->save($uptimes);
 				
 		}
 	
@@ -294,19 +297,19 @@ class AwardController extends Controller {
 		$map=array();
 		$map['times']=array('eq',0);
 		$map['_query']='openid='.$openid.'&loginid='.$loginid.'&_logic=or';
-		$findtoday=M('userinfo')->where($map)->select();
+		// $findtoday=M('userinfo')->where($map)->select();
 		// dump($map);
 		// dump($findtoday);
-		if(!$findtoday){
+		// if(!$findtoday){
 			$adddata=array();
 			$adddata['loginid']=$loginid;
 			$adddata['name']=$username;
 			$adddata['phone']=$userphone;
 			$adddata['addr']=$useraddress;
-			$adddata['giftid']=$gid;
+			// $adddata['giftid']=$gid;
 			$adddata['creat_time']=$nowday;
 			$adddata['status']=0;
-			$addsql=M('userinfo')->data($adddata)->add();
+			$addsql=M('userinfo')->where('loginid="'.$loginid.'"')->save($adddata);
 			if($addsql)
 			{
 				$data=array();
@@ -323,14 +326,14 @@ class AwardController extends Controller {
 				$data["success"]=1;
 				$this->ajaxReturn($data);
 			}
-		}else
-		{
-			$data=array();
-			$data['status']=1;
-			$data['info']="今日已经中奖，请明日再来参与！";
-			$data["success"]=1;
-			$this->ajaxReturn($data);
-		}
+		// }else
+		// {
+		// 	$data=array();
+		// 	$data['status']=1;
+		// 	$data['info']="今日已经中奖，请明日再来参与！";
+		// 	$data["success"]=1;
+		// 	$this->ajaxReturn($data);
+		// }
 		
 		
 		
