@@ -39,7 +39,7 @@ class AwardController extends Controller {
 		$getloginid=I('loginid');
 
 		// $getloginid有值便设置session并开始进入数据库查找，若无值便从else开始请求新的session；
-		if($getloginid)
+		if($getloginid!="-1")
 		{
 			$lifetime =168 * 3600;    //7天；
 			session_set_cookie_params($lifetime);
@@ -86,11 +86,11 @@ class AwardController extends Controller {
 				$datetype=M('userinfo')->where('loginid='.$getloginid)->save($uptimes);
 				$arr["times"]=2;
 				$this->ajaxReturn($arr);
-				echo '111';
+				
 			}else{
 				$times = M('userinfo')->where('loginid='.$getloginid)->getField('times');
 				$arr['times']=$times;
-				echo '1221';
+				
 				$this->ajaxReturn($arr);
 			}
 
@@ -104,6 +104,8 @@ class AwardController extends Controller {
 				$loginid=$randCharObj->getRandChar(16);
 				$data=array();
 				$data['loginid']=$loginid;
+				
+				
 				$find_lid=M('userinfo')->where($data)->find();
 				if($find_lid)
 				{
@@ -112,6 +114,7 @@ class AwardController extends Controller {
 				}
 				else
 				{
+					$data['times']=2;
 					M('userinfo')->data($data)->add();
 					$lifetime =168* 3600;    //7天；
 					session_set_cookie_params($lifetime);
@@ -125,6 +128,7 @@ class AwardController extends Controller {
 			$arr=array();
 			$arr["loginid"]=findid();
 			$arr["status"]=1;
+			$arr["times"]=2;
 			session_start();
 			$this->ajaxReturn($arr);
 		}
@@ -155,7 +159,19 @@ class AwardController extends Controller {
 	function one(){
 		session_start();
 		$loginid=$_SESSION["loginid"];
-		
+
+		$times = M('userinfo')->where('loginid='.$loginid)->getField('times');
+
+		if($times==0){
+			echo "can not play";
+			return;
+		}else
+		{
+				$uptimes=array();
+				$uptimes['times']=$times-1;
+				$datetype=M('userinfo')->where('loginid='.$loginid)->save($uptimes);
+				
+		}
 	
 		function get_rand($proArr) { 
 		    $result = ''; 
@@ -195,6 +211,7 @@ class AwardController extends Controller {
 		//如果中奖数据是放在数据库里，这里就需要进行判断中奖数量
 		//在中1、2、3等奖的，如果达到最大数量的则unset相应的奖项，避免重复中大奖
 		//code here eg:unset($prize_arr['0'])
+
 		foreach ($stocks as $key => $val) { 
 		    $arr[$val['id']] = $val['probability']; 
 		} 
@@ -213,10 +230,12 @@ class AwardController extends Controller {
 		
 		if($stocks[$rid-1]['id']==6)
 		{
+			$this->ajaxReturn($returnData);
 			return;
 		}
 		else
 		{
+			// 输出中奖内容
 			$time = time();
 			$month=date('m',$time);
 			$day=date('d',$time);
@@ -242,7 +261,7 @@ class AwardController extends Controller {
 			}
 			// 查看用户当日是否已经参与，若有，则无法再次参与
 			$map=array();
-			$map['date']=array('eq',$nowday);
+			$map['date']=array('eq',0);
 			$map['_query']='openid='.$openid.'&loginid='.$loginid.'&_logic=or';
 			$findtoday=M('giftinfo')->where($map)->select();
 			if($findtoday){
@@ -273,7 +292,7 @@ class AwardController extends Controller {
 		
 		// 查找该ID当日是否已经中奖，若无则可以添加信息；
 		$map=array();
-		$map['date']=array('eq',$nowday);
+		$map['times']=array('eq',0);
 		$map['_query']='openid='.$openid.'&loginid='.$loginid.'&_logic=or';
 		$findtoday=M('userinfo')->where($map)->select();
 		// dump($map);
