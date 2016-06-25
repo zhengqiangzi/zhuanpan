@@ -1,4 +1,6 @@
-var net=require('net')
+var net=require('net');
+var consts=require('consts')
+
 var local_award_info={
 	award_mapping:[
 		{
@@ -25,6 +27,11 @@ var local_award_info={
 			id:5,
 			name:"球衣",
 			rotate:90
+		},
+		{
+			id:6,
+			name:"足球",
+			rotate:-45
 		}
 		/*{
 			id:-1,
@@ -63,7 +70,7 @@ function getAward(){
 	net.getAward().then(function(data){
 
 		var pan_rotate=getRotateById(data);
-
+		consts.times=data.times||1;
 		return defer.resolve({rotate:pan_rotate,data:data});
 
 	},function(){

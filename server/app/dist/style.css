@@ -648,7 +648,7 @@ input[placeholder], [placeholder], *[placeholder], select {
 .write-message {
   position: absolute;
   z-index: 101;
-  width: 76.5625%;
+  width: 85.9375%;
   left: 50%;
   top: 50%;
   -webkit-transform: translate3d(-50%, -50%, 0px);
@@ -817,11 +817,11 @@ input[placeholder], [placeholder], *[placeholder], select {
   -webkit-transform: translate3d(-50%, -50%, 0px);
           transform: translate3d(-50%, -50%, 0px); }
   .virAward .vir-award-content {
-    width: 67.03125%;
+    width: 75%;
     position: absolute;
     left: 50%;
-    -webkit-transform: translate3d(-50%, 100px, 0px);
-            transform: translate3d(-50%, 100px, 0px);
+    -webkit-transform: translate3d(-50%, 110px, 0px);
+            transform: translate3d(-50%, 110px, 0px);
     top: 0px; }
   .virAward .star-manager {
     position: absolute;

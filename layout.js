@@ -77,6 +77,7 @@ function createWriteMessage(data={data:{gid:1}}){
 	$(document.body).append(html)
 
 	$('#scx').citySelect({
+			url:"/app/js/city.min.js",
 			prov:function(){return ld.getItem("shen")||'北京'}(),
 			city:function(){return ld.getItem("shi")||'东城区'}(),
 			dist:function(){return ld.getItem("dist")||''}(),
@@ -180,6 +181,7 @@ function createVirAward(data){
 
 function createRealAward(data){
 
+	console.log(data)
 	var html=`
 			<div class="realAward popup-content">
 				<div class="star-manager">
@@ -187,8 +189,8 @@ function createRealAward(data){
 					<div><img src="/app/image/star-middle.png"/></div>
 					<div><img src="/app/image/star-right.png"/></div>
 				</div>
-				<div class="realAward-image"><img src="/app/image/award_bg.png"/></div>
-				<div class="realAwardImage"><img src="/app/image/quan.png"/></div>
+				<div class="realAward-image"><img src="${data.data.pic}"/></div>
+				<!--<div class="realAwardImage"><img src="/app/image/quan.png"/></div>-->
 				<div class="realAwardBtn"><img src="/app/image/btn.png"/></div>
 			<div>
 	`

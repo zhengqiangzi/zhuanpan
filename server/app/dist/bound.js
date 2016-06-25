@@ -47,20 +47,23 @@
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var style = __webpack_require__(2);
-	var template = __webpack_require__(10);
-	var webEvents = __webpack_require__(11);
-	var layout = __webpack_require__(13);
-	var awardData = __webpack_require__(18);
-	var net = __webpack_require__(14);
+	var template = __webpack_require__(11);
+	var webEvents = __webpack_require__(12);
+	var layout = __webpack_require__(14);
+	var awardData = __webpack_require__(20);
+	var net = __webpack_require__(15);
 	var preRotate = -1;
 	var timer = null;
-	var localdatas = __webpack_require__(15);
+	var localdatas = __webpack_require__(16);
 	var step = 3;
+	var consts = __webpack_require__(18);
 
 	//如果本地没有用户唯一数据就请求，并存入本地数据 库
 	net.getUserId({ loginid: localdatas.getItem("loginid") || -1 }).then(function (data) {
 
 		if (data.status == 1) {
+
+			consts.leave_times = data.times || 1;
 			localdatas.saveItem('loginid', data.loginid);
 		}
 	}, function () {
@@ -150,6 +153,12 @@
 
 		//开始抽奖按钮点击 事件
 		$('.zhizheng').click(function () {
+
+			if (consts.leave_times <= 0) {
+
+				alert('你今天的摇奖次数已用完！');
+				return;
+			}
 
 			awardData.getAward().then(function (param) {
 				preRotate = param.rotate + step * 360;
@@ -302,7 +311,8 @@
 /* 7 */,
 /* 8 */,
 /* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -323,19 +333,19 @@
 	};
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var events = __webpack_require__(12);
+	var events = __webpack_require__(13);
 
 	var event = new events.EventEmitter();
 
 	module.exports = event;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -609,20 +619,20 @@
 	}
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var webEvents = __webpack_require__(11);
-	var nets = __webpack_require__(14);
-	var pageData = __webpack_require__(16);
-	var ld = __webpack_require__(15);
+	var webEvents = __webpack_require__(12);
+	var nets = __webpack_require__(15);
+	var pageData = __webpack_require__(17);
+	var ld = __webpack_require__(16);
 
 	var popup = null;
-	var conts = __webpack_require__(17);
+	var conts = __webpack_require__(18);
 
-	var citySelect = __webpack_require__(20);
+	var citySelect = __webpack_require__(19);
 
 	console.log(citySelect);
 
@@ -661,6 +671,7 @@
 		$(document.body).append(html);
 
 		$('#scx').citySelect({
+			url: "/app/js/city.min.js",
 			prov: function () {
 				return ld.getItem("shen") || '北京';
 			}(),
@@ -747,7 +758,8 @@
 
 	function createRealAward(data) {
 
-		var html = '\n\t\t\t<div class="realAward popup-content">\n\t\t\t\t<div class="star-manager">\n\t\t\t\t\t<div><img src="/app/image/star-left.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-middle.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-right.png"/></div>\n\t\t\t\t</div>\n\t\t\t\t<div class="realAward-image"><img src="/app/image/award_bg.png"/></div>\n\t\t\t\t<div class="realAwardImage"><img src="/app/image/quan.png"/></div>\n\t\t\t\t<div class="realAwardBtn"><img src="/app/image/btn.png"/></div>\n\t\t\t<div>\n\t';
+		console.log(data);
+		var html = '\n\t\t\t<div class="realAward popup-content">\n\t\t\t\t<div class="star-manager">\n\t\t\t\t\t<div><img src="/app/image/star-left.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-middle.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-right.png"/></div>\n\t\t\t\t</div>\n\t\t\t\t<div class="realAward-image"><img src="' + data.data.pic + '"/></div>\n\t\t\t\t<!--<div class="realAwardImage"><img src="/app/image/quan.png"/></div>-->\n\t\t\t\t<div class="realAwardBtn"><img src="/app/image/btn.png"/></div>\n\t\t\t<div>\n\t';
 		createLayOut(false);
 		$(document.body).append(html);
 		//关闭自己，并且跳到填写弹出窗口页面
@@ -868,12 +880,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
-	var localdatas = __webpack_require__(15);
+	var localdatas = __webpack_require__(16);
 	var uid = localdatas.getItem("loginid") || -1;
 	function ajax(url) {
 		var data = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
@@ -907,9 +919,9 @@
 
 	function getAward() {
 
-		//return ajax("/Home/Award/one",{loginid:uid})
+		return ajax("/Home/Award/one", { loginid: uid });
 
-		return ajax("/app/one.json");
+		//return ajax("/app/one.json")
 	}
 
 	function getUserId(data) {
@@ -932,7 +944,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -967,7 +979,7 @@
 	module.exports = data;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1053,7 +1065,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1066,89 +1078,7 @@
 	};
 
 /***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
-
-	var net = __webpack_require__(14);
-	var local_award_info = {
-		award_mapping: [{
-			id: 1,
-			name: "10元微店优惠券",
-			rotate: 0
-		}, {
-			id: 2,
-			name: "手机壳",
-			rotate: 135
-		}, {
-			id: 3,
-			name: "阳伞",
-			rotate: -135
-		}, {
-			id: 4,
-			name: "5元微店优惠券",
-			rotate: -180
-		}, {
-			id: 5,
-			name: "球衣",
-			rotate: 90
-		}
-		/*{
-	 	id:-1,
-	 	name:"没有中奖",
-	 	rotate:[90,0,230]
-	 }*/
-		]
-	};
-
-	function getRotateById(param) {
-
-		var data = local_award_info.award_mapping;
-
-		var rotate = null;
-
-		if (param.get == 1) {
-			//中奖
-			for (var i = 0; i < data.length; i++) {
-				if (data[i].id == param.id) {
-					rotate = data[i].rotate;
-				}
-			}
-		} else {
-			//未中奖
-			var g = [43, -90];
-			return g[Math.floor(Math.random() * g.length)];
-		}
-		return rotate;
-	}
-
-	function getAward() {
-
-		var defer = $.Deferred();
-
-		net.getAward().then(function (data) {
-
-			var pan_rotate = getRotateById(data);
-
-			return defer.resolve({ rotate: pan_rotate, data: data });
-		}, function () {
-
-			defer.reject('摇奖接口发生异常');
-		});
-
-		return defer.promise();
-	}
-
-	module.exports = {
-		local_award_info: local_award_info,
-		getAward: getAward
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ },
-/* 19 */,
-/* 20 */
+/* 19 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1298,6 +1228,93 @@
 			};
 		};
 	})(jQuery);
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var net = __webpack_require__(15);
+	var consts = __webpack_require__(18);
+
+	var local_award_info = {
+		award_mapping: [{
+			id: 1,
+			name: "10元微店优惠券",
+			rotate: 0
+		}, {
+			id: 2,
+			name: "手机壳",
+			rotate: 135
+		}, {
+			id: 3,
+			name: "阳伞",
+			rotate: -135
+		}, {
+			id: 4,
+			name: "5元微店优惠券",
+			rotate: -180
+		}, {
+			id: 5,
+			name: "球衣",
+			rotate: 90
+		}, {
+			id: 6,
+			name: "足球",
+			rotate: -45
+		}
+		/*{
+	 	id:-1,
+	 	name:"没有中奖",
+	 	rotate:[90,0,230]
+	 }*/
+		]
+	};
+
+	function getRotateById(param) {
+
+		var data = local_award_info.award_mapping;
+
+		var rotate = null;
+
+		if (param.get == 1) {
+			//中奖
+			for (var i = 0; i < data.length; i++) {
+				if (data[i].id == param.id) {
+					rotate = data[i].rotate;
+				}
+			}
+		} else {
+			//未中奖
+			var g = [43, -90];
+			return g[Math.floor(Math.random() * g.length)];
+		}
+		return rotate;
+	}
+
+	function getAward() {
+
+		var defer = $.Deferred();
+
+		net.getAward().then(function (data) {
+
+			var pan_rotate = getRotateById(data);
+			consts.times = data.times || 1;
+			return defer.resolve({ rotate: pan_rotate, data: data });
+		}, function () {
+
+			defer.reject('摇奖接口发生异常');
+		});
+
+		return defer.promise();
+	}
+
+	module.exports = {
+		local_award_info: local_award_info,
+		getAward: getAward
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }
 /******/ ]);

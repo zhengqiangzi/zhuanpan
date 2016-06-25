@@ -263,7 +263,7 @@ input[placeholder], [placeholder], *[placeholder],select {
 .write-message{
 	position:absolute;
 	z-index:101;
-	width:percentage(490px/640px);
+	width:percentage(550px/640px);
 	left:50%;
 	top:50%;
 	transform:translate3d(-50%,-50%,0px);
@@ -449,9 +449,9 @@ $xinxin_big_scale:1.6;
 	transform:translate3d(-50%,-50%,0px);
 
 	& .vir-award-content{
-		width:percentage(429px/640px);
+		width:percentage(480px/640px);
 		position:absolute;
- 		@include horizontal-center((-50%,100px,0px));
+ 		@include horizontal-center((-50%,110px,0px));
  		top:0px;
 
 	}

@@ -8,12 +8,16 @@ var preRotate=-1;
 var timer=null;
 var localdatas=require('localdata')
 var step=3;
+var consts=require('consts')
 	
 //如果本地没有用户唯一数据就请求，并存入本地数据 库
 	net.getUserId({loginid:localdatas.getItem("loginid")||-1}).then(function(data){
 
 		if(data.status==1){
-			localdatas.saveItem('loginid',data.loginid)
+
+			consts.leave_times=data.times||1;
+			localdatas.saveItem('loginid',data.loginid);
+
 		}
 
 	},function(){
@@ -111,6 +115,13 @@ function addluck(){
 
 	//开始抽奖按钮点击 事件
 	$('.zhizheng').click(function(){
+
+		if(consts.leave_times<=0)
+		{
+
+			alert('你今天的摇奖次数已用完！')
+			return;
+		}
 
 		awardData.getAward().then(function(param){
 			preRotate=param.rotate+step*360;
