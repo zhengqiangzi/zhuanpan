@@ -939,8 +939,8 @@ input[placeholder], [placeholder], *[placeholder], select {
     position: relative; }
     .rule .rule-header .rule-close-btn {
       position: absolute;
-      right: 40px;
-      top: 32px;
+      right: 28px;
+      top: 28px;
       width: 40px; }
     .rule .rule-header > img {
       display: block; }
@@ -1163,9 +1163,20 @@ input[placeholder], [placeholder], *[placeholder], select {
   .index-top .dai {
     margin-top: 50px; }
   .focus .close-btn {
-    top: 116px; } }
+    top: 116px; }
+  .messageSuccess > .messageSuccess-content .myawardbtn2 {
+    top: 105px !important; }
+  .myAward .myaward-top .close-btn-2 {
+    right: 35px  !important;
+    top: 51px  !important; }
+  .rule .rule-header .rule-close-btn {
+    right: 37px  !important;
+    top: 32px  !important; } }
 
 @media (max-height: 673px) and (min-height: 604px) {
+  .myAward .myaward-top .close-btn-2 {
+    right: 38px  !important;
+    top: 57px  !important; }
   .write-form {
     top: 150px; }
   .myAward .xin-group {
@@ -1177,7 +1188,12 @@ input[placeholder], [placeholder], *[placeholder], select {
     -webkit-transform: translate3d(-50%, 160px, 0px);
             transform: translate3d(-50%, 160px, 0px); }
   .focus .close-btn {
-    top: 128px; } }
+    top: 128px; }
+  .messageSuccess > .messageSuccess-content .myawardbtn2 {
+    top: 120px !important; }
+  .rule .rule-header .rule-close-btn {
+    top: 36px !important;
+    right: 44px !important; } }
 
 .best {
   z-index: 10000;
@@ -1240,7 +1256,7 @@ input[placeholder], [placeholder], *[placeholder], select {
     .messageSuccess > .messageSuccess-content .myawardbtn2 {
       position: absolute;
       width: 50%;
-      top: 110px;
+      top: 90px;
       left: 25%; }
     .messageSuccess > .messageSuccess-content .message-close-btn {
       position: absolute;

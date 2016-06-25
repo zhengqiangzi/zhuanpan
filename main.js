@@ -267,6 +267,6 @@ window.start=function(){
 //webEvents.emit('luckEvent')
 //webEvents.emit('PopupEvent.virAwardEvent')
 //webEvents.emit('PopupEvent.myAwardEvent')
-/*webEvents.emit('PopupEvent.createMessageSuccess')
-*/
+//webEvents.emit('PopupEvent.createMessageSuccess')
+//webEvents.emit('PopupEvent.rule')
 

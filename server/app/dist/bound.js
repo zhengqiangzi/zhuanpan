@@ -287,8 +287,8 @@
 	//webEvents.emit('luckEvent')
 	//webEvents.emit('PopupEvent.virAwardEvent')
 	//webEvents.emit('PopupEvent.myAwardEvent')
-	/*webEvents.emit('PopupEvent.createMessageSuccess')
-	*/
+	//webEvents.emit('PopupEvent.createMessageSuccess')
+	//webEvents.emit('PopupEvent.rule')
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
