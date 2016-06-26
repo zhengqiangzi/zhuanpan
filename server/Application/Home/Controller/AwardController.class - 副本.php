@@ -262,19 +262,6 @@ class AwardController extends Controller {
 				$this->ajaxReturn($baduser);
 				return;
 			}
-			//修改特殊奖品中奖几率
-			if($stocks[$rid-1]['id']==3){
-				$data=array();
-				$data['probability']=0;
-				$sid=$stocks[$rid-1]['id'];
-				$saveprobability=M('stocks')->where('id='.$sid)->save($data);
-			}
-			if($stocks[$rid-1]['id']==5 || $stocks[$rid-1]['id']==7){
-				$data=array();
-				$data['probability']=0;
-				$sid=$stocks[$rid-1]['id'];
-				$saveprobability=M('stocks')->where('id='.$sid)->save($data);
-			}
 			// 查看用户当日是否已经参与，若有，则无法再次参与
 			$map=array();
 			$map['date']=array('eq',0);
@@ -288,7 +275,7 @@ class AwardController extends Controller {
 			}
 			//数据库写入：
 			$addgit=M('giftinfo')->data($data)->add();
-		}
+			}
 			$this->ajaxReturn($returnData);
 	}
 	/*{
