@@ -119,6 +119,14 @@ function addluck(){
 		}
 
 		awardData.getAward().then(function(param){
+
+			if(consts.leave_times<=0)
+			{
+
+				alert('你今天的摇奖次数已用完！')
+				return;
+			}
+
 			preRotate=param.rotate+step*360;
 			step=step+3;
 			webEvents.emit('coverEvent');
