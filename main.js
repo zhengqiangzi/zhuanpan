@@ -13,7 +13,7 @@ var consts=require('consts')
 //如果本地没有用户唯一数据就请求，并存入本地数据 库
 	net.getUserId({loginid:localdatas.getItem("loginid")||-1}).then(function(data){
 		if(data.status==1){
-			consts.leave_times=data.times||1;
+			consts.leave_times=data.times||0;
 			localdatas.saveItem('loginid',data.loginid);
 		}
 	},function(){
