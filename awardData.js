@@ -70,7 +70,7 @@ function getAward(){
 	net.getAward().then(function(data){
 
 		var pan_rotate=getRotateById(data);
-		consts.times=data.times||1;
+		consts.leave_times=data.times||1;
 		return defer.resolve({rotate:pan_rotate,data:data});
 
 	},function(){
