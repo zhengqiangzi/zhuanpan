@@ -55,19 +55,16 @@
 	var preRotate = -1;
 	var timer = null;
 	var localdatas = __webpack_require__(16);
-	var step = 3;
+	var step = 5;
 	var consts = __webpack_require__(18);
 
 	//如果本地没有用户唯一数据就请求，并存入本地数据 库
 	net.getUserId({ loginid: localdatas.getItem("loginid") || -1 }).then(function (data) {
-
 		if (data.status == 1) {
-
 			consts.leave_times = data.times || 1;
 			localdatas.saveItem('loginid', data.loginid);
 		}
 	}, function () {
-
 		console.log('get user id error');
 	});
 	/*var a={
