@@ -808,6 +808,14 @@ input[placeholder], [placeholder], *[placeholder], select {
     -webkit-transform: translate3d(-50%, 120px, 0px);
             transform: translate3d(-50%, 120px, 0px);
     top: 0px; }
+  .realAward .realAward-image {
+    position: relative; }
+    .realAward .realAward-image .realAward-close-btn {
+      position: absolute;
+      right: 10%;
+      top: 13%;
+      width: 30px;
+      z-index: 10; }
 
 .virAward {
   position: absolute;
@@ -817,6 +825,14 @@ input[placeholder], [placeholder], *[placeholder], select {
   top: 50%;
   -webkit-transform: translate3d(-50%, -50%, 0px);
           transform: translate3d(-50%, -50%, 0px); }
+  .virAward .vir-bg {
+    position: relative; }
+    .virAward .vir-bg .vire-bg-close-btn {
+      position: absolute;
+      right: 10%;
+      top: 13%;
+      width: 30px;
+      z-index: 10; }
   .virAward .vir-award-content {
     width: 75%;
     position: absolute;

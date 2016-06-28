@@ -437,6 +437,18 @@ $xinxin_big_scale:1.6;
  		@include horizontal-center((-50%,120px,0px));
  		top:0px;
 	}
+
+	& .realAward-image{
+		position:relative;
+
+		& .realAward-close-btn{
+			position:absolute;
+			right:10%;
+			top:13%;
+			width:30px;
+			z-index:10;
+		}
+	}
 }
 
 .virAward{
@@ -447,12 +459,21 @@ $xinxin_big_scale:1.6;
 	top:50%;
 	transform:translate3d(-50%,-50%,0px);
 
+	& .vir-bg{
+		position:relative;
+		& .vire-bg-close-btn{
+			position:absolute;
+			right:10%;
+			top:13%;
+			width:30px;
+			z-index:10;
+		}
+	}
 	& .vir-award-content{
 		width:percentage(480px/640px);
 		position:absolute;
  		@include horizontal-center((-50%,110px,0px));
  		top:0px;
-
 	}
  	
  	& .star-manager{

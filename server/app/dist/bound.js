@@ -759,22 +759,29 @@
 	}
 
 	function createVirAward(data) {
-		var html = '\n\t\t<div class="virAward popup-content">\n\t\t\t<div class="vir-bg"><img src="' + data.data.pic + '"/></div>\n\t\t\t\t<div class="star-manager">\n\t\t\t\t\t<div><img src="/app/image/star-left.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-middle.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-right.png"/></div>\n\t\t\t\t</div>\n\t\t</div>\n\n\t';
+		var html = '\n\t\t<div class="virAward popup-content">\n\t\t\t<div class="vir-bg"><img src="' + data.data.pic + '"/>\n\n\t\t\t<div class="vire-bg-close-btn"><img src="/app/image/close-btn2.png"/></div>\n\t\t\t</div>\n\t\t\t\t<div class="star-manager">\n\t\t\t\t\t<div><img src="/app/image/star-left.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-middle.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-right.png"/></div>\n\t\t\t\t</div>\n\t\t</div>\n\n\t';
 		$(document.body).append(html);
 
-		createLayOut();
+		$('.vire-bg-close-btn').click(function () {
+
+			closePopup();
+		});
+		createLayOut(false);
 	}
 
 	function createRealAward(data) {
 
-		console.log(data);
-		var html = '\n\t\t\t<div class="realAward popup-content">\n\t\t\t\t<div class="star-manager">\n\t\t\t\t\t<div><img src="/app/image/star-left.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-middle.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-right.png"/></div>\n\t\t\t\t</div>\n\t\t\t\t<div class="realAward-image"><img src="' + data.data.pic + '"/></div>\n\t\t\t\t<!--<div class="realAwardImage"><img src="/app/image/quan.png"/></div>-->\n\t\t\t\t<div class="realAwardBtn"><img src="/app/image/btn.png"/></div>\n\t\t\t<div>\n\t';
+		var html = '\n\t\t\t<div class="realAward popup-content">\n\t\t\t\t<div class="star-manager">\n\t\t\t\t\t<div><img src="/app/image/star-left.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-middle.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-right.png"/></div>\n\t\t\t\t</div>\n\n\t\t\t\t<div class="realAward-image">\n\n\t\t\t\t<img src="' + data.data.pic + '"/>\n\n\t\t\t\t\t<div class="realAward-close-btn"><img src="/app/image/close-btn2.png"/></div>\n\n\t\t\t\t</div>\n\n\n\t\t\t\t<!--<div class="realAwardImage"><img src="/app/image/quan.png"/></div>-->\n\t\t\t\t<div class="realAwardBtn"><img src="/app/image/btn.png"/></div>\n\t\t\t<div>\n\t';
 		createLayOut(false);
 		$(document.body).append(html);
 		//关闭自己，并且跳到填写弹出窗口页面
 		$('.realAwardBtn').click(function () {
 			closePopup();
 			webEvents.emit('PopupEvent.WriteMessage', data);
+		});
+
+		$('.realAward-close-btn').click(function () {
+			closePopup();
 		});
 	}
 	//创建我的中奖纪录

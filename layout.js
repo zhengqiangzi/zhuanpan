@@ -161,7 +161,10 @@ function createFocus(){
 function createVirAward(data){
 	var html=`
 		<div class="virAward popup-content">
-			<div class="vir-bg"><img src="${data.data.pic}"/></div>
+			<div class="vir-bg"><img src="${data.data.pic}"/>
+
+			<div class="vire-bg-close-btn"><img src="/app/image/close-btn2.png"/></div>
+			</div>
 				<div class="star-manager">
 					<div><img src="/app/image/star-left.png"/></div>
 					<div><img src="/app/image/star-middle.png"/></div>
@@ -172,13 +175,15 @@ function createVirAward(data){
 	`
 	$(document.body).append(html);
 
+	$('.vire-bg-close-btn').click(function(){
 
-	createLayOut();
+		closePopup();
+	})
+	createLayOut(false);
 }
 
 function createRealAward(data){
 
-	console.log(data)
 	var html=`
 			<div class="realAward popup-content">
 				<div class="star-manager">
@@ -186,7 +191,16 @@ function createRealAward(data){
 					<div><img src="/app/image/star-middle.png"/></div>
 					<div><img src="/app/image/star-right.png"/></div>
 				</div>
-				<div class="realAward-image"><img src="${data.data.pic}"/></div>
+
+				<div class="realAward-image">
+
+				<img src="${data.data.pic}"/>
+
+					<div class="realAward-close-btn"><img src="/app/image/close-btn2.png"/></div>
+
+				</div>
+
+
 				<!--<div class="realAwardImage"><img src="/app/image/quan.png"/></div>-->
 				<div class="realAwardBtn"><img src="/app/image/btn.png"/></div>
 			<div>
@@ -197,6 +211,11 @@ function createRealAward(data){
 	$('.realAwardBtn').click(function(){
 		closePopup();
 		webEvents.emit('PopupEvent.WriteMessage',data)
+	})
+
+	$('.realAward-close-btn').click(function(){
+		closePopup();
+		
 	})
 }
 //创建我的中奖纪录
