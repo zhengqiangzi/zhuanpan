@@ -364,7 +364,28 @@ function closePopup(){
 	}
 }
 
+function DAlert(msg){
 
+
+	var html=`<div class="Alert">
+				
+				<div class="core">
+					<div class='core-msg'>${msg}</div>
+					<div class='core-close-btn'><a href='javascript:void(0)'>关闭</a></div>
+
+				</div>			
+
+			</div>`
+
+	$(document.body).append(html);
+
+
+	$('.core-close-btn').click(function(){
+			$(this).unbind();
+			$(this).parents('.Alert').remove();
+	})
+
+}
 
 
 module.exports={
@@ -376,6 +397,7 @@ module.exports={
 	createMessageSuccess,
 	createMyAward,
 	createRule,
-	createFail
+	createFail,
+	DAlert
 
 }

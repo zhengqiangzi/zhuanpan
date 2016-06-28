@@ -263,6 +263,12 @@ window.start=function(){
 	webEvents.emit('homeEvent')
 }
 
+window.alert=function(){
+
+	layout.DAlert([...arguments])
+}
+
+
 
 	//console.log(ld.getItem("name"))
 	//console.log(ld.saveItem("age",301))

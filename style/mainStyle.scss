@@ -923,3 +923,38 @@ $xinxin_big_scale:1.6;
 		}
 	}
 }
+
+.Alert{
+	
+	@extend %full;
+	z-index:10000000;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	background-color:rgba(0,0,0,.8);
+	& .core{
+
+		min-width:200px;
+		max-width:300px;
+		background-color:#fff;
+		border-radius:10px;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		padding:20px 10px 20px 10px;
+		flex-direction:column;
+		border:1px solid #ff7a00;
+
+		& .core-msg{
+			margin-bottom:30px;
+		}
+
+		& .core-close-btn a{
+			color:#fff;
+			padding:10px 15px 10px 15px;
+			background-color:#ff7a00;
+			border-radius:5px;
+
+		}
+	}
+}
