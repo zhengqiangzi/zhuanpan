@@ -268,7 +268,7 @@ window.start=function(){
 	//console.log(ld.saveItem("age",301))
 //webEvents.emit('PopupEvent.realAward')
 //webEvents.emit('luckEvent')
-webEvents.emit('PopupEvent.virAwardEvent')
+//webEvents.emit('PopupEvent.virAwardEvent')
 //webEvents.emit('PopupEvent.myAwardEvent')
 //webEvents.emit('PopupEvent.createMessageSuccess')
 //webEvents.emit('PopupEvent.rule')
