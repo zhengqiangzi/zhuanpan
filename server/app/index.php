@@ -7,6 +7,7 @@
 	<script type="text/javascript" src="/app/weblib/createjs-2015.11.26.min.js"></script>
 	<script type="text/javascript" src="/app/weblib/jquery.min.js"></script>
 	<link type="text/css" rel="styleSheet" href="/app/dist/style.css?vesion=444"/>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
    	<title>橙天玩</title>
    	<?php
 	require_once "jssdk.php";
@@ -18,8 +19,8 @@
    	
    	
    	<script type="text/javascript">
-   		var wx_imgUrl = 'http://green.vcenter-shop.com/app/image/wx_share_big.png';
-		var wx_link = 'http://green.vcenter-shop.com/app/index.html';
+   		var wx_imgUrl = 'http://green.vcenter-shop.com/app/image/wx_share_big.jpg';
+		var wx_link = 'http://green.vcenter-shop.com/app/index.php';
 		var wx_title ='橙天玩-幸运大转盘';
 		var wx_desc = '速来平安一账通，幸运橙天玩，转盘赢惊喜，每天壕礼送不停！';
 		

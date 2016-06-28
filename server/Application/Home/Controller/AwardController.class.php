@@ -116,6 +116,14 @@ class AwardController extends Controller {
 				{
 					$data['times']=2;
 					M('userinfo')->data($data)->add();
+					$time = time();
+					$month=date('m',$time);
+					$day=date('d',$time);
+					$nowday=$month.$day;
+					$checkdate=array();
+					$checkdate['loginid']=$loginid;
+					$checkdate['date']=$nowday;
+					$check_in=M('loginid')->add($checkdate);
 					$lifetime =168* 3600;    //7天；
 					session_set_cookie_params($lifetime);
 					session_Start();
@@ -171,7 +179,8 @@ class AwardController extends Controller {
 		}else
 		{
 				$uptimes=array();
-				$uptimes['times']=$times-1;
+				// $uptimes['times']=$times-1;
+				$uptimes['times']=2;
 				$datetype=M('userinfo')->where('loginid="'.$loginid.'"')->save($uptimes);
 				
 		}
