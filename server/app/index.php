@@ -6,16 +6,16 @@
 	
 	<script type="text/javascript" src="/app/weblib/createjs-2015.11.26.min.js"></script>
 	<script type="text/javascript" src="/app/weblib/jquery.min.js"></script>
-	<link type="text/css" rel="styleSheet" href="/app/dist/style.css?vesion=444"/>
+	<link type="text/css" rel="styleSheet" href="/app/dist/style.css?vesion=445214"/>
 	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
    	<title>橙天玩</title>
-   	<?php
-	require_once "jssdk.php";
-	$jssdk = new JSSDK("wx101f436c8f26adb6", "86be98b96e3aec971a43017a4fa254d1");
-//$jssdk = new JSSDK("wx74bbbf82bcaf1008", "124e4af215d0efb88dfbcc0835b35e67");
-	$signPackage = $jssdk -> GetSignPackage();
-	//echo $access_token;
-	?>
+ <?php
+	// require_once "jssdk.php";
+	// $jssdk = new JSSDK("wx101f436c8f26adb6", "86be98b96e3aec971a43017a4fa254d1");
+	// // $jssdk = new JSSDK("wx74bbbf82bcaf1008", "124e4af215d0efb88dfbcc0835b35e67");
+	// $signPackage = $jssdk -> GetSignPackage();
+	// echo $access_token;
+?> 
    	
    	
    	<script type="text/javascript">
@@ -136,6 +136,6 @@ var _hmt = _hmt || [];
 })();
 </script>
 
-<script type="text/javascript" src="/app/dist/bound.js?vesion=52"></script>
+<script type="text/javascript" src="/app/dist/bound.js?vesion=522"></script>
 </body>
 </html>

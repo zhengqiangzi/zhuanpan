@@ -165,6 +165,10 @@ class AwardController extends Controller {
 	}
 	//{"id":2,"virtual":2,"get":1,"name":"手机壳","gid":123,"pic":"image/quan.png"}
 	function one(){
+		$time = time();
+			$month=date('m',$time);
+			$day=date('d',$time);
+			$nowday=$month.$day;
 		session_start();
 		$loginid=$_SESSION["loginid"];
 
@@ -206,7 +210,8 @@ class AwardController extends Controller {
 // 每次前端页面的请求，PHP循环奖项设置数组，通过概率计算函数get_rand获取抽中的奖项id。将中奖奖品保存在数组$res['yes']中，而剩下的未中奖的信息保存在$res['no']中，最后输出json个数数据给前端页面。
 		$map=array();
 		$map['stock']=array('neq','0');
-		$select_stocks=M('stocks')->where($map)->select();
+		// $select_stocks=M('stocks')->where($map)->select();
+		$select_stocks=M('stocks')->select();
 		 // dump($select_stocks);
 		$stocks=array();
 		$stocks=$select_stocks;
@@ -245,13 +250,28 @@ class AwardController extends Controller {
 			$this->ajaxReturn($returnData);
 			return;
 		}
+		// 查看用户当日是否已经参与，若有，则无法再次参与
+			// $map=array();
+			// $map['date']=array('eq',$nowday);
+			// $map['_query']='openid='.$openid.'&loginid='.$loginid.'&_logic=or';
+			// $findtoday=M('giftinfo')->where($map)->select();
+			// if($findtoday){
+			// 	$baduser=array();
+			// 	$baduser['id']=7;
+			// 	$baduser['virtual']="1";
+			// 	$baduser['get']="2";
+			// 	$baduser['name']='未中奖';
+			// 	$baduser['pic']='img.png';
+			// 	$baduser['gid']="";
+			// 	$baduser['times']=$times;
+			// 	$this->ajaxReturn($baduser);
+			// 	return;
+			// }
+
 		else
 		{
 			// 输出中奖内容
-			$time = time();
-			$month=date('m',$time);
-			$day=date('d',$time);
-			$nowday=$month.$day;
+			
 			$data=array();
 			$data['giftid']=$giftid;
 			$data['date']=$nowday;
@@ -273,39 +293,57 @@ class AwardController extends Controller {
 				$this->ajaxReturn($baduser);
 				return;
 			}
+			
+			
+			M('stocks')->where('id='.$stocks[$rid-1]['id'])->setDec('stock');
+			$nowdata=M('stocks')->where('id='.$stocks[$rid-1]['id'])->getField('stock');
+			if($nowdata<=1)
+			{
+				$pdata=array();
+				$pdata['probability']=0;
+				$sid=$stocks[$rid-1]['id'];
+				$saveprobability=M('stocks')->where('id="'.$sid.'"')->save($pdata);
+			}
 			//修改特殊奖品中奖几率
-			if($stocks[$rid-1]['id']==3){
-				$pdata=array();
-				$pdata['probability']=0;
-				$sid=$stocks[$rid-1]['id'];
-				$saveprobability=M('stocks')->where('id='.$sid)->save($pdata);
-			}
-			if($stocks[$rid-1]['id']==5 || $stocks[$rid-1]['id']==6){
-				$pdata=array();
-				$pdata['probability']=0;
-				$sid=$stocks[$rid-1]['id'];
-				$saveprobability=M('stocks')->where('id='.$sid)->save($pdata);
-			}
-			// 查看用户当日是否已经参与，若有，则无法再次参与
-			// $map=array();
-			// $map['date']=array('eq',0);
-			// $map['_query']='openid='.$openid.'&loginid='.$loginid.'&_logic=or';
-			// $findtoday=M('giftinfo')->where($map)->select();
-			// if($findtoday){
-			// 	$baduser=array();
-			// 	$baduser['errmsg']="一天只有一次机会哟，明日再来吧";
-			// 	$this->ajaxReturn($baduser);
-			// 	return;
+			// if($stocks[$rid-1]['id']==3){
+			// 	$pdata=array();
+			// 	$pdata['probability']=0;
+			// 	$sid=$stocks[$rid-1]['id'];
+			// 	$saveprobability=M('stocks')->where('id='.$sid)->save($pdata);
 			// }
+			// if($stocks[$rid-1]['id']==5 || $stocks[$rid-1]['id']==6){
+			// 	$pdata=array();
+			// 	$pdata['probability']=0;
+			// 	$sid=$stocks[$rid-1]['id'];
+			// 	$saveprobability=M('stocks')->where('id='.$sid)->save($pdata);
+			// }
+			
 			//数据库写入：
 			$addgit=M('giftinfo')->data($data)->add();
 		}
 			$this->ajaxReturn($returnData);
 	}
-	/*{
-	"status":1,
-	"info":"服务器异常"
-	}*/
+	// 手机壳选择
+	function setSize(){
+		 $giftid=I('gid');
+		// $giftid='113214671317024';
+		$giftsize=I('size');
+		// $giftsize='big';
+		$updatasize=array();
+		$updatasize['size']=$giftsize;
+		$setdone=M('giftinfo')->where('giftid='.$giftid)->save($updatasize);
+		if($setdone){
+			$this->ajaxReturn('success');
+		}else
+		{
+
+			$this->ajaxReturn('false');
+		}
+	}
+
+
+
+	// 收件地址
 	function setAward(){
 		$time = time();
 		$month=date('m',$time);
