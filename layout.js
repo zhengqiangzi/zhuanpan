@@ -161,10 +161,7 @@ function createFocus(){
 function createVirAward(data){
 	var html=`
 		<div class="virAward popup-content">
-			<div class="vir-bg"><img src="/app/image/vir_bg.png"/></div>
-			<div class="vir-award-content">
-				<img src="${data.data.pic}"/>
-			</div>
+			<div class="vir-bg"><img src="${data.data.pic}"/></div>
 				<div class="star-manager">
 					<div><img src="/app/image/star-left.png"/></div>
 					<div><img src="/app/image/star-middle.png"/></div>
