@@ -220,9 +220,13 @@ function createRealAward(data){
 }
 //创建我的中奖纪录
  function createMyAward(){
+
+
+ 	var source=null;
+
 		nets.getMyAward().then(function(data){
 
-			var source=pageData(data.list);//中奖数据实翻页实例
+			source=pageData(data.list);//中奖数据实翻页实例
 
 			var item=`<div class="my-award-item">
 						<div class="my-award-left"><img src="/app/image/award-item-left.png"/><span>3.25</span></div>
@@ -243,10 +247,12 @@ function createRealAward(data){
 					
 				</div>
 				<div class="myaward-bottom"><img src="/app/image/my-bottom.png"/>
-					<div class="next-btn"><img src="/app/image/next.png"/></div>
+					<div class="pre-btn"><img src="/app/image/prev.png"/><img src="/app/image/prev_disabled.png"/></div>
+					<div class="next-btn"><img src="/app/image/next.png"/><img src="/app/image/next_disabled.png"/></div>
 				</div>
 			<div>
 			`
+
 
 			createLayOut();
 			$(document.body).append(html);
@@ -254,6 +260,8 @@ function createRealAward(data){
 			//下一页数据
 			$('.next-btn').click(function(){
 				var data=source.next();
+
+				setBtn();
 				if(data){
 					$('.myaward-middle').contents().remove();
 					for(var i=0;i<data.length;i++){
@@ -263,30 +271,66 @@ function createRealAward(data){
 						d.find('.my-award-right').text(data[i].award_number);
 						$('.myaward-middle').append(d)
 					}
-					if(!source.hasNext()){
-
-						$('.next-btn').addClass('disabled');
-
-					}
-				}else{
-
-					$('.next-btn').remove();
-					$('.myaward-middle').html("<div class='nodata'>暂时没有中奖数据！</div>")
 				}
 			})
 
-			$('.next-btn').trigger('click')
+			//下一页数据
+			$('.pre-btn').click(function(){
+				var data=source.pre();
+				setBtn();
+				if(data){
+					$('.myaward-middle').contents().remove();
+					for(var i=0;i<data.length;i++){
+						var d=$(item);
+						d.find('.my-award-left span').text(data[i].date);
+						d.find('.my-award-middle').text(data[i].award_name);
+						d.find('.my-award-right').text(data[i].award_number);
+						$('.myaward-middle').append(d)
+					}
+				}
+			})
 
+			
 			//关闭按钮
 			$('.close-btn-2').click(function(){
 				closePopup();
 			})
 
+			if(data.list.length<=0){
+
+				$('.next-btn,.pre-btn').remove();
+
+				$('.myaward-middle').html('<div class="nodata">暂时没有中奖数据哦！请加油哦！</div>')
+
+			}else{
+				
+				$('.next-btn').trigger('click')
+			}
 
 
 		},function(e){
 			console.log('error in my award data')
 		})
+
+		//设置按钮是否可以点击 
+		function setBtn(){
+
+			if(source.hasNext()){
+
+				$('.next-btn').removeClass('disabled')
+			}else{
+
+				$('.next-btn').addClass('disabled')
+			}
+
+
+			if(source.hasPrev()){
+				$('.pre-btn').removeClass('disabled')
+			}else{
+				
+				$('.pre-btn').addClass('disabled')
+			}
+		}
 
  }
 
