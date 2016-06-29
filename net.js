@@ -34,9 +34,9 @@ function getMyAward(){
 function getAward(){
 
 
-	return ajax("/Home/Award/one",{loginid:uid})
+	//return ajax("/Home/Award/one",{loginid:uid})
 
-	//return ajax("/app/one.json")
+	return ajax("/app/one.json")
 }
 
 function getUserId(data){

@@ -339,6 +339,10 @@ input[placeholder], [placeholder], *[placeholder],select {
 		border-radius:5px;
 		background-color:#fff;
 	}
+
+
+
+
 }
 .write-form{
 	
@@ -398,6 +402,7 @@ $xinxin_big_scale:1.6;
  		position:absolute;
  		width:90%;
  		@include horizontal-center((-50%,-50px,0px));
+ 		z-index:1;
  		&>div:nth-child(1){
  			position:absolute;
  			width:40%;

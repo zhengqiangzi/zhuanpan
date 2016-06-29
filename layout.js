@@ -36,13 +36,23 @@ function createWriteMessage(data={data:{gid:1}}){
 	var name=ld.getItem("name")||"";
 	var address=ld.getItem("address")||"";
 	var phone=ld.getItem("phone")||"";
-
+	var phone_type_html=`
+					<div class="write-item spec">
+						<select>
+							<option value="-1">请选择手机壳类型</option>
+							<option value="iPhone6">iphone6</option>
+							<option value="iPhone6Plus">iPhone6Plus</option>
+						</select>
+					</div>`
 	var html=`
+
+
 		<div class="write-message popup-content">
 			<div class="write-message-image"><img src="/app/image/message-bg.png"/></div>
 			<div class="write-form">
 				<input type='hidden' value="${data.data.gid}" name='gid'/>
 				<div class="write-item-manager">
+					
 					<div class="write-item">
 						<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>
 						<div class='write-item-input'><input type='text' placeHolder="请输入姓名" name='username' value='${name}'/></div>
@@ -52,9 +62,6 @@ function createWriteMessage(data={data:{gid:1}}){
 						<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>
 						<div class='write-item-input'><input type='tel'  placeHolder="请输入手机号码"  name='userphone' value='${phone}'/></div>
 					</div>
-
-			
-
 
 					<div class="write-item spec" id="scx">
 						<div class="shen"><select class='prov'></select></div>
@@ -67,6 +74,7 @@ function createWriteMessage(data={data:{gid:1}}){
 						<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>
 						<div class='write-item-input'><input type='text' placeHolder="请输入地址" name='useraddress' value='${address}'/></div>
 					</div>
+
 				</div>
 				<div class='write-message-submit-btn'><a href='javascript:void(0)'><img src="/app/image/submit-message.jpg"/></a></div>
 			</div>
@@ -75,6 +83,13 @@ function createWriteMessage(data={data:{gid:1}}){
 	createLayOut(false);
 
 	$(document.body).append(html)
+
+	if(data.data.id==2){
+
+		$('.write-item-manager').append($(phone_type_html))
+	}
+
+	
 
 	$('#scx').citySelect({
 			url:"/app/js/city.min.js",
