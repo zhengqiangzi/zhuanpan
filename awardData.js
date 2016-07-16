@@ -6,12 +6,12 @@ var local_award_info={
 		{
 			id:1,
 			name:"10元微店优惠券",
-			rotate:0
+			rotate:-180
 		},
 		{
 			id:2,
 			name:"手机壳",
-			rotate:135
+			rotate:90
 		},
 		{
 			id:3,
@@ -21,12 +21,12 @@ var local_award_info={
 		{
 			id:4,
 			name:"5元微店优惠券",
-			rotate:-180
+			rotate:0
 		},
 		{
 			id:5,
 			name:"球衣",
-			rotate:90
+			rotate:135
 		},
 		{
 			id:6,

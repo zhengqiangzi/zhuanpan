@@ -267,7 +267,6 @@ input[placeholder], [placeholder], *[placeholder],select {
 	left:50%;
 	top:50%;
 	transform:translate3d(-50%,-50%,0px);
-
 }
 .write-item-manager{
 	width:90%;
@@ -344,12 +343,17 @@ input[placeholder], [placeholder], *[placeholder],select {
 
 
 }
+.write-message-image-top img{
+	display:block;
+}
+.write-message-image-middle{
+
+	background-image:url(../image/message-bg-middle.png);
+	background-repeat:repeat-y;	
+}
 .write-form{
 	
-	position:absolute;
-	left:0px;
-	top:110px;
-	width:100%;
+	
 }
 .write-message-submit-btn{
 	width:90%;

@@ -674,7 +674,7 @@
 		var address = ld.getItem("address") || "";
 		var phone = ld.getItem("phone") || "";
 		var phone_type_html = '\n\t\t\t\t\t<div class="write-item spec">\n\t\t\t\t\t\t<select>\n\t\t\t\t\t\t\t<option value="-1">请选择手机壳类型</option>\n\t\t\t\t\t\t\t<option value="iPhone6">iphone6</option>\n\t\t\t\t\t\t\t<option value="iPhone6Plus">iPhone6Plus</option>\n\t\t\t\t\t\t</select>\n\t\t\t\t\t</div>';
-		var html = '\n\n\n\t\t<div class="write-message popup-content">\n\t\t\t<div class="write-message-image"><img src="/app/image/message-bg.png"/></div>\n\t\t\t<div class="write-form">\n\t\t\t\t<input type=\'hidden\' value="' + data.data.gid + '" name=\'gid\'/>\n\t\t\t\t<div class="write-item-manager">\n\t\t\t\t\t\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入姓名" name=\'username\' value=\'' + name + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'tel\'  placeHolder="请输入手机号码"  name=\'userphone\' value=\'' + phone + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class="write-item spec" id="scx">\n\t\t\t\t\t\t<div class="shen"><select class=\'prov\'></select></div>\n\t\t\t\t\t\t<div class="shi"><select class=\'city\'></select></div>\n\t\t\t\t\t\t<div class="qu"><select class=\'dist\'></select></div>\n\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>\n\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入地址" name=\'useraddress\' value=\'' + address + '\'/></div>\n\t\t\t\t\t</div>\n\n\t\t\t\t</div>\n\t\t\t\t<div class=\'write-message-submit-btn\'><a href=\'javascript:void(0)\'><img src="/app/image/submit-message.jpg"/></a></div>\n\t\t\t</div>\n\t\t</div>\n\t';
+		var html = '\n\n\n\t\t<div class="write-message popup-content">\n\t\t\t<div class="write-message-image-top"><img src="/app/image/message-bg-top.png"/></div>\n\t\t\t<div class="write-message-image-middle">\n\n\t\t\t\t<div class="write-form">\n\t\t\t\t\t\t<input type=\'hidden\' value="' + data.data.gid + '" name=\'gid\'/>\n\t\t\t\t\t\t<div class="write-item-manager">\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>\n\t\t\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入姓名" name=\'username\' value=\'' + name + '\'/></div>\n\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>\n\t\t\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'tel\'  placeHolder="请输入手机号码"  name=\'userphone\' value=\'' + phone + '\'/></div>\n\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t<div class="write-item spec" id="scx">\n\t\t\t\t\t\t\t\t<div class="shen"><select class=\'prov\'></select></div>\n\t\t\t\t\t\t\t\t<div class="shi"><select class=\'city\'></select></div>\n\t\t\t\t\t\t\t\t<div class="qu"><select class=\'dist\'></select></div>\n\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t<div class="write-item">\n\t\t\t\t\t\t\t\t<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>\n\t\t\t\t\t\t\t\t<div class=\'write-item-input\'><input type=\'text\' placeHolder="请输入地址" name=\'useraddress\' value=\'' + address + '\'/></div>\n\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\'write-message-submit-btn\'><a href=\'javascript:void(0)\'><img src="/app/image/submit-message.jpg"/></a></div>\n\t\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t\t<div class="write-message-image-bottom"><img src="/app/image/message-bg-bottom.png"/></div>\n\t\t\t\n\n\t\n\t\t</div>\n\t';
 		createLayOut(false);
 
 		$(document.body).append(html);
@@ -1316,11 +1316,11 @@
 		award_mapping: [{
 			id: 1,
 			name: "10元微店优惠券",
-			rotate: 0
+			rotate: -180
 		}, {
 			id: 2,
 			name: "手机壳",
-			rotate: 135
+			rotate: 90
 		}, {
 			id: 3,
 			name: "阳伞",
@@ -1328,11 +1328,11 @@
 		}, {
 			id: 4,
 			name: "5元微店优惠券",
-			rotate: -180
+			rotate: 0
 		}, {
 			id: 5,
 			name: "球衣",
-			rotate: 90
+			rotate: 135
 		}, {
 			id: 6,
 			name: "足球",

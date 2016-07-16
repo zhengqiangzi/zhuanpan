@@ -48,36 +48,44 @@ function createWriteMessage(data={data:{gid:1}}){
 
 
 		<div class="write-message popup-content">
-			<div class="write-message-image"><img src="/app/image/message-bg.png"/></div>
-			<div class="write-form">
-				<input type='hidden' value="${data.data.gid}" name='gid'/>
-				<div class="write-item-manager">
-					
-					<div class="write-item">
-						<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>
-						<div class='write-item-input'><input type='text' placeHolder="请输入姓名" name='username' value='${name}'/></div>
+			<div class="write-message-image-top"><img src="/app/image/message-bg-top.png"/></div>
+			<div class="write-message-image-middle">
+
+				<div class="write-form">
+						<input type='hidden' value="${data.data.gid}" name='gid'/>
+						<div class="write-item-manager">
+							
+							<div class="write-item">
+								<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>
+								<div class='write-item-input'><input type='text' placeHolder="请输入姓名" name='username' value='${name}'/></div>
+							</div>
+
+							<div class="write-item">
+								<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>
+								<div class='write-item-input'><input type='tel'  placeHolder="请输入手机号码"  name='userphone' value='${phone}'/></div>
+							</div>
+
+							<div class="write-item spec" id="scx">
+								<div class="shen"><select class='prov'></select></div>
+								<div class="shi"><select class='city'></select></div>
+								<div class="qu"><select class='dist'></select></div>
+
+							</div>
+							
+							<div class="write-item">
+								<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>
+								<div class='write-item-input'><input type='text' placeHolder="请输入地址" name='useraddress' value='${address}'/></div>
+							</div>
+
+						</div>
+						<div class='write-message-submit-btn'><a href='javascript:void(0)'><img src="/app/image/submit-message.jpg"/></a></div>
 					</div>
 
-					<div class="write-item">
-						<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>
-						<div class='write-item-input'><input type='tel'  placeHolder="请输入手机号码"  name='userphone' value='${phone}'/></div>
-					</div>
-
-					<div class="write-item spec" id="scx">
-						<div class="shen"><select class='prov'></select></div>
-						<div class="shi"><select class='city'></select></div>
-						<div class="qu"><select class='dist'></select></div>
-
-					</div>
-					
-					<div class="write-item">
-						<div class="write-item-icon"><img src="/app/image/icon-3.png"/></div>
-						<div class='write-item-input'><input type='text' placeHolder="请输入地址" name='useraddress' value='${address}'/></div>
-					</div>
-
-				</div>
-				<div class='write-message-submit-btn'><a href='javascript:void(0)'><img src="/app/image/submit-message.jpg"/></a></div>
 			</div>
+			<div class="write-message-image-bottom"><img src="/app/image/message-bg-bottom.png"/></div>
+			
+
+	
 		</div>
 	`
 	createLayOut(false);
