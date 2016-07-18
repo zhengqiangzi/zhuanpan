@@ -183,8 +183,8 @@ class AwardController extends Controller {
 		}else
 		{
 				$uptimes=array();
-				// $uptimes['times']=$times-1;
-				$uptimes['times']=2;
+				$uptimes['times']=$times-1;
+				// $uptimes['times']=2;
 				$datetype=M('userinfo')->where('loginid="'.$loginid.'"')->save($uptimes);
 				
 		}
@@ -251,22 +251,22 @@ class AwardController extends Controller {
 			return;
 		}
 		// 查看用户当日是否已经参与，若有，则无法再次参与
-			// $map=array();
-			// $map['date']=array('eq',$nowday);
-			// $map['_query']='openid='.$openid.'&loginid='.$loginid.'&_logic=or';
-			// $findtoday=M('giftinfo')->where($map)->select();
-			// if($findtoday){
-			// 	$baduser=array();
-			// 	$baduser['id']=7;
-			// 	$baduser['virtual']="1";
-			// 	$baduser['get']="2";
-			// 	$baduser['name']='未中奖';
-			// 	$baduser['pic']='img.png';
-			// 	$baduser['gid']="";
-			// 	$baduser['times']=$times;
-			// 	$this->ajaxReturn($baduser);
-			// 	return;
-			// }
+			$map=array();
+			$map['date']=array('eq',$nowday);
+			$map['_query']='openid='.$openid.'&loginid='.$loginid.'&_logic=or';
+			$findtoday=M('giftinfo')->where($map)->select();
+			if($findtoday){
+				$baduser=array();
+				$baduser['id']=7;
+				$baduser['virtual']="1";
+				$baduser['get']="2";
+				$baduser['name']='未中奖';
+				$baduser['pic']='img.png';
+				$baduser['gid']="";
+				$baduser['times']=$times;
+				$this->ajaxReturn($baduser);
+				return;
+			}
 
 		else
 		{
@@ -354,7 +354,20 @@ class AwardController extends Controller {
 		$userphone=I('userphone');
 		$useraddress=I('useraddress');
 		$loginid=I('loginid');
-		
+		$psize=I('size');
+		if($psize!=-1)
+		{
+			$updatasize=array();
+			$updatasize['size']=$psize;
+			$setdone=M('giftinfo')->where('giftid='.$gid)->save($updatasize);
+			// if($setdone){
+			// 	$this->ajaxReturn('success');
+			// }else
+			// {
+
+			// 	$this->ajaxReturn('false');
+			// }
+		}
 		// 查找该ID当日是否已经中奖，若无则可以添加信息；
 		// $map=array();
 		// $map['times']=array('eq',0);

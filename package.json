@@ -18,9 +18,10 @@
     "events": "^1.1.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
+    "gulp-sass": "^2.3.2",
     "jquery": "^3.0.0",
-    "node-sass": "^3.7.0",
-    "sass-loader": "^3.2.0",
+    "node-sass": "^3.8.0",
+    "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1"
