@@ -1,5 +1,5 @@
 var localdatas=require('localdata')
-var uid=localdatas.getItem("loginid")||-1;
+var uid=function(){return localdatas.getItem("loginid")||-1};
 function ajax(url,data=null){
 
 	var best=$("<div class='best'><div>正在加载信息...</div></div>");
@@ -27,14 +27,14 @@ function ajax(url,data=null){
 
 function getMyAward(){
 
-	return ajax("/Home/Award/myaward",{loginid:uid})
+	return ajax("/Home/Award/myaward",{loginid:uid()})
 	// return ajax("/app/myaward.json")
 }
 
 function getAward(){
 
 
-	return ajax("/Home/Award/one",{loginid:uid})
+	return ajax("/Home/Award/one",{loginid:uid()})
 
 	// return ajax("/app/one.json")
 }

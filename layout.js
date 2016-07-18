@@ -155,13 +155,132 @@ function createWriteMessage(data={data:{gid:1}}){
 			}else{
 				alert(data.info)
 			}
-
 		},function(){
 			closePopup();
 			console.log('提交信息发生异常')
 		});
 	})
 }
+
+
+
+
+
+function createWriteMessageWithVir(data={data:{gid:1}}){
+
+	var name=ld.getItem("name")||"";
+	var phone=ld.getItem("phone")||"";
+	
+	var html=`
+
+
+		<div class="write-message popup-content">
+			<div class="write-message-image-top"><img src="/app/image/message-bg-top.png"/></div>
+			<div class="write-message-image-middle">
+
+				<div class="write-form">
+						<input type='hidden' value="${data.data.gid}" name='gid'/>
+						<div class="write-item-manager">
+							
+							<div class="write-item">
+								<div class="write-item-icon"><img src="/app/image/icon-1.png"/></div>
+								<div class='write-item-input'><input type='text' placeHolder="请输入姓名" name='username' value='${name}'/></div>
+							</div>
+
+							<div class="write-item">
+								<div class="write-item-icon"><img src="/app/image/icon-2.png"/></div>
+								<div class='write-item-input'><input type='tel'  placeHolder="请输入手机号码"  name='userphone' value='${phone}'/></div>
+							</div>
+						</div>
+						<div class='write-message-submit-btn'><a href='javascript:void(0)'><img src="/app/image/submit-message.jpg"/></a></div>
+					</div>
+			</div>
+			<div class="write-message-image-bottom"><img src="/app/image/message-bg-bottom.png"/></div>
+		</div>
+	`
+	createLayOut(false);
+
+	$(document.body).append(html)
+
+	
+
+	$('.write-message-submit-btn>a').click(function(){
+
+		var gid=$("input[name='gid']").val()
+		var username=$("input[name='username']").val()
+		var userphone=$("input[name='userphone']").val()
+
+		if(gid.length<=0){
+			alert('发生错误！请联系管理员!')
+			return;
+		}
+		if(username.length<=1){
+			alert('请正确填写姓名')
+			return;
+		}
+		if(!/^1[0-9]{10}$/.test(userphone)){
+			alert("请正确填写手机号码")
+			return 
+		}
+	
+		var object={
+			gid:gid,
+			username:username,
+			userphone:userphone,
+		}
+
+		ld.saveItem("name",username)
+		ld.saveItem("phone",userphone)
+
+		nets.submitMessage(object).then(function(data){
+			closePopup();
+			if(data.status==1){
+				//提交成功
+				webEvents.emit('PopupEvent.createMessageSuccess')
+			}else{
+				alert(data.info)
+			}
+		},function(){
+			closePopup();
+			console.log('提交信息发生异常')
+		});
+	})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function createFocus(){
 
@@ -187,6 +306,8 @@ function createVirAward(data){
 			<div class="vir-bg"><img src="${data.data.pic}"/>
 
 			<div class="vire-bg-close-btn"><img src="/app/image/close-btn2.png"/></div>
+
+			<div class="vire-sbtn"><img src="/app/image/btn.png"/></div>
 			</div>
 				<div class="star-manager">
 					<div><img src="/app/image/star-left.png"/></div>
@@ -201,6 +322,13 @@ function createVirAward(data){
 	$('.vire-bg-close-btn').click(function(){
 
 		closePopup();
+	})
+
+	$('.vire-sbtn').click(function(){
+			closePopup();
+		webEvents.emit('PopupEvent.createWriteMessageWithVir',data);
+
+
 	})
 	createLayOut(false);
 }
@@ -484,6 +612,7 @@ module.exports={
 	createMyAward,
 	createRule,
 	createFail,
-	DAlert
+	DAlert,
+	createWriteMessageWithVir
 
 }

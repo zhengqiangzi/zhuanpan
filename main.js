@@ -258,6 +258,16 @@ webEvents.on('PopupEvent.createMessageSuccess',function(){
 	layout.createMessageSuccess();
 })
 
+
+//虚拟奖品弹出层
+webEvents.on('PopupEvent.createWriteMessageWithVir',function(data){
+	layout.createWriteMessageWithVir(data);
+})
+
+
+
+
+
 window.start=function(){
 
 	webEvents.emit('homeEvent')
