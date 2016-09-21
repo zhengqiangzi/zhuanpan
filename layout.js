@@ -307,7 +307,7 @@ function createVirAward(data){
 
 			<div class="vire-bg-close-btn"><img src="/app/image/close-btn2.png"/></div>
 
-			<div class="vire-sbtn"><img src="/app/image/btn.png"/></div>
+			<div class="vire-sbtn"><img src="/app/image/v_confirm_btn.png"/></div>
 			</div>
 				<div class="star-manager">
 					<div><img src="/app/image/star-left.png"/></div>
@@ -325,9 +325,9 @@ function createVirAward(data){
 	})
 
 	$('.vire-sbtn').click(function(){
-			closePopup();
-		webEvents.emit('PopupEvent.createWriteMessageWithVir',data);
-
+		closePopup();
+		//webEvents.emit('PopupEvent.createWriteMessageWithVir',data);
+		webEvents.emit('PopupEvent.vritualConfirmEvent',data)
 
 	})
 	createLayOut(false);
@@ -488,7 +488,7 @@ function createRealAward(data){
 
 function createRule(){
 
-var html=`
+	var html=`
 			<div class="rule popup-content">
 				
 				<div class="rule-header"><img src="/app/image/rule-header.png"/>
@@ -496,7 +496,12 @@ var html=`
 					<div class="rule-close-btn"><img src="/app/image/close-btn2.png"/></div>
 
 				</div>
-				<div class="rule-content"><img src="/app/image/rule_content.png"/></div>
+				<div class="rule-content">
+
+						<img src="/app/image/rule_content.png"/>
+
+
+				</div>
 
 
 
@@ -552,19 +557,54 @@ function createMessageSuccess(){
 	`
 	createLayOut(false);
 	$(document.body).append(html);
-
-
 	$('.message-close-btn').click(function(){
-
-				closePopup();
+		closePopup();
 	})
 
-
 	$('.myawardbtn2').click(function(){
-
 		closePopup();
 		webEvents.emit('PopupEvent.myAwardEvent')
 	})
+
+
+}
+
+function createVirtualConfirmWindow(data){
+	var html=`
+		<div class="confirm popup-content">
+			<div class="confirm-header"><img src="/app/image/confirm_header.png"/>
+				<div class="rule-close-btn"><img src="/app/image/close-btn2.png"/></div>
+			</div>
+			<div class="confirm-content">
+
+					<img src="/app/image/confirm_letter.png"/>
+
+
+					<div class="write-message-btn"><img src="/app/image/btn.png"/></div>
+
+
+			</div>
+
+
+		<div>
+	`
+	createLayOut(false);
+
+	$(document.body).append(html);
+
+	$('.rule-close-btn').click(function(){
+
+		closePopup();
+	})
+
+	$('.write-message-btn').click(function(){
+
+		closePopup();
+
+		webEvents.emit('PopupEvent.createWriteMessageWithVir',data);
+	})
+
+
 
 
 }
@@ -613,6 +653,7 @@ module.exports={
 	createRule,
 	createFail,
 	DAlert,
-	createWriteMessageWithVir
+	createWriteMessageWithVir,
+	createVirtualConfirmWindow
 
 }

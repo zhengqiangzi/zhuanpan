@@ -285,6 +285,11 @@
 		layout.createWriteMessageWithVir(data);
 	});
 
+	webEvents.on('PopupEvent.vritualConfirmEvent', function (data) {
+
+		layout.createVirtualConfirmWindow(data);
+	});
+
 	window.start = function () {
 
 		webEvents.emit('homeEvent');
@@ -294,6 +299,8 @@
 
 		layout.DAlert([].concat(Array.prototype.slice.call(arguments)));
 	};
+
+	//webEvents.emit('PopupEvent.vritualConfirmEvent',{b:1})
 
 	//console.log(ld.getItem("name"))
 	//console.log(ld.saveItem("age",301))
@@ -825,7 +832,7 @@
 	}
 
 	function createVirAward(data) {
-		var html = '\n\t\t<div class="virAward popup-content">\n\t\t\t<div class="vir-bg"><img src="' + data.data.pic + '"/>\n\n\t\t\t<div class="vire-bg-close-btn"><img src="/app/image/close-btn2.png"/></div>\n\n\t\t\t<div class="vire-sbtn"><img src="/app/image/btn.png"/></div>\n\t\t\t</div>\n\t\t\t\t<div class="star-manager">\n\t\t\t\t\t<div><img src="/app/image/star-left.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-middle.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-right.png"/></div>\n\t\t\t\t</div>\n\t\t</div>\n\n\t';
+		var html = '\n\t\t<div class="virAward popup-content">\n\t\t\t<div class="vir-bg"><img src="' + data.data.pic + '"/>\n\n\t\t\t<div class="vire-bg-close-btn"><img src="/app/image/close-btn2.png"/></div>\n\n\t\t\t<div class="vire-sbtn"><img src="/app/image/v_confirm_btn.png"/></div>\n\t\t\t</div>\n\t\t\t\t<div class="star-manager">\n\t\t\t\t\t<div><img src="/app/image/star-left.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-middle.png"/></div>\n\t\t\t\t\t<div><img src="/app/image/star-right.png"/></div>\n\t\t\t\t</div>\n\t\t</div>\n\n\t';
 		$(document.body).append(html);
 
 		$('.vire-bg-close-btn').click(function () {
@@ -835,7 +842,8 @@
 
 		$('.vire-sbtn').click(function () {
 			closePopup();
-			webEvents.emit('PopupEvent.createWriteMessageWithVir', data);
+			//webEvents.emit('PopupEvent.createWriteMessageWithVir',data);
+			webEvents.emit('PopupEvent.vritualConfirmEvent', data);
 		});
 		createLayOut(false);
 	}
@@ -944,7 +952,7 @@
 
 	function createRule() {
 
-		var html = '\n\t\t\t<div class="rule popup-content">\n\t\t\t\t\n\t\t\t\t<div class="rule-header"><img src="/app/image/rule-header.png"/>\n\t\t\t\t\t\n\t\t\t\t\t<div class="rule-close-btn"><img src="/app/image/close-btn2.png"/></div>\n\n\t\t\t\t</div>\n\t\t\t\t<div class="rule-content"><img src="/app/image/rule_content.png"/></div>\n\n\n\n\t\t\t<div>\n\t';
+		var html = '\n\t\t\t<div class="rule popup-content">\n\t\t\t\t\n\t\t\t\t<div class="rule-header"><img src="/app/image/rule-header.png"/>\n\t\t\t\t\t\n\t\t\t\t\t<div class="rule-close-btn"><img src="/app/image/close-btn2.png"/></div>\n\n\t\t\t\t</div>\n\t\t\t\t<div class="rule-content">\n\n\t\t\t\t\t\t<img src="/app/image/rule_content.png"/>\n\n\n\t\t\t\t</div>\n\n\n\n\t\t\t<div>\n\t';
 		createLayOut(false);
 		$(document.body).append(html);
 
@@ -971,16 +979,32 @@
 		var html = '\n\t\t\t<div class="messageSuccess popup-content">\n\t\t\t\t\n\t\t\t\t<div class=\'messageSuccess-content\'>\n\t\t\t\t\t<div><img src="/app/image/message-success.png"/></div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\'myawardbtn2\'><img src="/app/image/myAwardBtn2.png"/></div>\n\t\t\t\t\t<div class=\'message-close-btn\'><img src="/app/image/close-btn2.png"/></div>\n\t\t\t\t</div>\n\n\n\t\t\t<div>\n\t';
 		createLayOut(false);
 		$(document.body).append(html);
-
 		$('.message-close-btn').click(function () {
-
 			closePopup();
 		});
 
 		$('.myawardbtn2').click(function () {
-
 			closePopup();
 			webEvents.emit('PopupEvent.myAwardEvent');
+		});
+	}
+
+	function createVirtualConfirmWindow(data) {
+		var html = '\n\t\t<div class="confirm popup-content">\n\t\t\t<div class="confirm-header"><img src="/app/image/confirm_header.png"/>\n\t\t\t\t<div class="rule-close-btn"><img src="/app/image/close-btn2.png"/></div>\n\t\t\t</div>\n\t\t\t<div class="confirm-content">\n\n\t\t\t\t\t<img src="/app/image/confirm_letter.png"/>\n\n\n\t\t\t\t\t<div class="write-message-btn"><img src="/app/image/btn.png"/></div>\n\n\n\t\t\t</div>\n\n\n\t\t<div>\n\t';
+		createLayOut(false);
+
+		$(document.body).append(html);
+
+		$('.rule-close-btn').click(function () {
+
+			closePopup();
+		});
+
+		$('.write-message-btn').click(function () {
+
+			closePopup();
+
+			webEvents.emit('PopupEvent.createWriteMessageWithVir', data);
 		});
 	}
 
@@ -1015,7 +1039,8 @@
 		createRule: createRule,
 		createFail: createFail,
 		DAlert: DAlert,
-		createWriteMessageWithVir: createWriteMessageWithVir
+		createWriteMessageWithVir: createWriteMessageWithVir,
+		createVirtualConfirmWindow: createVirtualConfirmWindow
 
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -1062,9 +1087,9 @@
 
 	function getAward() {
 
-		return ajax("/Home/Award/one", { loginid: uid() });
+		//return ajax("/Home/Award/one",{loginid:uid()})
 
-		// return ajax("/app/one.json")
+		return ajax("/app/one.json");
 	}
 
 	function getUserId(data) {
@@ -1385,28 +1410,36 @@
 		award_mapping: [{
 			id: 1,
 			name: "10元微店优惠券",
-			rotate: -180
+			rotate: 135
 		}, {
 			id: 2,
 			name: "手机壳",
-			rotate: 90
+			rotate: 180
 		}, {
 			id: 3,
 			name: "阳伞",
-			rotate: -135
+			rotate: -90
 		}, {
 			id: 4,
 			name: "5元微店优惠券",
-			rotate: 0
+			rotate: -45
 		}, {
+			//special add no clothers of footerball
 			id: 5,
-			name: "球衣",
-			rotate: 135
-		}, {
+			name: "20元微店优惠券",
+			rotate: 45
+		},
+		/*		{
+	 			id:5,
+	 			name:"球衣",
+	 			rotate:135
+	 		},*/
+		{
 			id: 6,
 			name: "足球",
-			rotate: -45
+			rotate: 0
 		}
+
 		/*{
 	 	id:-1,
 	 	name:"没有中奖",
@@ -1430,7 +1463,7 @@
 			}
 		} else {
 			//未中奖
-			var g = [43, -90];
+			var g = [90, -135];
 			return g[Math.floor(Math.random() * g.length)];
 		}
 		return rotate;

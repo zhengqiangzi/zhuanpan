@@ -418,7 +418,7 @@ input[placeholder], [placeholder], *[placeholder], select {
   color: #ff7a00;
   font-size: 12px; }
 
-.main, .home, .luck, .popup, .rule, .loading, .cover, .best, .fail, .messageSuccess, .Alert {
+.main, .home, .luck, .popup, .rule, .confirm, .loading, .cover, .best, .fail, .messageSuccess, .Alert {
   position: absolute;
   left: 0;
   top: 0;
@@ -452,19 +452,19 @@ input[placeholder], [placeholder], *[placeholder], select {
 
 @-webkit-keyframes title-play {
   from {
-    -webkit-transform: rotate(-7deg);
-            transform: rotate(-7deg); }
+    -webkit-transform: rotate(-7deg) translate3d(-50%, 0px, 0px);
+            transform: rotate(-7deg) translate3d(-50%, 0px, 0px); }
   to {
-    -webkit-transform: rotate(7deg);
-            transform: rotate(7deg); } }
+    -webkit-transform: rotate(7deg) translate3d(-50%, 0px, 0px);
+            transform: rotate(7deg) translate3d(-50%, 0px, 0px); } }
 
 @keyframes title-play {
   from {
-    -webkit-transform: rotate(-7deg);
-            transform: rotate(-7deg); }
+    -webkit-transform: rotate(-7deg) translate3d(-50%, 0px, 0px);
+            transform: rotate(-7deg) translate3d(-50%, 0px, 0px); }
   to {
-    -webkit-transform: rotate(7deg);
-            transform: rotate(7deg); } }
+    -webkit-transform: rotate(7deg) translate3d(-50%, 0px, 0px);
+            transform: rotate(7deg) translate3d(-50%, 0px, 0px); } }
 
 @-webkit-keyframes adai-play {
   from {
@@ -486,17 +486,16 @@ input[placeholder], [placeholder], *[placeholder], select {
   position: absolute;
   top: 0px;
   width: 100%;
-  margin-top: 60px; }
+  margin-top: 40px; }
   .index-top .title {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    -webkit-transform: rotate(-7deg);
-            transform: rotate(-7deg);
-    -webkit-animation: title-play 1s  infinite alternate ease-in-out;
-            animation: title-play 1s  infinite alternate ease-in-out; }
+    width: 80.15625%;
+    -webkit-transform: rotate(-7deg) translate3d(-50%, 0px, 0px);
+            transform: rotate(-7deg) translate3d(-50%, 0px, 0px);
+    position: absolute;
+    z-index: 2;
+    left: 50%; }
   .index-top .dai {
-    margin-top: 40px;
+    margin-top: 200px;
     width: 100%;
     position: relative; }
   .index-top .a-dai {
@@ -991,6 +990,33 @@ input[placeholder], [placeholder], *[placeholder], select {
     width: 80.3125%;
     margin-left: auto;
     margin-right: auto; }
+
+.confirm {
+  z-index: 101; }
+  .confirm .confirm-header {
+    width: 97.03125%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; }
+    .confirm .confirm-header .rule-close-btn {
+      position: absolute;
+      right: 28px;
+      top: 66px;
+      width: 30px; }
+    .confirm .confirm-header > img {
+      display: block; }
+  .confirm .confirm-content {
+    width: 80.46875%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; }
+    .confirm .confirm-content .write-message-btn {
+      width: 67.34375%;
+      position: absolute;
+      left: 50%;
+      -webkit-transform: translate3d(-50%, 0px, 0px);
+              transform: translate3d(-50%, 0px, 0px);
+      bottom: 20px; }
 
 @-webkit-keyframes xin2 {
   from {

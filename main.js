@@ -265,6 +265,12 @@ webEvents.on('PopupEvent.createWriteMessageWithVir',function(data){
 })
 
 
+webEvents.on('PopupEvent.vritualConfirmEvent',function(data){
+
+
+	layout.createVirtualConfirmWindow(data);
+})
+
 
 
 
@@ -279,6 +285,7 @@ window.alert=function(){
 }
 
 
+//webEvents.emit('PopupEvent.vritualConfirmEvent',{b:1})
 
 	//console.log(ld.getItem("name"))
 	//console.log(ld.saveItem("age",301))

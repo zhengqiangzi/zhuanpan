@@ -6,33 +6,41 @@ var local_award_info={
 		{
 			id:1,
 			name:"10元微店优惠券",
-			rotate:-180
+			rotate:135
 		},
 		{
 			id:2,
 			name:"手机壳",
-			rotate:90
+			rotate:180
 		},
 		{
 			id:3,
 			name:"阳伞",
-			rotate:-135
+			rotate:-90
 		},
 		{
 			id:4,
 			name:"5元微店优惠券",
-			rotate:0
+			rotate:-45
 		},
 		{
+			//special add no clothers of footerball
+			id:5,
+			name:"20元微店优惠券",
+			rotate:45
+		},
+/*		{
 			id:5,
 			name:"球衣",
 			rotate:135
-		},
+		},*/
 		{
 			id:6,
 			name:"足球",
-			rotate:-45
+			rotate:0
 		}
+
+
 		/*{
 			id:-1,
 			name:"没有中奖",
@@ -56,7 +64,7 @@ function getRotateById(param){
 		}
 	}else{
 		//未中奖
-		var g=[43,-90];
+		var g=[90,-135];
 		return g[Math.floor(Math.random()*g.length)];
 	}
 	return rotate;

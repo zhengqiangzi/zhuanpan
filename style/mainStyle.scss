@@ -76,11 +76,11 @@ input[placeholder], [placeholder], *[placeholder],select {
 @keyframes title-play{
 	
 	from{
-		transform:rotate(-7deg);
+		transform:rotate(-7deg) translate3d(-50%,0px,0px);
 	}
 	
 	to{
-		transform:rotate(7deg);
+		transform:rotate(7deg)  translate3d(-50%,0px,0px);
 	}
 }
 
@@ -104,17 +104,21 @@ input[placeholder], [placeholder], *[placeholder],select {
 	position:absolute;
 	top:0px;
 	width:100%;
-	margin-top:60px;
+	margin-top:40px;
 	& .title{
-		width:percentage(576px/640px);
-		margin-left:auto;
-		margin-right:auto;
-		transform:rotate(-7deg);
-		animation:title-play 1s  infinite alternate ease-in-out;
+		width:percentage(513px/640px);
+		transform:rotate(-7deg) translate3d(-50%,0px,0px);
+		//animation:title-play 1s  infinite alternate ease-in-out;
+		position:absolute;
+		//transform-origin:0% 50%;
+		z-index:2;
+		left:50%;
+
+
 	}
 
 	& .dai{
-		margin-top:40px;
+		margin-top:200px;
 		width:100%;
 		position:relative;
 	}
@@ -669,10 +673,49 @@ $xinxin_big_scale:1.6;
 
 	& .rule-content{
 		width:percentage(514px/640px);
-				margin-left:auto;
+		margin-left:auto;
 		margin-right:auto;
 	}
 }
+
+.confirm{
+	@extend %full;
+	z-index:101;
+		& .confirm-header{
+			width:percentage(621px/640px);
+			margin-left:auto;
+			margin-right:auto;
+			position:relative;
+
+				& .rule-close-btn{
+					position:absolute;
+					right:28px;
+					top:66px;
+					width:30px;
+				}
+				&>img{
+						display:block;
+				}
+
+		}
+		& .confirm-content{
+			width:percentage(515px/640px);
+			margin-left:auto;
+			margin-right:auto;
+			position:relative;
+
+			& .write-message-btn{
+
+				width:percentage(431px/640px);
+				position:absolute;
+				 @include horizontal-center((-50%,0px,0px));
+				 bottom:20px;
+			}
+
+		}
+}
+
+
 
 @keyframes xin2{
 		from{
