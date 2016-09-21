@@ -254,8 +254,8 @@ webEvents.on('PopupEvent.rule',function(){
 webEvents.on('PopupEvent.createFail',function(){
 	layout.createFail();
 })
-webEvents.on('PopupEvent.createMessageSuccess',function(){
-	layout.createMessageSuccess();
+webEvents.on('PopupEvent.createMessageSuccess',function(data){
+	layout.createMessageSuccess(data);
 })
 
 
@@ -273,6 +273,7 @@ webEvents.on('PopupEvent.vritualConfirmEvent',function(data){
 
 
 
+//webEvents.emit('PopupEvent.createMessageSuccess',{isVir:true})
 
 window.start=function(){
 

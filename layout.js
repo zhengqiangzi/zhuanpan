@@ -151,7 +151,7 @@ function createWriteMessage(data={data:{gid:1}}){
 			closePopup();
 			if(data.status==1){
 				//提交成功
-				webEvents.emit('PopupEvent.createMessageSuccess')
+				webEvents.emit('PopupEvent.createMessageSuccess',{isVir:false})
 			}else{
 				alert(data.info)
 			}
@@ -236,7 +236,7 @@ function createWriteMessageWithVir(data={data:{gid:1}}){
 			closePopup();
 			if(data.status==1){
 				//提交成功
-				webEvents.emit('PopupEvent.createMessageSuccess')
+				webEvents.emit('PopupEvent.createMessageSuccess',{isVir:true})
 			}else{
 				alert(data.info)
 			}
@@ -540,19 +540,24 @@ function createFail(){
 	})
 }
 
-function createMessageSuccess(){
+function createMessageSuccess(data){
 
+	console.log(data.isVir)
 	var html=`
 			<div class="messageSuccess popup-content">
 				
 				<div class='messageSuccess-content'>
-					<div><img src="/app/image/message-success.png"/></div>
-					
-					<div class='myawardbtn2'><img src="/app/image/myAwardBtn2.png"/></div>
+					<div><img src="/app/image/message-success.png" style="display:block"/></div>
 					<div class='message-close-btn'><img src="/app/image/close-btn2.png"/></div>
+					<div class='myawardbtn2'>`
+					+(data.isVir?`<a href='#'><img src="/app/image/market.png"/></a>`:'')+
+
+							`<span><img src="/app/image/myAwardBtn3.png"/></span>
+					</div>
+
+
+
 				</div>
-
-
 			<div>
 	`
 	createLayOut(false);
@@ -561,7 +566,7 @@ function createMessageSuccess(){
 		closePopup();
 	})
 
-	$('.myawardbtn2').click(function(){
+	$('.myawardbtn2 span').click(function(){
 		closePopup();
 		webEvents.emit('PopupEvent.myAwardEvent')
 	})

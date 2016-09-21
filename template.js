@@ -1,7 +1,17 @@
 function home(){
 	return `<div class="home">
 				<div class="index-top">
-					<div class="title"><img src="/app/image/title.png"/></div>
+					<div class="title">
+
+						<img src="/app/image/title.png"/>
+
+						<div class="title-star"><img src="/app/image/title-star.png"/></div>
+	
+					</div>
+
+
+
+
 					<div class="dai">
 						<div class='dai-bg'><img src="/app/image/top.png"/></div>
 						<div class="a-dai"><img src="/app/image/a-dai.png"/></div>

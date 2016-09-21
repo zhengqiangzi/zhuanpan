@@ -76,11 +76,11 @@ input[placeholder], [placeholder], *[placeholder],select {
 @keyframes title-play{
 	
 	from{
-		transform:rotate(-7deg) translate3d(-50%,0px,0px);
+		transform:scale(0.5) rotate(0deg);
 	}
 	
 	to{
-		transform:rotate(7deg)  translate3d(-50%,0px,0px);
+		transform:scale(1) rotate(360deg);
 	}
 }
 
@@ -114,6 +114,14 @@ input[placeholder], [placeholder], *[placeholder],select {
 		z-index:2;
 		left:50%;
 
+		& .title-star{
+			position:absolute;
+			left:56%;
+			top:17%;
+			width:30%;
+			animation:title-play 2s  infinite alternate ease-in-out;
+
+		}
 
 	}
 
@@ -911,7 +919,7 @@ $xinxin_big_scale:1.6;
 		transform:translate3d(-50%, 160px, 0px)
 	}
 		.index-top .dai{
-		margin-top:50px;
+		margin-top:250px;
 	}
 	.focus .close-btn{
 		top:116px;
@@ -930,6 +938,11 @@ $xinxin_big_scale:1.6;
 				right:37px  !important;
 		top:32px  !important;	
 	}
+
+	.confirm .confirm-header .rule-close-btn{
+			top:77px;
+
+	}
 }
 
 @media(max-height:673px) and (min-height:604px){
@@ -945,7 +958,7 @@ $xinxin_big_scale:1.6;
 		right:50px;
 	}
 	.index-top .dai{
-		margin-top:70px;
+		margin-top:270px;
 	}
 	.index-bottom .index-logo{
 		transform:translate3d(-50%, 160px, 0px)
@@ -963,6 +976,12 @@ $xinxin_big_scale:1.6;
 		right:44px !important;
 
 	}
+
+	.confirm .confirm-header .rule-close-btn{
+			top:84px;
+
+	}
+
 }
 
 .best{
@@ -1003,7 +1022,7 @@ $xinxin_big_scale:1.6;
 
 .messageSuccess{
 	
-		@extend %full;
+	@extend %full;
 	z-index:101;
 	display:flex;
 	align-items:center;
@@ -1014,13 +1033,25 @@ $xinxin_big_scale:1.6;
 		width:percentage(490px/640px);
 		position:relative;
 
-		& .myawardbtn2{
-			position:absolute;
-			width:50%;
-			top:90px;
-			left:25%;
-		}
 
+		& .myawardbtn2{
+			width:100%;
+			margin:auto;
+			background-image:url(../image/message-success-bottom.png);
+			background-position:left bottom;
+			background-size:100% auto;
+			background-repeat:no-repeat;
+			padding-bottom:10px;
+			padding-top:10px;
+
+			&>*{
+				width:70%;
+				display:block;
+				margin:auto;
+			}
+
+		}
+		
 		& .message-close-btn{
 			position:absolute;
 			right:16px;

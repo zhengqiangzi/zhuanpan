@@ -276,8 +276,8 @@
 	webEvents.on('PopupEvent.createFail', function () {
 		layout.createFail();
 	});
-	webEvents.on('PopupEvent.createMessageSuccess', function () {
-		layout.createMessageSuccess();
+	webEvents.on('PopupEvent.createMessageSuccess', function (data) {
+		layout.createMessageSuccess(data);
 	});
 
 	//虚拟奖品弹出层
@@ -289,6 +289,8 @@
 
 		layout.createVirtualConfirmWindow(data);
 	});
+
+	//webEvents.emit('PopupEvent.createMessageSuccess',{isVir:true})
 
 	window.start = function () {
 
@@ -340,7 +342,7 @@
 	"use strict";
 
 	function home() {
-		return "<div class=\"home\">\n\t\t\t\t<div class=\"index-top\">\n\t\t\t\t\t<div class=\"title\"><img src=\"/app/image/title.png\"/></div>\n\t\t\t\t\t<div class=\"dai\">\n\t\t\t\t\t\t<div class='dai-bg'><img src=\"/app/image/top.png\"/></div>\n\t\t\t\t\t\t<div class=\"a-dai\"><img src=\"/app/image/a-dai.png\"/></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"index-bottom\">\n\t\t\t\t\t<div class=\"start-btn\"><a href='javascript:void(0)'><img src=\"/app/image/btn-index.png\"/></a></div>\n\t\t\t\t\t<div class=\"index-logo\"><img src=\"/app/image/logo-index.png\"/></div>\n\t\t\t\t\t<img src=\"/app/image/index-bottom.png\" class='ib-bg'/>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"caidai\">\n\t\t\t\t\t<div class='dai-bg'><img src=\"/app/image/caidai.png\"/></div>\n\t\t\t\t</div>\n\t\t\t</div>";
+		return "<div class=\"home\">\n\t\t\t\t<div class=\"index-top\">\n\t\t\t\t\t<div class=\"title\">\n\n\t\t\t\t\t\t<img src=\"/app/image/title.png\"/>\n\n\t\t\t\t\t\t<div class=\"title-star\"><img src=\"/app/image/title-star.png\"/></div>\n\t\n\t\t\t\t\t</div>\n\n\n\n\n\t\t\t\t\t<div class=\"dai\">\n\t\t\t\t\t\t<div class='dai-bg'><img src=\"/app/image/top.png\"/></div>\n\t\t\t\t\t\t<div class=\"a-dai\"><img src=\"/app/image/a-dai.png\"/></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"index-bottom\">\n\t\t\t\t\t<div class=\"start-btn\"><a href='javascript:void(0)'><img src=\"/app/image/btn-index.png\"/></a></div>\n\t\t\t\t\t<div class=\"index-logo\"><img src=\"/app/image/logo-index.png\"/></div>\n\t\t\t\t\t<img src=\"/app/image/index-bottom.png\" class='ib-bg'/>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"caidai\">\n\t\t\t\t\t<div class='dai-bg'><img src=\"/app/image/caidai.png\"/></div>\n\t\t\t\t</div>\n\t\t\t</div>";
 	}
 
 	function luck() {
@@ -754,7 +756,7 @@
 				closePopup();
 				if (data.status == 1) {
 					//提交成功
-					webEvents.emit('PopupEvent.createMessageSuccess');
+					webEvents.emit('PopupEvent.createMessageSuccess', { isVir: false });
 				} else {
 					alert(data.info);
 				}
@@ -809,7 +811,7 @@
 				closePopup();
 				if (data.status == 1) {
 					//提交成功
-					webEvents.emit('PopupEvent.createMessageSuccess');
+					webEvents.emit('PopupEvent.createMessageSuccess', { isVir: true });
 				} else {
 					alert(data.info);
 				}
@@ -974,16 +976,17 @@
 		});
 	}
 
-	function createMessageSuccess() {
+	function createMessageSuccess(data) {
 
-		var html = '\n\t\t\t<div class="messageSuccess popup-content">\n\t\t\t\t\n\t\t\t\t<div class=\'messageSuccess-content\'>\n\t\t\t\t\t<div><img src="/app/image/message-success.png"/></div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\'myawardbtn2\'><img src="/app/image/myAwardBtn2.png"/></div>\n\t\t\t\t\t<div class=\'message-close-btn\'><img src="/app/image/close-btn2.png"/></div>\n\t\t\t\t</div>\n\n\n\t\t\t<div>\n\t';
+		console.log(data.isVir);
+		var html = '\n\t\t\t<div class="messageSuccess popup-content">\n\t\t\t\t\n\t\t\t\t<div class=\'messageSuccess-content\'>\n\t\t\t\t\t<div><img src="/app/image/message-success.png" style="display:block"/></div>\n\t\t\t\t\t<div class=\'message-close-btn\'><img src="/app/image/close-btn2.png"/></div>\n\t\t\t\t\t<div class=\'myawardbtn2\'>' + (data.isVir ? '<a href=\'#\'><img src="/app/image/market.png"/></a>' : '') + '<span><img src="/app/image/myAwardBtn3.png"/></span>\n\t\t\t\t\t</div>\n\n\n\n\t\t\t\t</div>\n\t\t\t<div>\n\t';
 		createLayOut(false);
 		$(document.body).append(html);
 		$('.message-close-btn').click(function () {
 			closePopup();
 		});
 
-		$('.myawardbtn2').click(function () {
+		$('.myawardbtn2 span').click(function () {
 			closePopup();
 			webEvents.emit('PopupEvent.myAwardEvent');
 		});
@@ -1087,9 +1090,9 @@
 
 	function getAward() {
 
-		//return ajax("/Home/Award/one",{loginid:uid()})
+		return ajax("/Home/Award/one", { loginid: uid() });
 
-		return ajax("/app/one.json");
+		//return ajax("/app/one.json")
 	}
 
 	function getUserId(data) {
