@@ -47,16 +47,16 @@
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var style = __webpack_require__(2);
-	var template = __webpack_require__(12);
-	var webEvents = __webpack_require__(13);
-	var layout = __webpack_require__(15);
-	var awardData = __webpack_require__(21);
-	var net = __webpack_require__(16);
+	var template = __webpack_require__(13);
+	var webEvents = __webpack_require__(14);
+	var layout = __webpack_require__(16);
+	var awardData = __webpack_require__(22);
+	var net = __webpack_require__(17);
 	var preRotate = -1;
 	var timer = null;
-	var localdatas = __webpack_require__(17);
+	var localdatas = __webpack_require__(18);
 	var step = 5;
-	var consts = __webpack_require__(19);
+	var consts = __webpack_require__(20);
 
 	//如果本地没有用户唯一数据就请求，并存入本地数据 库
 	net.getUserId({ loginid: localdatas.getItem("loginid") || -1 }).then(function (data) {
@@ -336,7 +336,8 @@
 /* 9 */,
 /* 10 */,
 /* 11 */,
-/* 12 */
+/* 12 */,
+/* 13 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -357,19 +358,19 @@
 	};
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var events = __webpack_require__(14);
+	var events = __webpack_require__(15);
 
 	var event = new events.EventEmitter();
 
 	module.exports = event;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -643,20 +644,20 @@
 	}
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var webEvents = __webpack_require__(13);
-	var nets = __webpack_require__(16);
-	var pageData = __webpack_require__(18);
-	var ld = __webpack_require__(17);
+	var webEvents = __webpack_require__(14);
+	var nets = __webpack_require__(17);
+	var pageData = __webpack_require__(19);
+	var ld = __webpack_require__(18);
 
 	var popup = null;
-	var conts = __webpack_require__(19);
+	var conts = __webpack_require__(20);
 
-	var citySelect = __webpack_require__(20);
+	var citySelect = __webpack_require__(21);
 
 	console.log(citySelect);
 
@@ -979,7 +980,7 @@
 	function createMessageSuccess(data) {
 
 		console.log(data.isVir);
-		var html = '\n\t\t\t<div class="messageSuccess popup-content">\n\t\t\t\t\n\t\t\t\t<div class=\'messageSuccess-content\'>\n\t\t\t\t\t<div><img src="/app/image/message-success.png" style="display:block"/></div>\n\t\t\t\t\t<div class=\'message-close-btn\'><img src="/app/image/close-btn2.png"/></div>\n\t\t\t\t\t<div class=\'myawardbtn2\'>' + (data.isVir ? '<a href=\'#\'><img src="/app/image/market.png"/></a>' : '') + '<span><img src="/app/image/myAwardBtn3.png"/></span>\n\t\t\t\t\t</div>\n\n\n\n\t\t\t\t</div>\n\t\t\t<div>\n\t';
+		var html = '\n\t\t\t<div class="messageSuccess popup-content">\n\t\t\t\t\n\t\t\t\t<div class=\'messageSuccess-content\'>\n\t\t\t\t\t<div><img src="/app/image/message-success.png" style="display:block"/></div>\n\t\t\t\t\t<div class=\'message-close-btn\'><img src="/app/image/close-btn2.png"/></div>\n\t\t\t\t\t<div class=\'myawardbtn2\'>' + (data.isVir ? '<a href=\'https://anybuy.pingan.com.cn/gbd-anybuy/?from=groupmessage&isappinstalled=0\'><img src="/app/image/market.png"/></a>' : '') + '<span><img src="/app/image/myAwardBtn3.png"/></span>\n\t\t\t\t\t</div>\n\n\n\n\t\t\t\t</div>\n\t\t\t<div>\n\t';
 		createLayOut(false);
 		$(document.body).append(html);
 		$('.message-close-btn').click(function () {
@@ -1049,12 +1050,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
-	var localdatas = __webpack_require__(17);
+	var localdatas = __webpack_require__(18);
 	var uid = function uid() {
 		return localdatas.getItem("loginid") || -1;
 	};
@@ -1115,7 +1116,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1150,7 +1151,7 @@
 	module.exports = data;
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1236,7 +1237,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1249,7 +1250,7 @@
 	};
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1401,13 +1402,13 @@
 	})(jQuery);
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var net = __webpack_require__(16);
-	var consts = __webpack_require__(19);
+	var net = __webpack_require__(17);
+	var consts = __webpack_require__(20);
 
 	var local_award_info = {
 		award_mapping: [{

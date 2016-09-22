@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="/app/weblib/jquery.min.js"></script>
 	<link type="text/css" rel="styleSheet" href="/app/dist/style.css?vesion=445214"/>
 	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-   	<title>橙天玩</title>
+   	<title>幸运大转盘</title>
  <?php
 	// require_once "jssdk.php";
 	// $jssdk = new JSSDK("wx101f436c8f26adb6", "86be98b96e3aec971a43017a4fa254d1");

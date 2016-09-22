@@ -550,7 +550,7 @@ function createMessageSuccess(data){
 					<div><img src="/app/image/message-success.png" style="display:block"/></div>
 					<div class='message-close-btn'><img src="/app/image/close-btn2.png"/></div>
 					<div class='myawardbtn2'>`
-					+(data.isVir?`<a href='#'><img src="/app/image/market.png"/></a>`:'')+
+					+(data.isVir?`<a href='https://anybuy.pingan.com.cn/gbd-anybuy/?from=groupmessage&isappinstalled=0'><img src="/app/image/market.png"/></a>`:'')+
 
 							`<span><img src="/app/image/myAwardBtn3.png"/></span>
 					</div>
